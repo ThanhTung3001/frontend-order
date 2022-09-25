@@ -5,7 +5,7 @@
 .carousel.carousel-slider img {
     height: 600px !important;
     object-fit: cover;
-    background: linear-gradient(0deg, rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6));
+opacity: 0.34;
 
 }
 
@@ -15,6 +15,7 @@ p.legend {
     font-size: 59px !important;
     background-color: rgba(255, 255, 255, 0) !important;
     bottom: 100px !important;
+
     opacity: 1 !important;
 }
 
@@ -28,4 +29,18 @@ p.legend {
 
 span.MuiSlider-root.MuiSlider-colorSecondary.MuiSlider-sizeMedium.css-1diafny-MuiSlider-root {
     color: #F5C342;
+}
+.slide_bg{
+   
+    background-size: cover;
+    position: relative;
+}
+.slide_bg:before {
+    content: "";
+    position: absolute;
+    left: 0;
+    right: 0;
+    top: 0;
+    bottom: 0;
+    background: linear-gradient(0deg, rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6));
 }
