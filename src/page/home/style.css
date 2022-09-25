@@ -1,0 +1,31 @@
+.carousel.carousel-slider {
+    height: 600px !important;
+}
+
+.carousel.carousel-slider img {
+    height: 600px !important;
+    object-fit: cover;
+    background: linear-gradient(0deg, rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6));
+
+}
+
+p.legend {
+    color: #D55550 !important;
+    font-weight: 700 !important;
+    font-size: 59px !important;
+    background-color: rgba(255, 255, 255, 0) !important;
+    bottom: 100px !important;
+    opacity: 1 !important;
+}
+
+.thumbs-wrapper.axis-vertical {
+    display: none;
+}
+
+.full-width {
+    background-color: #F2F2F2;
+}
+
+span.MuiSlider-root.MuiSlider-colorSecondary.MuiSlider-sizeMedium.css-1diafny-MuiSlider-root {
+    color: #F5C342;
+}
