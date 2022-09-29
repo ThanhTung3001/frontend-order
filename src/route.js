@@ -12,6 +12,7 @@ import { Category } from "./page/category";
 import { DetailCategory } from "./page/category/details";
 import { BlogDetails } from "./page/Blogs/blogDetails";
 import { Register } from "./page/Register";
+import GoogleAuthCallback from "./page/GoogleCallBack";
 
 export const RouteApp = () => {
   return (
@@ -29,6 +30,8 @@ export const RouteApp = () => {
         <Route exact path="/blogs/:id" element={<BlogDetails />} />
         <Route exact path="/recovery-password" element={<RecoveryPassword />} />
         <Route path="*" element={<NotFound />} />
+        <Route path="/auth/callback/google" element={<GoogleAuthCallback />} />
+
       </Routes>
       <Footer />
     </Router>

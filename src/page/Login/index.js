@@ -15,6 +15,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { register } from "../../app/reducer/UserSlice";
 import { LoginAction, RegisterAction } from "../../app/action/UserAction";
 import { Navigate, useHistory, useNavigate } from "react-router-dom";
+import GoogleButton from 'react-google-button'
 
 export const Login = () => {
   const { users, authencated, error } = useSelector(
@@ -210,7 +211,8 @@ export const Login = () => {
         <div className="row d-flex justify-content-center ">
           <div className="col-sm-12 col-md-7">
             <div className="row block p-5">
-              <div className="col-sm-12">
+              <div className="col-sm-12 ">
+
                 <h3 style={{ textAlign: "center", fontWeight: 700 }}>
                   Đăng nhập
                 </h3>
@@ -241,15 +243,25 @@ export const Login = () => {
                 />
               </div>
 
-              <div className="col-sm-12 col-md-8 mt-5">
-                <Button
-                  fullWidth
-                  variant="contained"
-                  color="error"
-                  onClick={handleSubmit}
-                >
-                  Đăng nhập
-                </Button>
+              <div className="col-sm-12 col-md-10  d-flex">
+                <div className="col-12 col-sm-6 m-2">
+                  <Button
+                    fullWidth
+                    style={{ height: '100%' }}
+                    variant="contained"
+                    color="error"
+                    onClick={handleSubmit}
+                  >
+                    Đăng nhập
+                  </Button>
+                </div>
+                <div className="col-12 col-sm-6 m-2">
+                  <GoogleButton type="light" onClick={() => {
+                    (window.location = `${URL_BACKEND}/api/connect/google`)
+                  }}>Đăng nhập với Google</GoogleButton>
+                </div>
+
+
               </div>
             </div>
           </div>

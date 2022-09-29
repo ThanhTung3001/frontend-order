@@ -81,6 +81,7 @@ const Header = () => {
     if (path === "logout") {
       localStorage.setItem("UserInfo", "");
       dispatch(logout());
+      window.location.reload();
     } else {
       navigate(path);
     }
@@ -101,21 +102,27 @@ const Header = () => {
       const userInfor = JSON.parse(localStorage.getItem("UserInfo"));
       // console.log(isJwtExpired("Bearer " + userInfor.jwt)); //Bearer
       const decodeToken = decode(userInfor.jwt);
+
       if (decodeToken.payload.exp >= decodeToken.payload.iat) {
+
         setUser(userInfor);
         setAppAuthencated(true);
       } else {
+        setAppAuthencated(false);
+        setUser({});
         localStorage.setItem("UserInfo", "");
+
       }
+      console.log(authencated)
     }
     // setAppAuthencated(authencated);
-  }, [authencated, appAuthencated]);
-
-  React.useEffect(() => {
-    setAppAuthencated(authencated);
-
-    return () => {};
   }, [authencated]);
+
+  // React.useEffect(() => {
+  //   setAppAuthencated(authencated);
+
+  //   return () => { };
+  // }, [authencated]);
 
   return (
     <AppBar

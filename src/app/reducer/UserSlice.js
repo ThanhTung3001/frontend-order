@@ -11,8 +11,12 @@ export const UserSlice = createSlice({
     error: false,
   },
   reducers: {
-    register(state, action) {},
-    login(state, action) {},
+    register(state, action) { },
+    login(state, action) {
+      state.users = action.payload;
+      state.authencated = true;
+      state.error = false;
+    },
     logout(state, action) {
       state.users = {};
       state.authencated = false;
