@@ -13,10 +13,10 @@ import { URL_BACKEND } from "../../constants";
 import { createSelector } from "@reduxjs/toolkit";
 import { useDispatch, useSelector } from "react-redux";
 import { register } from "../../app/reducer/UserSlice";
-import { LoginAction, RegisterAction } from "../../app/action/UserAction";
+import { RegisterAction } from "../../app/action/UserAction";
 import { Navigate, useHistory, useNavigate } from "react-router-dom";
 
-export const Login = () => {
+export const Register = () => {
   const { users, authencated, error } = useSelector(
     (state) => state.userReducer
   );
@@ -183,24 +183,27 @@ export const Login = () => {
     }
   };
   const handleSubmit = async () => {
-    if (!password.error && !username.error) {
+    if (
+      !fullName.error &&
+      !email.error &&
+      !password.error &&
+      !repeatPassword.error &&
+      !username.error
+    ) {
       const dataSend = {
+        FullName: fullName.value,
         username: username.value,
-
+        email: email.value,
         password: password.value,
       };
-      dispatch(
-        LoginAction({
-          identifier: username.value,
-          password: password.value,
-        })
-      );
+      dispatch(RegisterAction(dataSend));
     }
   };
   useEffect(() => {
     if (error) {
-      alert("Tài khoản hoặc mật khẩu không đúng");
+      alert("Email hoặc username đã tồn tại");
     } else if (authencated) {
+      alert("Đăng ký thành công, tự động chuyển hướng đến trang chủ");
       navigator("/");
     }
   }, [authencated, error, users]);
@@ -212,26 +215,44 @@ export const Login = () => {
             <div className="row block p-5">
               <div className="col-sm-12">
                 <h3 style={{ textAlign: "center", fontWeight: 700 }}>
-                  Đăng nhập
+                  Đăng ký
                 </h3>
               </div>
-
               <div className="col-sm-12 col-md-8 m-2">
                 <TextField
                   fullWidth
-                  label="Tên tài khoản hoặc email"
-                  placeholder="Tên tài khoản hoặc email"
+                  placeholder="Họ và tên"
+                  error={fullName.error}
+                  helperText={fullName.message}
+                  value={fullName.value}
+                  onChange={handleChangeFullName}
+                />
+              </div>
+              <div className="col-sm-12 col-md-8 m-2">
+                <TextField
+                  fullWidth
+                  placeholder="Tên tài khoản"
                   error={username.error}
                   helperText={username.message}
                   value={username.value}
                   onChange={handleChangeUsername}
                 />
               </div>
+              <div className="col-sm-12 col-md-8 m-2">
+                <TextField
+                  type="email"
+                  fullWidth
+                  placeholder="Email"
+                  error={email.error}
+                  helperText={email.message}
+                  value={email.value}
+                  onChange={handleChangeEmail}
+                />
+              </div>
 
               <div className="col-sm-12 col-md-8 m-2">
                 <TextField
                   type="password"
-                  label="Mật khẩu"
                   onChange={handleChangePassword}
                   value={password.value}
                   error={password.error}
@@ -240,7 +261,27 @@ export const Login = () => {
                   placeholder="Mật khẩu"
                 />
               </div>
-
+              <div className="col-sm-12 col-md-8 m-2">
+                <TextField
+                  type="password"
+                  fullWidth
+                  placeholder="Xác nhận mật khẩu"
+                  onChange={handleChangeRepeatPassword}
+                  value={repeatPassword.value}
+                  error={repeatPassword.error}
+                  helperText={repeatPassword.message}
+                />
+              </div>
+              <div className="row d-flex justify-content-center">
+                <div className="col-sm-8 col-md-8 mt-3 d-flex justify-content-center">
+                  <FormGroup>
+                    <FormControlLabel
+                      control={<Checkbox checked={true} />}
+                      label="Tôi đã đọc và đồng ý với Điều khoản sử dụng và Chính sách quyền riêng tư"
+                    />
+                  </FormGroup>
+                </div>
+              </div>
               <div className="col-sm-12 col-md-8 mt-5">
                 <Button
                   fullWidth
@@ -248,7 +289,7 @@ export const Login = () => {
                   color="error"
                   onClick={handleSubmit}
                 >
-                  Đăng nhập
+                  Đăng ký
                 </Button>
               </div>
             </div>

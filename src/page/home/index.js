@@ -219,7 +219,7 @@ export const Home = () => {
                 <Button
                   variant="contained"
                   onClick={() => {
-                    navigate("/dat-tiec");
+                    navigate("/cac-loai-tiec");
                   }}
                 >
                   Xem thêm

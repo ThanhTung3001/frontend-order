@@ -40,7 +40,7 @@ export const Footer = () => {
   if (companyInfo.length > 0) {
     return (
       <>
-        <div>
+        <div className="container-fluid">
           <div className="row block mr-0 mb-0">
             <div className="row d-flex justify-content-between mb-2">
               <div className="col-sm-6">
@@ -76,9 +76,9 @@ export const Footer = () => {
                 <Divider light />
                 <div className="row mt-2">
                   <h4>{companyInfo[0].attributes.name}</h4>
-                  <h7>Địa chỉ: {companyInfo[0].attributes.address}</h7>
-                  <h7>Email: {companyInfo[0].attributes.email} </h7>
-                  <h7>Sđt: {companyInfo[0].attributes.phone}</h7>
+                  <p>Địa chỉ: {companyInfo[0].attributes.address}</p>
+                  <p>Email: {companyInfo[0].attributes.email} </p>
+                  <p>Sđt: {companyInfo[0].attributes.phone}</p>
                 </div>
               </div>
               <div className="col-sm-3">

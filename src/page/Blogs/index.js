@@ -1,6 +1,7 @@
 import axios from "axios";
 import moment from "moment";
 import React, { useEffect, useState } from "react";
+import { Link } from "react-router-dom";
 import { URL_BACKEND } from "../../constants";
 
 export const Blogs = () => {
@@ -28,60 +29,80 @@ export const Blogs = () => {
             {blog.map((e, index) => {
               if (index < 2) {
                 return (
-                  <div className="col-sm-5 justify-content-center">
-                    <div className="row">
-                      <div className="col">
-                        <img
-                          className="item-img big"
-                          src={
-                            URL_BACKEND + e.attributes.Media.data.attributes.url
-                          }
-                          alt={
-                            e.attributes.Media.data.attributes.alternativeText
-                          }
-                        />
+                  <div className="col-sm-12 col-md-12 col-lg-5 justify-content-center">
+                    <Link
+                      to={`/blogs/${e.id}`}
+                      style={{ textDecoration: "none" }}
+                    >
+                      <div className="row">
+                        <div className="col" style={{ height: 300 }}>
+                          <img
+                            className="item-img"
+                            style={{
+                              width: "100%",
+                            }}
+                            src={
+                              URL_BACKEND +
+                              e.attributes.Media.data.attributes.url
+                            }
+                            alt={
+                              e.attributes.Media.data.attributes.alternativeText
+                            }
+                          />
+                        </div>
                       </div>
-                    </div>
-                    <div className="row">
-                      <div className="">
-                        <p className="description mt-3 center">
-                          {moment(e.attributes.publishedAt).format(
-                            "DD/MM/YYYY HH:mm"
-                          )}
-                        </p>
-                        <h3 className="title-article center">
-                          {e.attributes.title}
-                        </h3>
+                      <div className="row">
+                        <div className="">
+                          <p className="description mt-3 center">
+                            {moment(e.attributes.publishedAt).format(
+                              "DD/MM/YYYY HH:mm"
+                            )}
+                          </p>
+                          <h3 className="title-article center">
+                            {e.attributes.title}
+                          </h3>
 
-                        <p className="description center">
-                          {e.attributes.description.substring(0, 230)}
-                          ...
-                        </p>
+                          <p className="description center">
+                            {e.attributes.description.substring(0, 230)}
+                            ...
+                          </p>
+                        </div>
                       </div>
-                    </div>
+                    </Link>
                   </div>
                 );
               } else {
                 return (
-                  <div className="col-sm-3">
-                    <div className="row">
-                      <div className="col">
-                        <img
-                          className="item-img"
-                          src={
-                            URL_BACKEND + e.attributes.Media.data.attributes.url
-                          }
-                          alt={
-                            e.attributes.Media.data.attributes.alternativeText
-                          }
-                        />
+                  <div className="col-sm-12 col-md-6 col-lg-3">
+                    <Link
+                      to={`/blogs/${e.id}`}
+                      style={{ textDecoration: "none" }}
+                    >
+                      <div className="row">
+                        <div
+                          className="col"
+                          style={{
+                            height: 200,
+                          }}
+                        >
+                          <img
+                            className="item-img"
+                            src={
+                              URL_BACKEND +
+                              e.attributes.Media.data.attributes.url
+                            }
+                            alt={
+                              e.attributes.Media.data.attributes.alternativeText
+                            }
+                          />
+                        </div>
                       </div>
-                    </div>
-                    <div className="row">
-                      <h3 className="title-article center">
-                        {e.attributes.title}
-                      </h3>
-                    </div>
+                      <div className="row">
+                        <h3 className="title-article center">
+                          {e.attributes.title}
+                        </h3>
+                      </div>
+                    </Link>
                   </div>
                 );
               }

@@ -11,6 +11,7 @@ import { Blogs } from "./page/Blogs";
 import { Category } from "./page/category";
 import { DetailCategory } from "./page/category/details";
 import { BlogDetails } from "./page/Blogs/blogDetails";
+import { Register } from "./page/Register";
 
 export const RouteApp = () => {
   return (
@@ -23,6 +24,8 @@ export const RouteApp = () => {
         <Route exact path="/cac-loai-tiec" element={<Category />} />
         <Route exact path="/cac-loai-tiec/:id" element={<DetailCategory />} />
         <Route exact path="/blogs" element={<Blogs />} />
+        <Route exact path="/register" element={<Register />} />
+        <Route exact path="/login" element={<Login />} />
         <Route exact path="/blogs/:id" element={<BlogDetails />} />
         <Route exact path="/recovery-password" element={<RecoveryPassword />} />
         <Route path="*" element={<NotFound />} />

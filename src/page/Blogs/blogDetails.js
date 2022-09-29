@@ -6,6 +6,7 @@ import { URL_BACKEND } from "../../constants";
 import remarkGfm from "remark-gfm";
 import ReactMarkdown from "react-markdown";
 import "./style.css";
+import parse from "html-react-parser";
 
 export const BlogDetails = () => {
   const { id } = useParams();
@@ -25,8 +26,8 @@ export const BlogDetails = () => {
       // console.log(article.Content);
 
       article.Content = article.Content.replaceAll(
-        "(/uploads/",
-        `(${URL_BACKEND}/uploads/`
+        `/uploads/`,
+        `${URL_BACKEND}/uploads/`
       );
       setContent(article.Content);
     });
@@ -55,7 +56,7 @@ export const BlogDetails = () => {
           </div>
           <div className="row">
             <div className="col" id="content">
-              {<ReactMarkdown children={content} remarkPlugins={[remarkGfm]} />}
+              {parse(content)}
             </div>
           </div>
         </div>
