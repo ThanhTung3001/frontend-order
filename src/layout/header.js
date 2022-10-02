@@ -77,13 +77,12 @@ const Header = () => {
     setAnchorElNav(null);
   };
   const handleClickNav = (path) => {
-    // console.log("click");
     if (path === "logout") {
       localStorage.setItem("UserInfo", "");
       dispatch(logout());
       window.location.reload();
     } else {
-      navigate(path);
+      navigate(path);  
     }
   };
 

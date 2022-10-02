@@ -19,6 +19,7 @@
     "date-fns": "^2.29.3",
     "dayjs": "^1.11.5",
     "email-validator": "^2.0.4",
+    "formik": "^2.2.9",
     "html-react-parser": "^3.0.4",
     "jwt-check-expiration": "^1.0.5",
     "jwt-check-expiry": "^1.0.10",
@@ -60,5 +61,8 @@
       "last 1 firefox version",
       "last 1 safari version"
     ]
+  },
+  "devDependencies": {
+    "tailwindcss": "^3.1.8"
   }
 }

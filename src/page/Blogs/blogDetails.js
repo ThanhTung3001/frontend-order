@@ -23,7 +23,7 @@ export const BlogDetails = () => {
 
       setTitle(article.title);
       setTime(article.publishedAt);
-      // console.log(article.Content);
+     
 
       article.Content = article.Content.replaceAll(
         `/uploads/`,

@@ -41,7 +41,7 @@ export const Footer = () => {
     return (
       <>
         <div className="container-fluid">
-          <div className="row block mr-0 mb-0">
+          <div className="row block-top">
             <div className="row d-flex justify-content-between mb-2">
               <div className="col-sm-6">
                 <h5>Đăng ký nhận thêm thông tin Các ưu đãi riêng biệt</h5>

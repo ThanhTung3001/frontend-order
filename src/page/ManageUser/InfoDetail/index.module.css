@@ -1,0 +1,13 @@
+.BtnChangePassword{
+    background: #F5C342;
+}
+.FormInfoAccount{
+    margin-top: 30px;
+    width: 400px;
+}
+@media screen and (max-width:390px){
+    .FormInfoAccount{
+       width: 100%;
+    margin-top: 20px;
+    }
+}

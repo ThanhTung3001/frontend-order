@@ -17,9 +17,9 @@ export const Blogs = () => {
   }, []);
 
   return (
-    <div className="full-width">
+    <div className="full-width1">
       <div className="container">
-        <div className="row block">
+        <div className="row block-top">
           <div className="row d-flex justify-content-center">
             <div className="col-sm-4 d-flex justify-content-center">
               <h3 className="hignl-title second">Blogs</h3>

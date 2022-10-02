@@ -97,7 +97,7 @@ export const Home = () => {
 
   return (
     <>
-      <div className="full-width">
+      <div className="full-width2">
         <div className="slide">
           <Carousel autoPlay interval={2000}>
             {background.map((e, index) => (
@@ -229,7 +229,7 @@ export const Home = () => {
           </div>
         </div>
         <div className="container">
-          <div className="row block">
+          <div className="">
             <div className="row d-flex justify-content-center">
               <div className=".col-sm-12 d-flex justify-content-center">
                 <h3 className="hignl-title second">Blogs</h3>
