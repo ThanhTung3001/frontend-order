@@ -28,11 +28,15 @@
     "react-bootstrap": "^2.5.0",
     "react-dom": "^18.2.0",
     "react-google-button": "^0.7.2",
+    "react-loader-spinner": "^5.3.4",
+    "react-loading-overlay": "^1.0.1",
     "react-markdown": "^8.0.3",
     "react-redux": "^8.0.4",
     "react-responsive-carousel": "^3.2.23",
     "react-router-dom": "^6.4.1",
     "react-scripts": "5.0.1",
+    "react-social-login-buttons": "^3.6.1",
+    "react-spinners": "^0.13.4",
     "react-toastify": "^9.0.8",
     "remark-gfm": "^3.0.1",
     "web-vitals": "^2.1.4"
@@ -60,5 +64,8 @@
       "last 1 firefox version",
       "last 1 safari version"
     ]
+  },
+  "devDependencies": {
+    "tailwindcss": "^3.1.8"
   }
 }

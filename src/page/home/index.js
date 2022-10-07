@@ -188,6 +188,7 @@ export const Home = () => {
             {listType.map((e, index) => {
               return (
                 <Link
+                  key={index}
                   style={{ textDecoration: "none" }}
                   to={`cac-loai-tiec/${e.id}`}
                   className={

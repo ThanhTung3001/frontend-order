@@ -2,6 +2,8 @@ import axios from "axios";
 import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import { URL_BACKEND } from "../../constants";
+import parse from "html-react-parser";
+import moment from "moment";
 
 export const Category = () => {
   const [bigCategory, setBigCategory] = useState([]);
@@ -20,7 +22,7 @@ export const Category = () => {
         <div className="row block">
           <div className="row d-flex justify-content-center">
             <div className="col-sm-4 d-flex justify-content-center">
-              <h3 className="hignl-title second">Các loại tiệc</h3>
+              <h3 className="hignl-title second p-3">Danh sách loại hình</h3>
             </div>
           </div>
           <div className="row">
@@ -44,13 +46,19 @@ export const Category = () => {
                       </div>
                     </div>
                     <div className="row">
-                      <h3 className="title-article center">
+                      <h3 className="title-category center mt-2">
                         {e.attributes.name}
                       </h3>
 
-                      <p className="description center">
-                        {e.attributes.Description.substring(0, 230)}
-                        ...
+                      <p className="description center mb-1">
+                        {parse(e.attributes.Description)}
+                      </p>
+                      <p className="description-time center">
+                        Khung giờ
+                        {` ${e.attributes.FromTime.substring(
+                          0,
+                          5
+                        )} - ${e.attributes.EndTime.substring(0, 5)}`}
                       </p>
                     </div>
                   </Link>

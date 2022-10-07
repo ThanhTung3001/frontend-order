@@ -47,7 +47,7 @@ const settings = [
   },
   {
     name: "Quản lý tài khoản",
-    path: "quan-ly-tai-khoan",
+    path: "user/info",
   },
   {
     name: "Đổi mật khẩu",
@@ -94,36 +94,6 @@ const Header = () => {
   const [user, setUser] = React.useState({});
   const location = useLocation();
   const { authencated } = useSelector((state) => state.userReducer);
-  React.useEffect(() => {
-    //console.log(authencated);
-    const userInfor = JSON.stringify(localStorage.getItem("UserInfo"));
-    const userJson = localStorage.getItem("UserInfo");
-    if (userJson) {
-      const userInfor = JSON.parse(localStorage.getItem("UserInfo"));
-      // console.log(isJwtExpired("Bearer " + userInfor.jwt)); //Bearer
-      const decodeToken = decode(userInfor.jwt);
-
-      if (decodeToken.payload.exp >= decodeToken.payload.iat) {
-
-        setUser(userInfor);
-        setAppAuthencated(true);
-      } else {
-        setAppAuthencated(false);
-        setUser({});
-        localStorage.setItem("UserInfo", "");
-
-      }
-      console.log(authencated)
-    }
-    // setAppAuthencated(authencated);
-  }, [authencated]);
-
-  // React.useEffect(() => {
-  //   setAppAuthencated(authencated);
-
-  //   return () => { };
-  // }, [authencated]);
-
   return (
     <AppBar
       style={{
@@ -229,7 +199,7 @@ const Header = () => {
             ))}
           </Box>
 
-          {appAuthencated == true ? (
+          {authencated == true ? (
             <Box sx={{ flexGrow: 0 }}>
               <Tooltip title="Người dùng">
                 <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>

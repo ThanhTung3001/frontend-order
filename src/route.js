@@ -1,5 +1,12 @@
-import React from "react";
-import { BrowserRouter as Router, Routes, Route, Link } from "react-router-dom";
+import React, { useEffect } from "react";
+import {
+  BrowserRouter as Router,
+  Routes,
+  Route,
+  Link,
+  useNavigate,
+  Navigate,
+} from "react-router-dom";
 import { Footer } from "./layout/footer";
 import Header from "./layout/header";
 import { Login } from "./page/Login";
@@ -13,8 +20,40 @@ import { DetailCategory } from "./page/category/details";
 import { BlogDetails } from "./page/Blogs/blogDetails";
 import { Register } from "./page/Register";
 import GoogleAuthCallback from "./page/GoogleCallBack";
+import FacebookCallBack from "./page/FacebookCallBack";
+import { useDispatch, useSelector } from "react-redux";
+import { decode } from "jwt-check-expiry";
+import { login, logout } from "./app/reducer/UserSlice";
+import { UserInfo } from "./page/User";
+import ManageUser from "./page/ManageUser";
 
 export const RouteApp = () => {
+  let dispatch = useDispatch();
+  const { users, authencated } = useSelector((state) => state.userReducer);
+  useEffect(() => {
+    if (authencated === true) {
+      const tokenDecode = decode(users.jwt);
+      //  console.log(tokenDecode);
+      if (tokenDecode.header.iat < tokenDecode.header.exp) {
+        const json = localStorage.setItem("UserInfo", JSON.stringify(users));
+      }
+    } else {
+      const json = localStorage.getItem("UserInfo");
+
+      if (json.length > 0) {
+        const userInfo = JSON.parse(json);
+        const tokenDecode = decode(userInfo.jwt);
+        console.log(tokenDecode.payload.iat);
+        console.log(tokenDecode.payload.exp);
+        if (tokenDecode.payload.iat < tokenDecode.payload.exp) {
+          dispatch(login(userInfo));
+        }
+      } else {
+        dispatch(logout());
+      }
+    }
+  }, [authencated]);
+
   return (
     <Router>
       <Header />
@@ -31,9 +70,23 @@ export const RouteApp = () => {
         <Route exact path="/recovery-password" element={<RecoveryPassword />} />
         <Route path="*" element={<NotFound />} />
         <Route path="/auth/callback/google" element={<GoogleAuthCallback />} />
-
+        <Route path="/auth/callback/facebook" element={<FacebookCallBack />} />
+        <Route
+          exact
+          path="/user/info"
+          element={<PrivateRoute element={<ManageUser />} auth={authencated} />}
+        />
       </Routes>
       <Footer />
     </Router>
   );
+};
+const PrivateRoute = ({ element, auth }) => {
+  console.log(auth);
+  if (!auth) {
+    // navigate("/login");
+    return <Navigate to="/login" replace={true} />;
+  } else {
+    return element;
+  }
 };

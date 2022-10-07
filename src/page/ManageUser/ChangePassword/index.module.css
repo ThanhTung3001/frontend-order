@@ -1,0 +1,37 @@
+.BtnChangePassword {
+    background: #F5C342;
+}
+
+.FormInfoAccount {
+    margin-top: 30px;
+    width: 380px;
+}
+
+.ContainerInputPassword {
+    display: flex;
+    width: 800px;
+    justify-content: space-between;
+}
+
+.InputPassword {
+    width: 380px;
+}
+
+.Button {
+    background: #F5C342;
+}
+
+@media screen and (max-width:420px) {
+    .FormInfoAccount {
+        width: 100%;
+    }
+
+    .ContainerInputPassword {
+        flex-direction: column;
+        width: 100%;
+    }
+
+    .InputPassword {
+        width: 100%;
+    }
+}

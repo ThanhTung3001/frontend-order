@@ -41,10 +41,10 @@ export const DetailCategory = () => {
 
   useEffect(() => {
     axios
-      .get(URL_BACKEND + `/api/big-categories/${id}?populate=deep,4`)
+      .get(URL_BACKEND + `/api/big-categories/${id}?populate=deep,5`)
       .then((rs) => {
         let { data } = rs;
-        //  console.log(data.data.attributes.categories.data);
+        console.log(data.data.attributes.categories.data);
         setBigCategory(data.data.attributes.categories.data);
       });
 
@@ -56,7 +56,7 @@ export const DetailCategory = () => {
         <div className="row block">
           <div className="row d-flex justify-content-center">
             <div className="col-sm-12 d-flex justify-content-center">
-              <h3 className="hignl-title second">Các loại hình tiệc</h3>
+              <h3 className="hignl-title second">Danh sách Menu</h3>
             </div>
           </div>
           <div className="row">
@@ -70,7 +70,7 @@ export const DetailCategory = () => {
                           {new Array(4).fill().map((product, index) => {
                             //  console.log(product);
                             let urlImg = "";
-                            //    console.log(e.attributes.products.data.length);
+                            //   console.log(e.attributes.products.data.length);
                             if (e.attributes.products.data.length < index + 1) {
                               urlImg = "/img_emty.png";
                             } else {
@@ -131,10 +131,13 @@ export const DetailCategory = () => {
                             }
                           )} */}
                           <div
-                            className="row m-2 flex-column justify-content-between"
-                            style={{ height: 250 }}
+                            className="row m-2 flex-column justify-content-center"
+                            style={{ height: 350 }}
                           >
-                            <div className="col-sm-12 col-md-12">
+                            <div
+                              className="col-sm-12 col-md-12"
+                              style={{ height: 150 }}
+                            >
                               {e.attributes.products.data.map(
                                 (product, index) => {
                                   return (
@@ -165,6 +168,37 @@ export const DetailCategory = () => {
                                     Đặt tiệc
                                   </Button>
                                 </div>
+                              </div>
+                              <div className="row flex-column mt-3">
+                                <h1 className="description">
+                                  Đơn giá{": "}
+                                  <strong>
+                                    {parseInt(
+                                      e.attributes.price
+                                    ).toLocaleString("it-IT", {
+                                      style: "currency",
+                                      currency: "VND",
+                                    })}
+                                  </strong>
+                                </h1>
+                                <h1 className="description">
+                                  Số lượng tối thiểu{": "}
+                                  <strong>{e.attributes.amout}</strong>
+                                </h1>
+                                <h1 className="description">
+                                  Thời gian phù hợp{": "}
+                                  <strong>{`${e.attributes.FromTime.substring(
+                                    0,
+                                    5
+                                  )} - ${e.attributes.EndTime.substring(
+                                    0,
+                                    5
+                                  )}`}</strong>
+                                </h1>
+                                <h1 className="description">
+                                  Supplier{": "}
+                                  <strong>{`${e.attributes.TypeMenu}`}</strong>
+                                </h1>
                               </div>
                             </div>
                           </div>
