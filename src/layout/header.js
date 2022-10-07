@@ -43,7 +43,7 @@ const pages = [
 const settings = [
   {
     name: "Giỏ hàng",
-    path: "card",
+    path: "cart",
   },
   {
     name: "Quản lý tài khoản",

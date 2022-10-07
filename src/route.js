@@ -26,6 +26,7 @@ import { decode } from "jwt-check-expiry";
 import { login, logout } from "./app/reducer/UserSlice";
 import { UserInfo } from "./page/User";
 import ManageUser from "./page/ManageUser";
+import { Cart } from "./page/Cart";
 
 export const RouteApp = () => {
   let dispatch = useDispatch();
@@ -67,6 +68,7 @@ export const RouteApp = () => {
         <Route exact path="/register" element={<Register />} />
         <Route exact path="/login" element={<Login />} />
         <Route exact path="/blogs/:id" element={<BlogDetails />} />
+        <Route exact path="/cart" element={<Cart />} />
         <Route exact path="/recovery-password" element={<RecoveryPassword />} />
         <Route path="*" element={<NotFound />} />
         <Route path="/auth/callback/google" element={<GoogleAuthCallback />} />

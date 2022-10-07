@@ -32,10 +32,9 @@ function ManageUser() {
   const refInput = useRef({});
   const [userInfo, setUserInfo] = useState({});
   const [img, setImg] = useState(
-    `${URL_BACKEND}${
-      user.Avatar != undefined
-        ? user.Avatar.url
-        : "/uploads/2289_Sk_VNQSBGQU_1_PID_Ew_Mjgt_MT_Iy_127a9d0f7c.jpg"
+    `${URL_BACKEND}${user.Avatar != undefined
+      ? user.Avatar.url
+      : "/uploads/2289_Sk_VNQSBGQU_1_PID_Ew_Mjgt_MT_Iy_127a9d0f7c.jpg"
     }`
   );
   const handleFileUpload = async (event) => {
@@ -108,9 +107,9 @@ function ManageUser() {
                       onChange={handleFileUpload}
                       type="file"
                       style={{ display: "none" }}
-                      // multiple={false}
+                    // multiple={false}
                     />
-                    <Button onClick={uploadFile}>Cập nhật ảnh đại diện</Button>
+                    <Button variant="containeds" onClick={uploadFile}>Cập nhật ảnh đại diện</Button>
                   </div>
                 </div>
                 <span className={style.TitleCard}>{user.FullName}</span>
@@ -121,9 +120,8 @@ function ManageUser() {
                     onClick={() => {
                       HandleToogle(1);
                     }}
-                    className={`${style.ItemCard} ${
-                      ItemToogle === 1 ? `${style.active}` : ``
-                    }`}
+                    className={`${style.ItemCard} ${ItemToogle === 1 ? `${style.active}` : ``
+                      }`}
                   >
                     Thông tin cá nhân
                   </li>
@@ -131,9 +129,8 @@ function ManageUser() {
                     onClick={() => {
                       HandleToogle(2);
                     }}
-                    className={`${style.ItemCard} ${
-                      ItemToogle === 2 ? `${style.active}` : ``
-                    }`}
+                    className={`${style.ItemCard} ${ItemToogle === 2 ? `${style.active}` : ``
+                      }`}
                   >
                     Lịch sử giao dịch
                   </li>
@@ -141,9 +138,8 @@ function ManageUser() {
                     onClick={() => {
                       HandleToogle(3);
                     }}
-                    className={`${style.ItemCard} ${
-                      ItemToogle === 3 ? `${style.active}` : ``
-                    }`}
+                    className={`${style.ItemCard} ${ItemToogle === 3 ? `${style.active}` : ``
+                      }`}
                   >
                     Đăng Xuất
                   </li>
@@ -204,7 +200,18 @@ function ManageUser() {
           <div className={style.ContainerCardInfo}>
             <div className={style.ContainerBlockInfo}>
               <img className={style.CardImage} src={img} alt="" />
-
+              <div className="row mt-2">
+                <div className="col">
+                  <input
+                    ref={refInput}
+                    onChange={handleFileUpload}
+                    type="file"
+                    style={{ display: "none" }}
+                  // multiple={false}
+                  />
+                  <Button variant="containeds" onClick={uploadFile}>Cập nhật ảnh đại diện</Button>
+                </div>
+              </div>
               <span className={style.TitleCard}>{user.FullName}</span>
             </div>
             <div>
@@ -213,9 +220,8 @@ function ManageUser() {
                   onClick={() => {
                     HandleToogle(1);
                   }}
-                  className={`${style.ItemCard} ${
-                    ItemToogle === 1 ? `${style.active}` : ``
-                  }`}
+                  className={`${style.ItemCard} ${ItemToogle === 1 ? `${style.active}` : ``
+                    }`}
                 >
                   Thông tin cá nhân
                 </li>
@@ -223,9 +229,8 @@ function ManageUser() {
                   onClick={() => {
                     HandleToogle(2);
                   }}
-                  className={`${style.ItemCard} ${
-                    ItemToogle === 2 ? `${style.active}` : ``
-                  }`}
+                  className={`${style.ItemCard} ${ItemToogle === 2 ? `${style.active}` : ``
+                    }`}
                 >
                   Lịch sử giao dịch
                 </li>
@@ -233,9 +238,8 @@ function ManageUser() {
                   onClick={() => {
                     // HandleToogle(3);
                   }}
-                  className={`${style.ItemCard} ${
-                    ItemToogle === 3 ? `${style.active}` : ``
-                  }`}
+                  className={`${style.ItemCard} ${ItemToogle === 3 ? `${style.active}` : ``
+                    }`}
                 >
                   Đăng Xuất
                 </li>
@@ -243,7 +247,7 @@ function ManageUser() {
             </div>
           </div>
         </div>
-        <div className="col-xl-8 col-11 justify-content-center text-center">
+        <div className="col-xl-8 col-11 justify-content-center text-center mt-3">
           <HistoryTransaction />
         </div>
       </div>

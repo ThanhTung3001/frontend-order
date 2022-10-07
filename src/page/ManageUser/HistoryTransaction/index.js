@@ -1,7 +1,7 @@
 import style from "./index.module.css";
 function HistoryTransaction() {
   return (
-    <div className={style.ContainerHistoryTransaction}>
+    <div className={`${style.ContainerHistoryTransaction}`} style={{ minHeight: 414 }}>
       <div>
         <h1 className={style.TextHistory}>Lịch sử giao dịch</h1>
         <ul className={style.MenuHistory}>

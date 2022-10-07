@@ -14,8 +14,14 @@ import {
 } from "@mui/material";
 import { categoryMock } from "../../mock/CategoryMock";
 import { height } from "@mui/system";
+import { useDispatch, useSelector } from "react-redux";
+import { addToCart } from "../../app/reducer/CartSlice";
 
 export const DetailCategory = () => {
+  const dispatch = useDispatch();
+  const { items, isLoaded } = useSelector(state => state.cartReducer)
+
+
   const [bigCategory, setBigCategory] = useState([]);
   const { id } = useParams();
   const [open, setOpen] = React.useState(false);
@@ -23,6 +29,15 @@ export const DetailCategory = () => {
   const [selected, setSelected] = useState(false);
   const [itemSelected, setItemSelected] = useState(categoryMock);
   const [listMenu, setListMenu] = useState([]);
+  const handleAddToCart = (data) => {
+
+    dispatch(addToCart({
+      ID: data.id,
+      name: data.attributes.name,
+      amount: 1,
+      price: data.attributes.price
+    }));
+  }
   const handleOpen = (idItem) => {
     setItem(bigCategory.find((e) => e.id == idItem));
     setListMenu(bigCategory.filter((e) => e.id != idItem));
@@ -44,11 +59,11 @@ export const DetailCategory = () => {
       .get(URL_BACKEND + `/api/big-categories/${id}?populate=deep,5`)
       .then((rs) => {
         let { data } = rs;
-        console.log(data.data.attributes.categories.data);
+        // console.log(data.data.attributes.categories.data);
         setBigCategory(data.data.attributes.categories.data);
       });
 
-    return () => {};
+    return () => { };
   }, []);
   return (
     <div className="full-width">
@@ -141,9 +156,8 @@ export const DetailCategory = () => {
                               {e.attributes.products.data.map(
                                 (product, index) => {
                                   return (
-                                    <p className="description">{`${
-                                      index + 1
-                                    }. ${product.attributes.name}`}</p>
+                                    <p className="description">{`${index + 1
+                                      }. ${product.attributes.name}`}</p>
                                   );
                                 }
                               )}
@@ -155,8 +169,11 @@ export const DetailCategory = () => {
                                     variant="contained"
                                     color="warning"
                                     fullWidth
+                                    onClick={() => {
+                                      handleAddToCart(e)
+                                    }}
                                   >
-                                    Cần hỗ trợ thêm
+                                    Thêm vào giỏ hàng
                                   </Button>
                                 </div>
                                 <div className="col">
@@ -169,7 +186,7 @@ export const DetailCategory = () => {
                                   </Button>
                                 </div>
                               </div>
-                              <div className="row flex-column mt-3">
+                              <div className="row flex-column mt-4">
                                 <h1 className="description">
                                   Đơn giá{": "}
                                   <strong>
@@ -307,9 +324,8 @@ export const DetailCategory = () => {
                             {item.attributes.products.data.map(
                               (product, index) => {
                                 return (
-                                  <p className="description">{`${index + 1}. ${
-                                    product.attributes.name
-                                  }`}</p>
+                                  <p className="description">{`${index + 1}. ${product.attributes.name
+                                    }`}</p>
                                 );
                               }
                             )}
@@ -408,9 +424,8 @@ export const DetailCategory = () => {
                               {itemSelected.attributes.products.data.map(
                                 (product, index) => {
                                   return (
-                                    <p className="description">{`${
-                                      index + 1
-                                    }. ${product.attributes.name}`}</p>
+                                    <p className="description">{`${index + 1
+                                      }. ${product.attributes.name}`}</p>
                                   );
                                 }
                               )}
@@ -469,7 +484,5 @@ const style = {
   overflow: "scroll",
   justifyContent: "center",
   alignItems: "center",
-  pt: 30,
-  // pb: 20,
   px: 4,
 };

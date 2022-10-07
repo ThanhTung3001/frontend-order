@@ -43,7 +43,7 @@ export const BigCategory = () => {
       setBigCategory(data.data);
     });
 
-    return () => {};
+    return () => { };
   }, []);
 
   return (
@@ -134,9 +134,8 @@ export const BigCategory = () => {
                               {e.attributes.products.data.map(
                                 (product, index) => {
                                   return (
-                                    <p className="description">{`${
-                                      index + 1
-                                    }. ${product.attributes.name}`}</p>
+                                    <p className="description">{`${index + 1
+                                      }. ${product.attributes.name}`}</p>
                                   );
                                 }
                               )}
@@ -149,7 +148,7 @@ export const BigCategory = () => {
                                     color="warning"
                                     fullWidth
                                   >
-                                    Cần hỗ trợ thêm
+                                    Thêm vào giỏ hàng
                                   </Button>
                                 </div>
                                 <div className="col">
@@ -269,9 +268,8 @@ export const BigCategory = () => {
                             {item.attributes.products.data.map(
                               (product, index) => {
                                 return (
-                                  <p className="description">{`${index + 1}. ${
-                                    product.attributes.name
-                                  }`}</p>
+                                  <p className="description">{`${index + 1}. ${product.attributes.name
+                                    }`}</p>
                                 );
                               }
                             )}
@@ -370,9 +368,8 @@ export const BigCategory = () => {
                               {itemSelected.attributes.products.data.map(
                                 (product, index) => {
                                   return (
-                                    <p className="description">{`${
-                                      index + 1
-                                    }. ${product.attributes.name}`}</p>
+                                    <p className="description">{`${index + 1
+                                      }. ${product.attributes.name}`}</p>
                                   );
                                 }
                               )}
