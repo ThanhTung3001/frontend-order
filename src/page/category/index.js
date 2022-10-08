@@ -21,7 +21,7 @@ export const Category = () => {
       <div className="container">
         <div className="row block">
           <div className="row d-flex justify-content-center">
-            <div className="col-sm-4 d-flex justify-content-center">
+            <div className="col-12 d-flex justify-content-center">
               <h3 className="hignl-title second p-3">Danh sách loại hình</h3>
             </div>
           </div>

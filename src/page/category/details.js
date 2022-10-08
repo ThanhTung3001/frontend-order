@@ -5,6 +5,7 @@ import { useParams } from "react-router";
 import {
   Box,
   Button,
+  Divider,
   FormControl,
   InputLabel,
   MenuItem,
@@ -19,8 +20,7 @@ import { addToCart } from "../../app/reducer/CartSlice";
 
 export const DetailCategory = () => {
   const dispatch = useDispatch();
-  const { items, isLoaded } = useSelector(state => state.cartReducer)
-
+  const { items, isLoaded } = useSelector((state) => state.cartReducer);
 
   const [bigCategory, setBigCategory] = useState([]);
   const { id } = useParams();
@@ -30,14 +30,16 @@ export const DetailCategory = () => {
   const [itemSelected, setItemSelected] = useState(categoryMock);
   const [listMenu, setListMenu] = useState([]);
   const handleAddToCart = (data) => {
-
-    dispatch(addToCart({
-      ID: data.id,
-      name: data.attributes.name,
-      amount: 1,
-      price: data.attributes.price
-    }));
-  }
+    dispatch(
+      addToCart({
+        ID: data.id,
+        name: data.attributes.name,
+        amount: 1,
+        price: data.attributes.price,
+      })
+    );
+    alert("Thêm vào giỏ hàng thành công");
+  };
   const handleOpen = (idItem) => {
     setItem(bigCategory.find((e) => e.id == idItem));
     setListMenu(bigCategory.filter((e) => e.id != idItem));
@@ -63,7 +65,7 @@ export const DetailCategory = () => {
         setBigCategory(data.data.attributes.categories.data);
       });
 
-    return () => { };
+    return () => {};
   }, []);
   return (
     <div className="full-width">
@@ -76,6 +78,12 @@ export const DetailCategory = () => {
           </div>
           <div className="row">
             {bigCategory.map((e, index) => {
+              if (e.attributes.FromTime == null) {
+                e.attributes.FromTime = "";
+              }
+              if (e.attributes.EndTime == null) {
+                e.attributes.EndTime = "";
+              }
               return (
                 <div key={index} className="col-sm-12">
                   <div>
@@ -89,11 +97,6 @@ export const DetailCategory = () => {
                             if (e.attributes.products.data.length < index + 1) {
                               urlImg = "/img_emty.png";
                             } else {
-                              // console.log(e.attributes);
-                              // console.log(
-                              //   e.attributes.products.data[index].attributes
-                              //     .avatar.data.attributes.url
-                              // );
                               urlImg =
                                 URL_BACKEND +
                                 e.attributes.products.data[index].attributes
@@ -138,26 +141,21 @@ export const DetailCategory = () => {
                               </Button>
                             </div>
                           </div>
-                          {/* {parseInt(e.attributes.price).toLocaleString(
-                            "it-IT",
-                            {
-                              style: "currency",
-                              currency: "VND",
-                            }
-                          )} */}
+
                           <div
                             className="row m-2 flex-column justify-content-center"
-                            style={{ height: 350 }}
+                            style={{ height: 450 }}
                           >
                             <div
-                              className="col-sm-12 col-md-12"
-                              style={{ height: 150 }}
+                              className="col-sm-12 col-md-12 flex-column flex-wrap"
+                              style={{ height: 250 }}
                             >
                               {e.attributes.products.data.map(
                                 (product, index) => {
                                   return (
-                                    <p className="description">{`${index + 1
-                                      }. ${product.attributes.name}`}</p>
+                                    <p className="description">{`${
+                                      index + 1
+                                    }. ${product.attributes.name}`}</p>
                                   );
                                 }
                               )}
@@ -170,7 +168,7 @@ export const DetailCategory = () => {
                                     color="warning"
                                     fullWidth
                                     onClick={() => {
-                                      handleAddToCart(e)
+                                      handleAddToCart(e);
                                     }}
                                   >
                                     Thêm vào giỏ hàng
@@ -223,6 +221,7 @@ export const DetailCategory = () => {
                       </div>
                     </div>
                   </div>
+                  <Divider className="mb-2" style={{ color: "gray" }} />
                 </div>
               );
             })}
@@ -324,8 +323,9 @@ export const DetailCategory = () => {
                             {item.attributes.products.data.map(
                               (product, index) => {
                                 return (
-                                  <p className="description">{`${index + 1}. ${product.attributes.name
-                                    }`}</p>
+                                  <p className="description">{`${index + 1}. ${
+                                    product.attributes.name
+                                  }`}</p>
                                 );
                               }
                             )}
@@ -409,13 +409,7 @@ export const DetailCategory = () => {
                               </h5>
                             </div>
                           </div>
-                          {/* {parseInt(e.attributes.price).toLocaleString(
-                            "it-IT",
-                            {
-                              style: "currency",
-                              currency: "VND",
-                            }
-                          )} */}
+
                           <div
                             className="row m-2 flex-column justify-content-between"
                             style={{ height: 250 }}
@@ -424,8 +418,9 @@ export const DetailCategory = () => {
                               {itemSelected.attributes.products.data.map(
                                 (product, index) => {
                                   return (
-                                    <p className="description">{`${index + 1
-                                      }. ${product.attributes.name}`}</p>
+                                    <p className="description">{`${
+                                      index + 1
+                                    }. ${product.attributes.name}`}</p>
                                   );
                                 }
                               )}

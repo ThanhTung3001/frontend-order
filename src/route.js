@@ -31,29 +31,29 @@ import { Cart } from "./page/Cart";
 export const RouteApp = () => {
   let dispatch = useDispatch();
   const { users, authencated } = useSelector((state) => state.userReducer);
-  useEffect(() => {
-    if (authencated === true) {
-      const tokenDecode = decode(users.jwt);
-      //  console.log(tokenDecode);
-      if (tokenDecode.header.iat < tokenDecode.header.exp) {
-        const json = localStorage.setItem("UserInfo", JSON.stringify(users));
-      }
-    } else {
-      const json = localStorage.getItem("UserInfo");
+  // useEffect(() => {
+  //   if (authencated === true) {
+  //     const tokenDecode = decode(users.jwt);
+  //     //  console.log(tokenDecode);
+  //     if (tokenDecode.header.iat < tokenDecode.header.exp) {
+  //       const json = localStorage.setItem("UserInfo", JSON.stringify(users));
+  //     }
+  //   } else {
+  //     const json = localStorage.getItem("UserInfo");
 
-      if (json.length > 0) {
-        const userInfo = JSON.parse(json);
-        const tokenDecode = decode(userInfo.jwt);
-        console.log(tokenDecode.payload.iat);
-        console.log(tokenDecode.payload.exp);
-        if (tokenDecode.payload.iat < tokenDecode.payload.exp) {
-          dispatch(login(userInfo));
-        }
-      } else {
-        dispatch(logout());
-      }
-    }
-  }, [authencated]);
+  //     if (json.length > 0) {
+  //       const userInfo = JSON.parse(json);
+  //       const tokenDecode = decode(userInfo.jwt);
+  //       console.log(tokenDecode.payload.iat);
+  //       console.log(tokenDecode.payload.exp);
+  //       if (tokenDecode.payload.iat < tokenDecode.payload.exp) {
+  //         dispatch(login(userInfo));
+  //       }
+  //     } else {
+  //       dispatch(logout());
+  //     }
+  //   }
+  // }, [authencated]);
 
   return (
     <Router>

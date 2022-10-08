@@ -33,3 +33,21 @@ export const getMeAction = createAsyncThunk("getMe/User", async (token) => {
   );
   return data;
 });
+
+const initUserCurrent = () => {
+  const json = localStorage.getItem("UserInfo");
+  if (json) {
+    return JSON.parse(json);
+  } else {
+    return {};
+  }
+};
+const initUserAuthenticated = () => {
+  const json = localStorage.getItem("UserInfo");
+  if (json) {
+    return true;
+  } else {
+    return false;
+  }
+};
+export { initUserCurrent, initUserAuthenticated };

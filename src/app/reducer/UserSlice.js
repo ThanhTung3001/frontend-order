@@ -1,13 +1,19 @@
 import { createSlice } from "@reduxjs/toolkit";
 import React from "react";
 import { useNavigate } from "react-router-dom";
-import { getMeAction, LoginAction, RegisterAction } from "../action/UserAction";
+import {
+  getMeAction,
+  initUserAuthenticated,
+  initUserCurrent,
+  LoginAction,
+  RegisterAction,
+} from "../action/UserAction";
 
 export const UserSlice = createSlice({
   name: "UserSlice",
   initialState: {
-    users: {},
-    authencated: false,
+    users: initUserCurrent(),
+    authencated: initUserAuthenticated(),
     loadedUser: false,
     error: false,
     user: {},
@@ -46,6 +52,7 @@ export const UserSlice = createSlice({
     });
     builder.addCase(getMeAction.fulfilled, (state, action) => {
       //  state.authencated = true;
+      state.users.user = action.payload;
       state.user = action.payload;
       state.loadedUser = true;
     });
