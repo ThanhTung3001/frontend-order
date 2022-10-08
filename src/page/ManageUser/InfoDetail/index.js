@@ -13,7 +13,7 @@ function InfoDetail() {
   const [email, setEmail] = useState(user.email);
   const [phone, setPhone] = useState(user.PhoneNumber);
   const [address, setAddress] = useState(user.Address);
-  // console.log(user);
+  // //console.log(user);
   const handleUpdate = async () => {
     const userInfo = {
       ...users,

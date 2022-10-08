@@ -10,7 +10,11 @@ import { el, id } from "date-fns/locale";
 import { useDispatch, useSelector } from "react-redux";
 import { Button, IconButton, TextField } from "@mui/material";
 import RemoveIcon from "@mui/icons-material/Remove";
-import { changeAmountItem, removeData } from "../../app/reducer/CartSlice";
+import {
+  changeAmountItem,
+  removeAll,
+  removeData,
+} from "../../app/reducer/CartSlice";
 import axios from "axios";
 import { URL_BACKEND } from "../../constants";
 import { Navigate, useNavigate } from "react-router-dom";
@@ -35,7 +39,7 @@ export const Cart = () => {
     });
   }, [items, amount]);
   const handleRemoveItems = (id) => {
-    // console.log(id);
+    // //console.log(id);
 
     const cf = window.confirm("Bạn có muốn xoá menu trong giỏ hàng");
     if (cf) {
@@ -43,13 +47,13 @@ export const Cart = () => {
     }
   };
   const handleChangeAmount = (amount, id) => {
-    // console.log(amount, id)
+    // //console.log(amount, id)
     setAmount(amount);
     const dataSend = {
       ID: id,
       amount: amount,
     };
-    // console.log(dataSend);
+    // //console.log(dataSend);
     dispatch(changeAmountItem(dataSend));
   };
   const handleSubmitCart = async () => {
@@ -57,9 +61,6 @@ export const Cart = () => {
     if (items.length == 0) {
       alert("Rất tiếc, giỏ hàng của bạn đang rỗng");
     } else {
-      //  console.log(users.jwt);
-
-      //  console.log(arrayIDCart);
       for (const e of items) {
         const { data } = await axios({
           url: URL_BACKEND + "/api/category-order-cards",
@@ -82,28 +83,30 @@ export const Cart = () => {
       if (users.user.PhoneNumber == null || users.user.email == null) {
         alert("Vui lòng kiểm tra thông tin của mình bạn nhé !!!");
         navigate("/user/info");
-      }
-      const { data, statusText, status } = await axios({
-        url: `${URL_BACKEND}/api/orders`,
-        method: "POST",
-        headers: {
-          authorization: "Bearer " + users.jwt,
-          "Content-Type": "application/json",
-        },
-        data: JSON.stringify({
-          data: {
-            OrderName: users.user.FullName + " - " + users.user.PhoneNumber,
-            Note: "Nothings",
-            Total: total,
-            users_permissions_user: users.user.id,
-            category_order_cards: arrayIDCart,
-          },
-        }),
-      });
-      if (status === 200) {
-        alert("Thao tác đặt hàng thành công, chúng tôi sẽ liên hệ bạn sớm");
       } else {
-        alert("Đặt hàng thất bại, vui lòng liên hệ Admin để được hỗ trợ");
+        const { data, statusText, status } = await axios({
+          url: `${URL_BACKEND}/api/orders`,
+          method: "POST",
+          headers: {
+            authorization: "Bearer " + users.jwt,
+            "Content-Type": "application/json",
+          },
+          data: JSON.stringify({
+            data: {
+              OrderName: users.user.FullName + " - " + users.user.PhoneNumber,
+              Note: "Nothings",
+              Total: total,
+              users_permissions_user: users.user.id,
+              category_order_cards: arrayIDCart,
+            },
+          }),
+        });
+        if (status === 200) {
+          alert("Thao tác đặt hàng thành công, chúng tôi sẽ liên hệ bạn sớm");
+          dispatch(removeAll());
+        } else {
+          alert("Đặt hàng thất bại, vui lòng liên hệ Admin để được hỗ trợ");
+        }
       }
     }
   };
@@ -126,7 +129,7 @@ export const Cart = () => {
                   <TableCell align="right" width={30}>
                     <h6 style={{ fontWeight: 700 }}>STT</h6>
                   </TableCell>
-                  <TableCell align="right">
+                  <TableCell align="left">
                     <h6 style={{ fontWeight: 700 }}>Tên menu</h6>
                   </TableCell>
                   <TableCell align="right">
@@ -144,7 +147,7 @@ export const Cart = () => {
                 {cartCurrent.map((row, index) => (
                   <TableRow key={index}>
                     <TableCell width={30}>{index + 1}</TableCell>
-                    <TableCell align="right">{row.name}</TableCell>
+                    <TableCell align="left">{row.name}</TableCell>
                     <TableCell align="right">
                       <TextField
                         value={row.amount}

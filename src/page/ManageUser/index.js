@@ -32,9 +32,10 @@ function ManageUser() {
   const refInput = useRef({});
   const [userInfo, setUserInfo] = useState({});
   const [img, setImg] = useState(
-    `${URL_BACKEND}${user.Avatar != undefined
-      ? user.Avatar.url
-      : "/uploads/2289_Sk_VNQSBGQU_1_PID_Ew_Mjgt_MT_Iy_127a9d0f7c.jpg"
+    `${URL_BACKEND}${
+      user.Avatar != undefined
+        ? user.Avatar.url
+        : "/uploads/2289_Sk_VNQSBGQU_1_PID_Ew_Mjgt_MT_Iy_127a9d0f7c.jpg"
     }`
   );
   const handleFileUpload = async (event) => {
@@ -55,7 +56,7 @@ function ManageUser() {
     const dataResponse = data[0];
 
     if (status === 200) {
-      console.log({ Avatar: dataResponse.id });
+      //console.log({ Avatar: dataResponse.id });
       fetch(`${URL_BACKEND}/api/users/${user.id}`, {
         method: "PUT",
         body: JSON.stringify({ Avatar: dataResponse.id }),
@@ -72,11 +73,11 @@ function ManageUser() {
         }
       });
 
-      //    console.log(data);
+      //    //console.log(data);
     }
   };
   const uploadFile = () => {
-    //console.log(refInput.current.target.files[0].name);
+    ////console.log(refInput.current.target.files[0].name);
     refInput.current.click();
   };
   useEffect(() => {
@@ -84,9 +85,9 @@ function ManageUser() {
       dispatch(getMeAction(users.jwt));
     }
     if (user) {
-      //console.log(user);
+      ////console.log(user);
       setUserInfo(user);
-      // console.log(user);
+      // //console.log(user);
     }
   }, [loadedUser]);
   if (ItemToogle == 1) {
@@ -107,9 +108,11 @@ function ManageUser() {
                       onChange={handleFileUpload}
                       type="file"
                       style={{ display: "none" }}
-                    // multiple={false}
+                      // multiple={false}
                     />
-                    <Button variant="containeds" onClick={uploadFile}>Cập nhật ảnh đại diện</Button>
+                    <Button variant="containeds" onClick={uploadFile}>
+                      Cập nhật ảnh đại diện
+                    </Button>
                   </div>
                 </div>
                 <span className={style.TitleCard}>{user.FullName}</span>
@@ -120,8 +123,9 @@ function ManageUser() {
                     onClick={() => {
                       HandleToogle(1);
                     }}
-                    className={`${style.ItemCard} ${ItemToogle === 1 ? `${style.active}` : ``
-                      }`}
+                    className={`${style.ItemCard} ${
+                      ItemToogle === 1 ? `${style.active}` : ``
+                    }`}
                   >
                     Thông tin cá nhân
                   </li>
@@ -129,8 +133,9 @@ function ManageUser() {
                     onClick={() => {
                       HandleToogle(2);
                     }}
-                    className={`${style.ItemCard} ${ItemToogle === 2 ? `${style.active}` : ``
-                      }`}
+                    className={`${style.ItemCard} ${
+                      ItemToogle === 2 ? `${style.active}` : ``
+                    }`}
                   >
                     Lịch sử giao dịch
                   </li>
@@ -138,8 +143,9 @@ function ManageUser() {
                     onClick={() => {
                       HandleToogle(3);
                     }}
-                    className={`${style.ItemCard} ${ItemToogle === 3 ? `${style.active}` : ``
-                      }`}
+                    className={`${style.ItemCard} ${
+                      ItemToogle === 3 ? `${style.active}` : ``
+                    }`}
                   >
                     Đăng Xuất
                   </li>
@@ -207,9 +213,11 @@ function ManageUser() {
                     onChange={handleFileUpload}
                     type="file"
                     style={{ display: "none" }}
-                  // multiple={false}
+                    // multiple={false}
                   />
-                  <Button variant="containeds" onClick={uploadFile}>Cập nhật ảnh đại diện</Button>
+                  <Button variant="containeds" onClick={uploadFile}>
+                    Cập nhật ảnh đại diện
+                  </Button>
                 </div>
               </div>
               <span className={style.TitleCard}>{user.FullName}</span>
@@ -220,8 +228,9 @@ function ManageUser() {
                   onClick={() => {
                     HandleToogle(1);
                   }}
-                  className={`${style.ItemCard} ${ItemToogle === 1 ? `${style.active}` : ``
-                    }`}
+                  className={`${style.ItemCard} ${
+                    ItemToogle === 1 ? `${style.active}` : ``
+                  }`}
                 >
                   Thông tin cá nhân
                 </li>
@@ -229,8 +238,9 @@ function ManageUser() {
                   onClick={() => {
                     HandleToogle(2);
                   }}
-                  className={`${style.ItemCard} ${ItemToogle === 2 ? `${style.active}` : ``
-                    }`}
+                  className={`${style.ItemCard} ${
+                    ItemToogle === 2 ? `${style.active}` : ``
+                  }`}
                 >
                   Lịch sử giao dịch
                 </li>
@@ -238,8 +248,9 @@ function ManageUser() {
                   onClick={() => {
                     // HandleToogle(3);
                   }}
-                  className={`${style.ItemCard} ${ItemToogle === 3 ? `${style.active}` : ``
-                    }`}
+                  className={`${style.ItemCard} ${
+                    ItemToogle === 3 ? `${style.active}` : ``
+                  }`}
                 >
                   Đăng Xuất
                 </li>

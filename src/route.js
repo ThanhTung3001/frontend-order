@@ -34,7 +34,7 @@ export const RouteApp = () => {
   // useEffect(() => {
   //   if (authencated === true) {
   //     const tokenDecode = decode(users.jwt);
-  //     //  console.log(tokenDecode);
+  //     //  //console.log(tokenDecode);
   //     if (tokenDecode.header.iat < tokenDecode.header.exp) {
   //       const json = localStorage.setItem("UserInfo", JSON.stringify(users));
   //     }
@@ -44,8 +44,8 @@ export const RouteApp = () => {
   //     if (json.length > 0) {
   //       const userInfo = JSON.parse(json);
   //       const tokenDecode = decode(userInfo.jwt);
-  //       console.log(tokenDecode.payload.iat);
-  //       console.log(tokenDecode.payload.exp);
+  //       //console.log(tokenDecode.payload.iat);
+  //       //console.log(tokenDecode.payload.exp);
   //       if (tokenDecode.payload.iat < tokenDecode.payload.exp) {
   //         dispatch(login(userInfo));
   //       }
@@ -84,7 +84,7 @@ export const RouteApp = () => {
   );
 };
 const PrivateRoute = ({ element, auth }) => {
-  console.log(auth);
+  //console.log(auth);
   if (!auth) {
     // navigate("/login");
     return <Navigate to="/login" replace={true} />;

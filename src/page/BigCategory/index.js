@@ -1,25 +1,46 @@
-import React, { useState, useEffect } from "react";
-import StarRateIcon from "@mui/icons-material/StarRate";
-import StarBorderOutlinedIcon from "@mui/icons-material/StarBorderOutlined";
 import axios from "axios";
+import React, { useEffect, useState } from "react";
 import { URL_BACKEND } from "../../constants";
+import { useParams } from "react-router";
 import {
   Box,
   Button,
+  Divider,
   FormControl,
   InputLabel,
   MenuItem,
   Modal,
   Select,
+  Typography,
 } from "@mui/material";
+import AddShoppingCartIcon from "@mui/icons-material/AddShoppingCart";
 import { categoryMock } from "../../mock/CategoryMock";
+import { height } from "@mui/system";
+import { useDispatch, useSelector } from "react-redux";
+import { addToCart } from "../../app/reducer/CartSlice";
+
 export const BigCategory = () => {
+  const dispatch = useDispatch();
+  const { items, isLoaded } = useSelector((state) => state.cartReducer);
+
   const [bigCategory, setBigCategory] = useState([]);
+  const { id } = useParams();
   const [open, setOpen] = React.useState(false);
   const [item, setItem] = useState(categoryMock);
   const [selected, setSelected] = useState(false);
   const [itemSelected, setItemSelected] = useState(categoryMock);
   const [listMenu, setListMenu] = useState([]);
+  const handleAddToCart = (data) => {
+    dispatch(
+      addToCart({
+        ID: data.id,
+        name: data.attributes.name,
+        amount: 1,
+        price: data.attributes.price,
+      })
+    );
+    alert("Thêm vào giỏ hàng thành công");
+  };
   const handleOpen = (idItem) => {
     setItem(bigCategory.find((e) => e.id == idItem));
     setListMenu(bigCategory.filter((e) => e.id != idItem));
@@ -35,28 +56,33 @@ export const BigCategory = () => {
   const handleClose = () => {
     setOpen(false);
   };
+
   useEffect(() => {
     axios.get(URL_BACKEND + `/api/categories?populate=deep,3`).then((rs) => {
       let { data } = rs;
-      // console.log(rs);
-      console.log(data.data);
+      console.log(data);
       setBigCategory(data.data);
     });
 
-    return () => { };
+    return () => {};
   }, []);
-
   return (
     <div className="full-width">
       <div className="container">
         <div className="row block">
           <div className="row d-flex justify-content-center">
             <div className="col-sm-12 d-flex justify-content-center">
-              <h3 className="hignl-title second">Các loại hình tiệc</h3>
+              <h3 className="hignl-title second">Danh sách Menu</h3>
             </div>
           </div>
           <div className="row">
             {bigCategory.map((e, index) => {
+              if (e.attributes.FromTime == null) {
+                e.attributes.FromTime = "";
+              }
+              if (e.attributes.EndTime == null) {
+                e.attributes.EndTime = "";
+              }
               return (
                 <div key={index} className="col-sm-12">
                   <div>
@@ -64,17 +90,12 @@ export const BigCategory = () => {
                       <div className="col-sm-12 col-md-6 col-lg-6">
                         <div className="row mt-2 mb-2">
                           {new Array(4).fill().map((product, index) => {
-                            //  console.log(product);
+                            //  //console.log(product);
                             let urlImg = "";
-                            //    console.log(e.attributes.products.data.length);
+                            //   //console.log(e.attributes.products.data.length);
                             if (e.attributes.products.data.length < index + 1) {
                               urlImg = "/img_emty.png";
                             } else {
-                              // console.log(e.attributes);
-                              // console.log(
-                              //   e.attributes.products.data[index].attributes
-                              //     .avatar.data.attributes.url
-                              // );
                               urlImg =
                                 URL_BACKEND +
                                 e.attributes.products.data[index].attributes
@@ -97,45 +118,38 @@ export const BigCategory = () => {
                         </div>
                       </div>
                       <div className="col-sm-12 col-md-6 col-lg-6 ">
-                        <div
-                          className="row flex-column justify-content-center"
-                          style={{ height: "100%", width: "100%" }}
-                        >
-                          <div className="row d-flex justify-content-between">
-                            <div className="col-6">
-                              <h5 style={{ fontWeight: 700 }}>
-                                {e.attributes.name}
-                              </h5>
-                            </div>
-                            <div className="col-6 d-flex justify-content-end">
-                              <Button
-                                variant="contained"
-                                color="warning"
-                                onClick={() => {
-                                  handleOpen(e.id);
-                                }}
-                              >
-                                So sánh
-                              </Button>
-                            </div>
+                        <div className="row d-flex justify-content-between mt-5">
+                          <div className="col-8">
+                            <h5 style={{ fontWeight: 700 }}>
+                              {e.attributes.name}
+                            </h5>
                           </div>
-                          {/* {parseInt(e.attributes.price).toLocaleString(
-                            "it-IT",
-                            {
-                              style: "currency",
-                              currency: "VND",
-                            }
-                          )} */}
+                          <div className="col-4">
+                            <Button
+                              variant="contained"
+                              color="warning"
+                              onClick={() => {
+                                handleOpen(e.id);
+                              }}
+                            >
+                              So sánh
+                            </Button>
+                          </div>
+
                           <div
-                            className="row m-2 flex-column justify-content-between"
-                            style={{ height: 250 }}
+                            className="row m-2 flex-column justify-content-center"
+                            style={{ height: 450 }}
                           >
-                            <div className="col-sm-12 col-md-12">
+                            <div
+                              className="col-sm-12 col-md-12 flex-column flex-wrap"
+                              style={{ height: 250 }}
+                            >
                               {e.attributes.products.data.map(
                                 (product, index) => {
                                   return (
-                                    <p className="description">{`${index + 1
-                                      }. ${product.attributes.name}`}</p>
+                                    <p className="description">{`${
+                                      index + 1
+                                    }. ${product.attributes.name}`}</p>
                                   );
                                 }
                               )}
@@ -147,8 +161,12 @@ export const BigCategory = () => {
                                     variant="contained"
                                     color="warning"
                                     fullWidth
+                                    startIcon={<AddShoppingCartIcon />}
+                                    onClick={() => {
+                                      handleAddToCart(e);
+                                    }}
                                   >
-                                    Thêm vào giỏ hàng
+                                    Giỏ hàng
                                   </Button>
                                 </div>
                                 <div className="col">
@@ -161,12 +179,44 @@ export const BigCategory = () => {
                                   </Button>
                                 </div>
                               </div>
+                              <div className="row flex-column mt-4">
+                                <h1 className="description">
+                                  Đơn giá{": "}
+                                  <strong>
+                                    {parseInt(
+                                      e.attributes.price
+                                    ).toLocaleString("it-IT", {
+                                      style: "currency",
+                                      currency: "VND",
+                                    })}
+                                  </strong>
+                                </h1>
+                                <h1 className="description">
+                                  Số lượng tối thiểu{": "}
+                                  <strong>{e.attributes.amout}</strong>
+                                </h1>
+                                <h1 className="description">
+                                  Thời gian phù hợp{": "}
+                                  <strong>{`${e.attributes.FromTime.substring(
+                                    0,
+                                    5
+                                  )} - ${e.attributes.EndTime.substring(
+                                    0,
+                                    5
+                                  )}`}</strong>
+                                </h1>
+                                <h1 className="description">
+                                  Supplier{": "}
+                                  <strong>{`${e.attributes.TypeMenu}`}</strong>
+                                </h1>
+                              </div>
                             </div>
                           </div>
                         </div>
                       </div>
                     </div>
                   </div>
+                  <Divider className="mb-2" style={{ color: "gray" }} />
                 </div>
               );
             })}
@@ -190,7 +240,7 @@ export const BigCategory = () => {
               value={itemSelected.id}
               label="Chọn loại muốn so sánh"
               onChange={(e) => {
-                //console.log(e);
+                ////console.log(e);
                 handleSelected(e.target.value);
               }}
             >
@@ -211,7 +261,7 @@ export const BigCategory = () => {
                     <div className="col-sm-12">
                       <div className="row mt-2 mb-2">
                         {new Array(4).fill().map((product, index) => {
-                          //  console.log(product);
+                          //  //console.log(product);
                           let urlImg = "";
                           if (
                             item.attributes.products.data.length <
@@ -247,7 +297,7 @@ export const BigCategory = () => {
                         style={{ height: "100%", width: "100%" }}
                       >
                         <div className="row d-flex justify-content-between">
-                          <div className="col-12">
+                          <div className="col-6">
                             <h5 style={{ fontWeight: 700 }}>
                               {item.attributes.name}
                             </h5>
@@ -268,8 +318,9 @@ export const BigCategory = () => {
                             {item.attributes.products.data.map(
                               (product, index) => {
                                 return (
-                                  <p className="description">{`${index + 1}. ${product.attributes.name
-                                    }`}</p>
+                                  <p className="description">{`${index + 1}. ${
+                                    product.attributes.name
+                                  }`}</p>
                                 );
                               }
                             )}
@@ -311,7 +362,7 @@ export const BigCategory = () => {
                       <div className="col-sm-12">
                         <div className="row mt-2 mb-2">
                           {new Array(4).fill().map((product, index) => {
-                            //  console.log(product);
+                            //  //console.log(product);
                             let urlImg = "";
                             if (
                               itemSelected.attributes.products.data.length <
@@ -347,19 +398,13 @@ export const BigCategory = () => {
                           style={{ height: "100%", width: "100%" }}
                         >
                           <div className="row d-flex justify-content-between">
-                            <div className="col-12">
+                            <div className="col-6">
                               <h5 style={{ fontWeight: 700 }}>
                                 {itemSelected.attributes.name}
                               </h5>
                             </div>
                           </div>
-                          {/* {parseInt(e.attributes.price).toLocaleString(
-                            "it-IT",
-                            {
-                              style: "currency",
-                              currency: "VND",
-                            }
-                          )} */}
+
                           <div
                             className="row m-2 flex-column justify-content-between"
                             style={{ height: 250 }}
@@ -368,8 +413,9 @@ export const BigCategory = () => {
                               {itemSelected.attributes.products.data.map(
                                 (product, index) => {
                                   return (
-                                    <p className="description">{`${index + 1
-                                      }. ${product.attributes.name}`}</p>
+                                    <p className="description">{`${
+                                      index + 1
+                                    }. ${product.attributes.name}`}</p>
                                   );
                                 }
                               )}
@@ -428,7 +474,5 @@ const style = {
   overflow: "scroll",
   justifyContent: "center",
   alignItems: "center",
-  pt: 30,
-  // pb: 20,
   px: 4,
 };

@@ -21,7 +21,7 @@ export const Blogs = () => {
       <div className="container">
         <div className="row block">
           <div className="row d-flex justify-content-center">
-            <div className="col-sm-4 d-flex justify-content-center">
+            <div className="col-sm-12 d-flex justify-content-center">
               <h3 className="hignl-title second">Blogs</h3>
             </div>
           </div>
@@ -35,7 +35,7 @@ export const Blogs = () => {
                       style={{ textDecoration: "none" }}
                     >
                       <div className="row">
-                        <div className="col" style={{ height: 300 }}>
+                        <div className="col">
                           <img
                             className="item-img"
                             style={{
@@ -79,12 +79,7 @@ export const Blogs = () => {
                       style={{ textDecoration: "none" }}
                     >
                       <div className="row">
-                        <div
-                          className="col"
-                          style={{
-                            height: 200,
-                          }}
-                        >
+                        <div className="col">
                           <img
                             className="item-img"
                             src={
@@ -98,7 +93,10 @@ export const Blogs = () => {
                         </div>
                       </div>
                       <div className="row">
-                        <h3 className="title-article center">
+                        <h3
+                          className="title-article center"
+                          style={{ fontSize: 16, lineHeight: 1.5 }}
+                        >
                           {e.attributes.title}
                         </h3>
                       </div>

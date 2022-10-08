@@ -14,7 +14,7 @@ function ChangePassword() {
       currentPassword: password,
       passwordConfirmation: currentPassword,
     };
-    // console.log(users.jwt);
+    // //console.log(users.jwt);
 
     try {
       const { data, status, statusText } = await axios(

@@ -20,7 +20,7 @@ function FacebookCallBack() {
       url: `${URL_BACKEND}/api/auth/facebook/callback${search}`,
     })
       .then((res) => {
-        // console.log(res.data)
+        // //console.log(res.data)
         return res.data;
       })
       .then(setAuth);

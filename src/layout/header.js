@@ -77,7 +77,7 @@ const Header = () => {
     setAnchorElNav(null);
   };
   const handleClickNav = (path) => {
-    // console.log("click");
+    // //console.log("click");
     if (path === "logout") {
       localStorage.setItem("UserInfo", "");
       dispatch(logout());
@@ -154,7 +154,14 @@ const Header = () => {
             >
               {pages.map((e, index) => (
                 <MenuItem key={index} onClick={handleCloseNavMenu}>
-                  <Typography textAlign="center">{e.name}</Typography>
+                  <Typography
+                    textAlign="center"
+                    onClick={() => {
+                      handleClickNav(e.path);
+                    }}
+                  >
+                    {e.name}
+                  </Typography>
                 </MenuItem>
               ))}
             </Menu>

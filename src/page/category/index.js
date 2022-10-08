@@ -10,7 +10,7 @@ export const Category = () => {
   useEffect(() => {
     axios.get(URL_BACKEND + `/api/big-categories?populate=*`).then((rs) => {
       let { data } = rs;
-      console.log(data.data);
+      //console.log(data.data);
       setBigCategory(data.data);
     });
 

@@ -13,6 +13,7 @@ import {
   Select,
   Typography,
 } from "@mui/material";
+import AddShoppingCartIcon from "@mui/icons-material/AddShoppingCart";
 import { categoryMock } from "../../mock/CategoryMock";
 import { height } from "@mui/system";
 import { useDispatch, useSelector } from "react-redux";
@@ -61,7 +62,7 @@ export const DetailCategory = () => {
       .get(URL_BACKEND + `/api/big-categories/${id}?populate=deep,5`)
       .then((rs) => {
         let { data } = rs;
-        // console.log(data.data.attributes.categories.data);
+        // //console.log(data.data.attributes.categories.data);
         setBigCategory(data.data.attributes.categories.data);
       });
 
@@ -91,9 +92,9 @@ export const DetailCategory = () => {
                       <div className="col-sm-12 col-md-6 col-lg-6">
                         <div className="row mt-2 mb-2">
                           {new Array(4).fill().map((product, index) => {
-                            //  console.log(product);
+                            //  //console.log(product);
                             let urlImg = "";
-                            //   console.log(e.attributes.products.data.length);
+                            //   //console.log(e.attributes.products.data.length);
                             if (e.attributes.products.data.length < index + 1) {
                               urlImg = "/img_emty.png";
                             } else {
@@ -119,27 +120,22 @@ export const DetailCategory = () => {
                         </div>
                       </div>
                       <div className="col-sm-12 col-md-6 col-lg-6 ">
-                        <div
-                          className="row flex-column justify-content-center"
-                          style={{ height: "100%", width: "100%" }}
-                        >
-                          <div className="row d-flex justify-content-between">
-                            <div className="col-6">
-                              <h5 style={{ fontWeight: 700 }}>
-                                {e.attributes.name}
-                              </h5>
-                            </div>
-                            <div className="col-6 d-flex justify-content-end">
-                              <Button
-                                variant="contained"
-                                color="warning"
-                                onClick={() => {
-                                  handleOpen(e.id);
-                                }}
-                              >
-                                So sánh
-                              </Button>
-                            </div>
+                        <div className="row d-flex justify-content-between mt-5">
+                          <div className="col-8">
+                            <h5 style={{ fontWeight: 700 }}>
+                              {e.attributes.name}
+                            </h5>
+                          </div>
+                          <div className="col-4">
+                            <Button
+                              variant="contained"
+                              color="warning"
+                              onClick={() => {
+                                handleOpen(e.id);
+                              }}
+                            >
+                              So sánh
+                            </Button>
                           </div>
 
                           <div
@@ -167,11 +163,12 @@ export const DetailCategory = () => {
                                     variant="contained"
                                     color="warning"
                                     fullWidth
+                                    startIcon={<AddShoppingCartIcon />}
                                     onClick={() => {
                                       handleAddToCart(e);
                                     }}
                                   >
-                                    Thêm vào giỏ hàng
+                                    Giỏ hàng
                                   </Button>
                                 </div>
                                 <div className="col">
@@ -245,7 +242,7 @@ export const DetailCategory = () => {
               value={itemSelected.id}
               label="Chọn loại muốn so sánh"
               onChange={(e) => {
-                //console.log(e);
+                ////console.log(e);
                 handleSelected(e.target.value);
               }}
             >
@@ -266,7 +263,7 @@ export const DetailCategory = () => {
                     <div className="col-sm-12">
                       <div className="row mt-2 mb-2">
                         {new Array(4).fill().map((product, index) => {
-                          //  console.log(product);
+                          //  //console.log(product);
                           let urlImg = "";
                           if (
                             item.attributes.products.data.length <
@@ -367,7 +364,7 @@ export const DetailCategory = () => {
                       <div className="col-sm-12">
                         <div className="row mt-2 mb-2">
                           {new Array(4).fill().map((product, index) => {
-                            //  console.log(product);
+                            //  //console.log(product);
                             let urlImg = "";
                             if (
                               itemSelected.attributes.products.data.length <

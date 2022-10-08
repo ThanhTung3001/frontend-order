@@ -20,7 +20,7 @@ function GoogleAuthCallback() {
       url: `${URL_BACKEND}/api/auth/google/callback${search}`,
     })
       .then((res) => {
-        // console.log(res.data)
+        // //console.log(res.data)
         return res.data;
       })
       .then(setAuth);

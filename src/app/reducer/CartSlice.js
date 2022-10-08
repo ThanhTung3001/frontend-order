@@ -9,7 +9,7 @@ const CartSlice = createSlice({
   },
   reducers: {
     changeAmountItem: (state, action) => {
-      //console.log(action.payload)
+      ////console.log(action.payload)
       const newItems = state.items.filter((e) => {
         if (e.ID == action.payload.ID) {
           if (parseInt(action.payload.amount) == 0) {
@@ -23,7 +23,7 @@ const CartSlice = createSlice({
           return true;
         }
       });
-      //console.log(newItems);
+      ////console.log(newItems);
       state.items = newItems;
       storedCartAction(state.items);
     },
@@ -32,7 +32,7 @@ const CartSlice = createSlice({
       state.isLoaded = true;
     },
     removeData: (state, action) => {
-      console.log(action.payload);
+      //console.log(action.payload);
       state.items = state.items.filter((e) => {
         return e.ID != action.payload;
       });
@@ -44,11 +44,13 @@ const CartSlice = createSlice({
       storedCartAction(state.items);
     },
     addToCart: (state, action) => {
-      //  console.log(action.payload)
+      //  //console.log(action.payload)
       const newItems = state.items.filter((e) => {
         if (e.ID == action.payload.ID) {
-          e.amount = e.amount + 1;
+          e.amount = parseInt(e.amount) + 1;
           return true;
+        } else {
+          return false;
         }
       });
       if (newItems.length > 0) {

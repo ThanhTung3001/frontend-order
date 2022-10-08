@@ -23,7 +23,7 @@ export const BlogDetails = () => {
 
       setTitle(article.title);
       setTime(article.publishedAt);
-      // console.log(article.Content);
+      // //console.log(article.Content);
 
       article.Content = article.Content.replaceAll(
         `/uploads/`,
@@ -38,7 +38,7 @@ export const BlogDetails = () => {
       <div className="container">
         <div className="row block">
           <div className="row d-flex justify-content-center">
-            <div className="col-sm-12 d-flex justify-content-center">
+            <div className="col-sm-12 d-flex justify-content-center mb-3">
               <h2 className=" second">{title}</h2>
             </div>
           </div>

@@ -77,13 +77,13 @@ export const Home = () => {
     let url = URL_BACKEND + `/api/banners?populate=*`;
     axios.get(url).then((rs) => {
       let { data } = rs;
-      //  console.log(data.data);
+      //  //console.log(data.data);
       setBackground(data.data);
     });
     //let url = URL_BACKEND + `/api/banners?populate=*`;
     axios.get(URL_BACKEND + `/api/big-categories?populate=*`).then((rs) => {
       let { data } = rs;
-      // console.log(data.data);
+      // //console.log(data.data);
       setListType(data.data);
     });
     axios.get(URL_BACKEND + `/api/blogs?populate=*`).then((rs) => {
