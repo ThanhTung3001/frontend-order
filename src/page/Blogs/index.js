@@ -3,7 +3,7 @@ import moment from "moment";
 import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import { URL_BACKEND } from "../../constants";
-
+import './style.css'
 export const Blogs = () => {
   const [blog, setBlog] = useState([]);
   useEffect(() => {
@@ -25,7 +25,7 @@ export const Blogs = () => {
               <h3 className="hignl-title second">Blogs</h3>
             </div>
           </div>
-          <div className="row justify-content-center">
+          <div className="row justify-content-center Space">
             {blog.map((e, index) => {
               if (index < 2) {
                 return (
@@ -35,11 +35,12 @@ export const Blogs = () => {
                       style={{ textDecoration: "none" }}
                     >
                       <div className="row">
-                        <div className="col" style={{ height: 300 }}>
+                        <div className="col ContainerImageBlog">
                           <img
                             className="item-img"
                             style={{
                               width: "100%",
+                              height : '100%'
                             }}
                             src={
                               URL_BACKEND +
@@ -52,17 +53,17 @@ export const Blogs = () => {
                         </div>
                       </div>
                       <div className="row">
-                        <div className="">
-                          <p className="description mt-3 center">
+                        <div className="ContainerTextBlog">
+                          <p className="description BlogDescription">
                             {moment(e.attributes.publishedAt).format(
                               "DD/MM/YYYY HH:mm"
                             )}
                           </p>
-                          <h3 className="title-article center">
+                          <h3 className="title-article titleArticle">
                             {e.attributes.title}
                           </h3>
 
-                          <p className="description center">
+                          <p className="description text-decription">
                             {e.attributes.description.substring(0, 230)}
                             ...
                           </p>
@@ -80,12 +81,11 @@ export const Blogs = () => {
                     >
                       <div className="row">
                         <div
-                          className="col"
-                          style={{
-                            height: 200,
-                          }}
+                          className="col WrapperImgBlog"
+                          
                         >
                           <img
+                          
                             className="item-img"
                             src={
                               URL_BACKEND +
@@ -98,7 +98,7 @@ export const Blogs = () => {
                         </div>
                       </div>
                       <div className="row">
-                        <h3 className="title-article center">
+                        <h3 className="center ContainerBlogTextItem">
                           {e.attributes.title}
                         </h3>
                       </div>

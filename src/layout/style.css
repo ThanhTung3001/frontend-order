@@ -4,3 +4,54 @@
 .footer h6{
     line-height: 40px;
 }
+.block-top{
+    padding: 30px;
+    background: #FFFFFF;
+    box-shadow: 0px 4px 20px rgb(0 0 0 / 12%);
+    border-radius: 4px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+ .reponsiveInputFooter{
+    justify-content: flex-end;
+ }
+ .WrapperItemFooter{
+    font-weight: 600;
+    margin-top: 20px;
+ }
+ @media screen and (max-width : 380px){
+    
+ }
+ @media screen and (max-width : 600px){
+    .reponsiveInputFooter{
+        margin-top: 20px;
+        display: flex;
+        width: 100%;
+    }
+    .InputReponsive{
+        width: 400px;
+    }
+    .WrapperItemFooter{
+        margin-top: 10px;
+    }
+}
+@media screen and (max-width : 900px){
+    .WrapperItemFooter{
+        margin-top: 30px;
+    }
+}
+@media screen and (max-width: 420px){
+    .block-top{
+        padding: 30px 10px;
+    }
+    .reponsiveInputFooter{
+        margin-top: 20px;
+        display: flex;
+        width: 100%;
+    }
+    .WrapperItemFooter{
+        margin-top: 20px;
+    }
+
+}

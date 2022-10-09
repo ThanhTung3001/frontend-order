@@ -43,12 +43,13 @@ export const Footer = () => {
         <div className="container-fluid">
           <div className="row block-top">
             <div className="row d-flex justify-content-between mb-2">
-              <div className="col-sm-6">
+              <div className="col-12 col-sm-6 col-md-6">
                 <h5>Đăng ký nhận thêm thông tin Các ưu đãi riêng biệt</h5>
               </div>
-              <div className="col-sm-6 d-flex justify-content-end">
-                <div className="col-sm-6">
+              <div className="reponsiveInputFooter col-sm-12 col-md-6 col-lg-6 col-xl-6 col-8 d-flex">
+                <div className="col-10 col-md-6 col-sm-10 col-md-10 col-lg-6 col-xl-7">
                   <TextField
+                   className="InputReponsive"
                     fullWidth
                     onChange={(e) => setEmailSubmit(e.target.value)}
                     placeholder="Nhập email của bạn"
@@ -68,7 +69,7 @@ export const Footer = () => {
             </div>
             <Divider />
             <div className="row mt-2 footer">
-              <div className="col-sm-3 ">
+              <div className="col-sm-12 col-md-12">
                 <img src="logo_color.png" />
                 <div className="row mt-2 mb-2">
                   <div className="col">{companyInfo[0].attributes.Slogan}</div>
@@ -81,21 +82,23 @@ export const Footer = () => {
                   <p>Sđt: {companyInfo[0].attributes.phone}</p>
                 </div>
               </div>
-              <div className="col-sm-3">
-                <h6>Chính sách bảo mật</h6>
-                <h6>Thông tin chuyển khoản</h6>
-                <h6>Hướng dẫn đặt hàng</h6>
-              </div>
-              <div className="col-sm-3">
-                <h6>Chính sách đổi trả</h6>
-                <h6>Câu hỏi thường gặp</h6>
-                <h6>Điều khoản sử dụng</h6>
-              </div>
-              <div className="col-sm-3">
-                <h6>Phí & khu vực giao hàng</h6>
-                <h6>Bảng tin công ty</h6>
-                <h6>Điều khoản sử dụng</h6>
-              </div>
+             
+                <div className="col-sm-4 col-md-4 WrapperItemFooter">
+                  <h6>Chính sách bảo mật</h6>
+                  <h6>Thông tin chuyển khoản</h6>
+                  <h6>Hướng dẫn đặt hàng</h6>
+                </div>
+                <div className="col-sm-4 col-md-4  WrapperItemFooter">
+                  <h6>Chính sách đổi trả</h6>
+                  <h6>Câu hỏi thường gặp</h6>
+                  <h6>Điều khoản sử dụng</h6>
+                </div>
+                <div className="col-sm-4 col-md-4  WrapperItemFooter">
+                  <h6>Phí & khu vực giao hàng</h6>
+                  <h6>Bảng tin công ty</h6>
+                  <h6>Điều khoản sử dụng</h6>
+                </div>
+              
             </div>
             <div className="row"></div>
           </div>

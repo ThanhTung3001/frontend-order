@@ -218,7 +218,7 @@ export const Register = () => {
                   Đăng ký
                 </h3>
               </div>
-              <div className="col-sm-12 col-md-8 m-2">
+              <div className="col-12 col-sm-8 col-md-12 col-lg-10 mt-4">
                 <TextField
                   fullWidth
                   placeholder="Họ và tên"
@@ -228,7 +228,7 @@ export const Register = () => {
                   onChange={handleChangeFullName}
                 />
               </div>
-              <div className="col-sm-12 col-md-8 m-2">
+              <div className="col-12 col-sm-8 col-md-12 col-lg-10 m-2">
                 <TextField
                   fullWidth
                   placeholder="Tên tài khoản"
@@ -238,7 +238,7 @@ export const Register = () => {
                   onChange={handleChangeUsername}
                 />
               </div>
-              <div className="col-sm-12 col-md-8 m-2">
+              <div className="col-12 col-sm-8 col-md-12 col-lg-10 m-2">
                 <TextField
                   type="email"
                   fullWidth
@@ -250,7 +250,7 @@ export const Register = () => {
                 />
               </div>
 
-              <div className="col-sm-12 col-md-8 m-2">
+              <div className="col-12 col-sm-8 col-md-12 col-lg-10 m-2">
                 <TextField
                   type="password"
                   onChange={handleChangePassword}
@@ -261,7 +261,7 @@ export const Register = () => {
                   placeholder="Mật khẩu"
                 />
               </div>
-              <div className="col-sm-12 col-md-8 m-2">
+              <div className="col-12 col-sm-8 col-md-12 col-lg-10 m-2">
                 <TextField
                   type="password"
                   fullWidth
@@ -273,16 +273,16 @@ export const Register = () => {
                 />
               </div>
               <div className="row d-flex justify-content-center">
-                <div className="col-sm-8 col-md-8 mt-3 d-flex justify-content-center">
-                  <FormGroup>
+                <div className="col-12 col-sm-8 col-md-12 col-lg-10 mt-3 d-flex justify-content-start align-items-start p-0">
+                  <FormGroup> 
                     <FormControlLabel
-                      control={<Checkbox checked={true} />}
+                      control={<Checkbox className="align-items-start" checked={true} />}
                       label="Tôi đã đọc và đồng ý với Điều khoản sử dụng và Chính sách quyền riêng tư"
                     />
                   </FormGroup>
                 </div>
               </div>
-              <div className="col-sm-12 col-md-8 mt-5">
+              <div className="col-12 col-sm-8 col-md-12 col-lg-10 mt-5">
                 <Button
                   fullWidth
                   variant="contained"

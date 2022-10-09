@@ -1,0 +1,8 @@
+@media screen and (max-width:420px){
+    .AroundLoginBtn{
+        flex-direction: column;
+    }
+    .LoginBtn{
+        width: 220px;
+    }
+}

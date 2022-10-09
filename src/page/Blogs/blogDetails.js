@@ -8,6 +8,7 @@ import ReactMarkdown from "react-markdown";
 import "./style.css";
 import parse from "html-react-parser";
 
+
 export const BlogDetails = () => {
   const { id } = useParams();
   // const [article, setArticle] = useState({});
@@ -23,7 +24,6 @@ export const BlogDetails = () => {
 
       setTitle(article.title);
       setTime(article.publishedAt);
-     
 
       article.Content = article.Content.replaceAll(
         `/uploads/`,
@@ -32,14 +32,15 @@ export const BlogDetails = () => {
       setContent(article.Content);
     });
   }, []);
-
+  const TextContent = content.slice(3,content.length - 4);
+  console.log(typeof TextContent);
   return (
-    <div className="full-width">
+    <div className="full-width1">
       <div className="container">
         <div className="row block">
           <div className="row d-flex justify-content-center">
             <div className="col-sm-12 d-flex justify-content-center">
-              <h2 className=" second">{title}</h2>
+              <h2 className="TitlePrice second">{title}</h2>
             </div>
           </div>
           <div className="row">
@@ -54,9 +55,9 @@ export const BlogDetails = () => {
               </h3>
             </div>
           </div>
-          <div className="row">
+          <div className="row mt-2">
             <div className="col" id="content">
-              {parse(content)}
+            <p style={{wordWrap : 'break-word'}}>{TextContent}</p>
             </div>
           </div>
         </div>

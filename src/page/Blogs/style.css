@@ -2,3 +2,97 @@
 #content img{
     width: 100%;
 }
+.Space{
+    row-gap: 0;
+}
+.TitlePrice{
+    font-size: 22px;
+    font-weight: 700;
+    margin-bottom: 20px;
+}
+.BlogDescription{
+    margin-top: 12px;
+}
+.text-decription{
+    text-align: center;
+}
+.titleArticle{
+    text-align: center;
+}
+.ContainerImageBlog{
+    height: 300px;
+}
+.ContainerTextBlog{
+    margin-top: 0;
+}
+.ContainerBlogTextItem{
+    margin-top: 10px;
+    font-size: 24px;
+    font-weight: 700;
+    line-height: 28px;
+    letter-spacing: 0em;
+}
+.WrapperImgBlog{
+   height: 300px;
+}
+.item-img{
+  height: 100%;
+}
+@media screen and (max-width:380px){
+   
+}
+@media screen and (max-width:639px){
+    .Space{
+        row-gap: 30px;
+    }
+    .ContainerImageBlog{
+        height: 200px;
+    }
+    .WrapperImgBlog{
+        height: 200px;
+    }
+}
+@media screen and (max-width:900px){
+    .Space{
+        row-gap: 40px;
+    }
+}
+@media screen and (max-width : 1000px){
+    .Space{
+        row-gap: 20px;
+    }
+}
+@media screen and (max-width: 420px){
+    .Space{
+        row-gap: 40px;
+    }
+    .BlogDescription{
+        margin-top: 0;
+        text-align: left;
+    }
+    .title-article{
+        text-align: left;
+        margin-top: 5px;     
+    }
+    .text-decription{
+        text-align: left;
+        margin-top: 10px;
+    }
+    .ContainerTextBlog{
+        margin-top: 10px;
+    }
+    .ContainerBlogTextItem{
+        margin-top: 10px;
+    }
+    .titleArticle{
+        margin-top: 10px;
+    }
+    .ContainerImageBlog{
+        height: 200px;
+    }
+    .WrapperImgBlog{
+        height: 200px;
+    }
+   
+   
+}

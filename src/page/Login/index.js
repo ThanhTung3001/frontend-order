@@ -16,7 +16,7 @@ import { register } from "../../app/reducer/UserSlice";
 import { LoginAction, RegisterAction } from "../../app/action/UserAction";
 import { Navigate, useHistory, useNavigate } from "react-router-dom";
 import GoogleButton from 'react-google-button'
-
+import './index.css'
 export const Login = () => {
   const { users, authencated, error } = useSelector(
     (state) => state.userReducer
@@ -210,7 +210,7 @@ export const Login = () => {
       <div className="container ">
         <div className="row d-flex justify-content-center ">
           <div className="col-sm-12 col-md-7">
-            <div className="row block p-5">
+            <div className="row block p-5 items-center">
               <div className="col-sm-12 ">
 
                 <h3 style={{ textAlign: "center", fontWeight: 700 }}>
@@ -243,8 +243,8 @@ export const Login = () => {
                 />
               </div>
 
-              <div className="col-sm-12 col-md-10  d-flex">
-                <div className="col-12 col-sm-6 m-2">
+              <div className="AroundLoginBtn col-sm-12 col-md-10 d-flex">
+                <div className="LoginBtn col-12 col-sm-6 m-2">
                   <Button
                     fullWidth
                     style={{ height: '100%' }}
@@ -256,7 +256,7 @@ export const Login = () => {
                   </Button>
                 </div>
                 <div className="col-12 col-sm-6 m-2">
-                  <GoogleButton type="light" onClick={() => {
+                  <GoogleButton style={window.innerWidth < '420' ? {width : '220px'} : {width : '240px'}} type="light" onClick={() => {
                     (window.location = `${URL_BACKEND}/api/connect/google`)
                   }}>Đăng nhập với Google</GoogleButton>
                 </div>

@@ -17,7 +17,7 @@ export const Category = () => {
   return (
     <div className="full-width">
       <div className="container">
-        <div className="row py-4">
+        <div className="row py-4 justify-content-center">
           <div className="row d-flex justify-content-center">
             <div className="col-sm-4 d-flex justify-content-center">
               <h3 className="hignl-title second">Các loại tiệc</h3>

@@ -1,0 +1,83 @@
+.ContainerCategoryDetail{
+    justify-content: center;
+    display: flex;
+    height: 250px;
+}
+.BtnCompare{
+    justify-content: flex-end;
+}
+.MenuCategoryDetail{
+    height: 150px;
+    display: flex;
+    padding: 0;
+    margin: 10px 0 0 0;
+}
+.AroundBtnOrder{
+    justify-content: space-around;
+    align-items: center;
+}
+.BoxModal{
+    height: 500px;
+}
+.MenuClose{
+    left: 50%;
+    bottom: 0;
+    transform: translateX(-50%);
+}
+.ReponsiveHeightModal{
+    height: 650px;
+}
+.AroundCeleb:not(:nth-child(1)){
+    margin-top: 30px;
+}
+@media screen and (max-width:1000px){
+    .AroundBtnOrder{
+        margin-top: 20px;
+        justify-content: flex-start;
+    }
+    .BtnOrder{
+        margin-top: 10px;
+    }
+}
+@media screen and (max-width:900px){
+    .AroundBtnOrder{
+        margin-top: 20px;
+        justify-content: flex-start;
+        align-items: center;
+    }
+    .BtnOrder{
+        margin-top: 10px;
+    }
+    .AroundCeleb:not(:nth-child(1)){
+        margin-top: 30px;
+    }
+}
+@media screen and (max-width : 750px){
+    .BtnOrder{
+        margin-top: 0;
+    }
+}
+    @media screen and (max-width:600px){
+        .ContainerCategoryDetail{
+            flex-direction: column;
+            align-items: flex-start;
+        }
+        .BtnCompare{
+            margin-top: 10px;
+        }
+    }
+    @media screen and (max-width: 420px){
+        .BtnCompare{
+            margin-top: 10px;
+            justify-content: start;
+        }
+        .AroundBtnOrder{
+            justify-content: space-between;
+            display: flex;
+            flex-direction: column;
+            margin-top: 10px;
+        }
+        .BtnOrder{
+            padding-top: 10px;
+        }
+}

@@ -128,6 +128,14 @@ button.MuiButtonBase-root.MuiButton-root.MuiButton-contained.MuiButton-contained
   display: flex;
   justify-content: center;
 }
+.BtnStyle{
+  background: #D32F2F;
+  color: white;
+  font-size: 15px;
+  padding: 8px 12px;
+  border-radius: 5px;
+  box-shadow: 0px 7px 8px -4px rgb(0 0 0 / 20%)
+}
 .full-width2{
   background-color: #F2F2F2;
   padding-bottom: 40px;
@@ -138,13 +146,5 @@ button.MuiButtonBase-root.MuiButton-root.MuiButton-contained.MuiButton-contained
   padding-top: 40px;
   padding-bottom: 40px;
 }
-.block-top{
-  padding: 30px;
-  background: #FFFFFF;
-  box-shadow: 0px 4px 20px rgba(0, 0, 0, 0.12);
-  border-radius: 4px;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-}
+
 

@@ -14,7 +14,7 @@ import {
 } from "@mui/material";
 import { categoryMock } from "../../mock/CategoryMock";
 import { height } from "@mui/system";
-
+import './style.css'
 export const DetailCategory = () => {
   const [bigCategory, setBigCategory] = useState([]);
   const { id } = useParams();
@@ -44,16 +44,15 @@ export const DetailCategory = () => {
       .get(URL_BACKEND + `/api/big-categories/${id}?populate=deep,4`)
       .then((rs) => {
         let { data } = rs;
-        //  console.log(data.data.attributes.categories.data);
+        console.log(data.data);
         setBigCategory(data.data.attributes.categories.data);
       });
-
     return () => {};
   }, []);
   return (
-    <div className="full-width">
+    <div className="full-width1">
       <div className="container">
-        <div className="row block">
+        <div style={{position :'relative'}} className="row block pb-9">
           <div className="row d-flex justify-content-center">
             <div className="col-sm-12 d-flex justify-content-center">
               <h3 className="hignl-title second">Các loại hình tiệc</h3>
@@ -62,7 +61,7 @@ export const DetailCategory = () => {
           <div className="row">
             {bigCategory.map((e, index) => {
               return (
-                <div key={index} className="col-sm-12">
+                <div key={index} className="col-sm-12 AroundCeleb">
                   <div>
                     <div className="row">
                       <div className="col-sm-12 col-md-6 col-lg-6">
@@ -102,16 +101,16 @@ export const DetailCategory = () => {
                       </div>
                       <div className="col-sm-12 col-md-6 col-lg-6 ">
                         <div
-                          className="row flex-column justify-content-center"
+                          className="row flex-column justify-content-center ReponsiveMenuCategory"
                           style={{ height: "100%", width: "100%" }}
                         >
-                          <div className="row d-flex justify-content-between">
-                            <div className="col-6">
+                          <div className="row ContainerCategoryDetail">
+                            <div className="col-12 col-sm-6">
                               <h5 style={{ fontWeight: 700 }}>
                                 {e.attributes.name}
                               </h5>
                             </div>
-                            <div className="col-6 d-flex justify-content-end">
+                            <div className="col-12 col-sm-6 d-flex BtnCompare">
                               <Button
                                 variant="contained"
                                 color="warning"
@@ -131,9 +130,7 @@ export const DetailCategory = () => {
                             }
                           )} */}
                           <div
-                            className="row m-2 flex-column justify-content-between"
-                            style={{ height: 250 }}
-                          >
+                            className="m-2 flex-column justify-content-between MenuCategoryDetail">
                             <div className="col-sm-12 col-md-12">
                               {e.attributes.products.data.map(
                                 (product, index) => {
@@ -146,8 +143,8 @@ export const DetailCategory = () => {
                               )}
                             </div>
                             <div className="col-sm-12">
-                              <div className="row d-flex justify-content-around">
-                                <div className="col">
+                              <div className="row d-flex AroundBtnOrder">
+                                <div className="col col-md-10 col-xl-6 col-lg-6">
                                   <Button
                                     variant="contained"
                                     color="warning"
@@ -156,7 +153,7 @@ export const DetailCategory = () => {
                                     Cần hỗ trợ thêm
                                   </Button>
                                 </div>
-                                <div className="col">
+                                <div className="col col-md-10 col-xl-6 col-lg-6 BtnOrder">
                                   <Button
                                     fullWidth
                                     color="error"
@@ -184,133 +181,33 @@ export const DetailCategory = () => {
         aria-labelledby="child-modal-title"
         aria-describedby="child-modal-description"
       >
-        <Box sx={{ ...style, width: "80%", flexDirection: "column" }}>
-          <FormControl style={{ height: 60 }} fullWidth>
-            <InputLabel id="demo-simple-select-label">
-              Chọn loại muốn so sánh
-            </InputLabel>
-            <Select
-              labelId="demo-simple-select-label"
-              id="demo-simple-select"
-              value={itemSelected.id}
-              label="Chọn loại muốn so sánh"
-              onChange={(e) => {
-                //console.log(e);
-                handleSelected(e.target.value);
-              }}
-            >
-              {listMenu.map((e, index) => {
-                return (
-                  <MenuItem key={index} value={e.id}>
-                    {e.attributes.name}
-                  </MenuItem>
-                );
-              })}
-            </Select>
-          </FormControl>
-          <div className="row d-flex justify-content-center mt-2">
-            <div className="col-sm-5 " style={{ marginRight: 20 }}>
-              <div className="col-sm-12">
-                <div>
-                  <div className="row">
-                    <div className="col-sm-12">
-                      <div className="row mt-2 mb-2">
-                        {new Array(4).fill().map((product, index) => {
-                          //  console.log(product);
-                          let urlImg = "";
-                          if (
-                            item.attributes.products.data.length <
-                            index + 1
-                          ) {
-                            urlImg = "/img_emty.png";
-                          } else {
-                            urlImg =
-                              URL_BACKEND +
-                              item.attributes.products.data[index].attributes
-                                .avatar.data.attributes.url;
-                          }
-                          return (
-                            <div
-                              key={index}
-                              className=" col-6 col-sm-6 p-1 ml-0 mr-1 d-flex justify-content-center"
-                            >
-                              {/* itemSelected.attributes.products.data */}
-                              <img
-                                src={urlImg}
-                                className="item-img"
-                                width={"100%"}
-                                alt=""
-                              />
-                            </div>
-                          );
-                        })}
-                      </div>
-                    </div>
-                    <div className="col-sm-12">
-                      <div
-                        className="row flex-column justify-content-center"
-                        style={{ height: "100%", width: "100%" }}
-                      >
-                        <div className="row d-flex justify-content-between">
-                          <div className="col-6">
-                            <h5 style={{ fontWeight: 700 }}>
-                              {item.attributes.name}
-                            </h5>
-                          </div>
-                        </div>
-                        {/* {parseInt(e.attributes.price).toLocaleString(
-                            "it-IT",
-                            {
-                              style: "currency",
-                              currency: "VND",
-                            }
-                          )} */}
-                        <div
-                          className="row m-2 flex-column justify-content-between"
-                          style={{ height: 250 }}
-                        >
-                          <div className="col-sm-12 col-md-12">
-                            {item.attributes.products.data.map(
-                              (product, index) => {
-                                return (
-                                  <p className="description">{`${index + 1}. ${
-                                    product.attributes.name
-                                  }`}</p>
-                                );
-                              }
-                            )}
-                          </div>
-                          <div className="col-sm-12">
-                            <div className="row d-flex justify-content-around">
-                              <div className="col">
-                                <Button
-                                  variant="contained"
-                                  color="warning"
-                                  fullWidth
-                                >
-                                  Cần hỗ trợ thêm
-                                </Button>
-                              </div>
-                              <div className="col">
-                                <Button
-                                  fullWidth
-                                  color="error"
-                                  variant="contained"
-                                >
-                                  Đặt tiệc
-                                </Button>
-                              </div>
-                            </div>
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-            <div className="col-sm-5">
-              {selected == true ? (
+        <Box className="BoxModal" sx={{ ...style, width: "80%", flexDirection: "column" }}>
+          <div style={{ position: 'relative', width:'100%', height:'100%'}}>
+            <FormControl className="AroundFormControl" style={{ height: 60 }} fullWidth>
+              <InputLabel className="InputFormControl" id="demo-simple-select-label">
+                Chọn loại muốn so sánh
+              </InputLabel>
+              <Select
+                labelId="demo-simple-select-label"
+                id="demo-simple-select"
+                value={itemSelected.id}
+                label="Chọn loại muốn so sánh"
+                onChange={(e) => {
+                  //console.log(e);
+                  handleSelected(e.target.value);
+                }}
+              >
+                {listMenu.map((e, index) => {
+                  return (
+                    <MenuItem key={index} value={e.id}>
+                      {e.attributes.name}
+                    </MenuItem>
+                  );
+                })}
+              </Select>
+            </FormControl>
+            <div className="row d-flex justify-content-between mt-2 AroundMenuFood">
+              <div className="col-sm-5 WrapperMenuFoodLeft">
                 <div className="col-sm-12">
                   <div>
                     <div className="row">
@@ -320,15 +217,15 @@ export const DetailCategory = () => {
                             //  console.log(product);
                             let urlImg = "";
                             if (
-                              itemSelected.attributes.products.data.length <
+                              item.attributes.products.data.length <
                               index + 1
                             ) {
                               urlImg = "/img_emty.png";
                             } else {
                               urlImg =
                                 URL_BACKEND +
-                                itemSelected.attributes.products.data[index]
-                                  .attributes.avatar.data.attributes.url;
+                                item.attributes.products.data[index].attributes
+                                  .avatar.data.attributes.url;
                             }
                             return (
                               <div
@@ -355,33 +252,32 @@ export const DetailCategory = () => {
                           <div className="row d-flex justify-content-between">
                             <div className="col-6">
                               <h5 style={{ fontWeight: 700 }}>
-                                {itemSelected.attributes.name}
+                                {item.attributes.name}
                               </h5>
                             </div>
                           </div>
                           {/* {parseInt(e.attributes.price).toLocaleString(
-                            "it-IT",
-                            {
-                              style: "currency",
-                              currency: "VND",
-                            }
-                          )} */}
+                              "it-IT",
+                              {
+                                style: "currency",
+                                currency: "VND",
+                              }
+                            )} */}
                           <div
-                            className="row m-2 flex-column justify-content-between"
-                            style={{ height: 250 }}
+                            className="row m-2 flex-column justify-content-between p-0"
                           >
-                            <div className="col-sm-12 col-md-12">
-                              {itemSelected.attributes.products.data.map(
+                            <div className="col-sm-12 col-md-12 p-0">
+                              {item.attributes.products.data.map(
                                 (product, index) => {
                                   return (
-                                    <p className="description">{`${
-                                      index + 1
-                                    }. ${product.attributes.name}`}</p>
+                                    <p className="description">{`${index + 1}. ${
+                                      product.attributes.name
+                                    }`}</p>
                                   );
                                 }
                               )}
                             </div>
-                            <div className="col-sm-12">
+                            <div className="col-sm-12 p-0 mt-4">
                               <div className="row d-flex justify-content-around">
                                 <div className="col">
                                   <Button
@@ -389,7 +285,7 @@ export const DetailCategory = () => {
                                     color="warning"
                                     fullWidth
                                   >
-                                    Cần hỗ trợ thêm
+                                   Hỗ trợ
                                   </Button>
                                 </div>
                                 <div className="col">
@@ -409,12 +305,113 @@ export const DetailCategory = () => {
                     </div>
                   </div>
                 </div>
-              ) : null}
+              </div>
+              <div className="col-sm-5 WrapperFoodRight">
+                {selected == true ? (
+                  <div className="col-sm-12 ">
+                    <div>
+                      <div className="row">
+                        <div className="col-sm-12">
+                          <div className="row mt-2 mb-2">
+                            {new Array(4).fill().map((product, index) => {
+                              //  console.log(product);
+                              let urlImg = "";
+                              if (
+                                itemSelected.attributes.products.data.length <
+                                index + 1
+                              ) {
+                                urlImg = "/img_emty.png";
+                              } else {
+                                urlImg =
+                                  URL_BACKEND +
+                                  itemSelected.attributes.products.data[index]
+                                    .attributes.avatar.data.attributes.url;
+                              }
+                              return (
+                                <div
+                                  key={index}
+                                  className=" col-6 col-sm-6 p-1 ml-0 mr-1 d-flex justify-content-center"
+                                >
+                                  {/* itemSelected.attributes.products.data */}
+                                  <img
+                                    src={urlImg}
+                                    className="item-img"
+                                    width={"100%"}
+                                    alt=""
+                                  />
+                                </div>
+                              );
+                            })}
+                          </div>
+                        </div>
+                        <div className="col-sm-12 p-0">
+                          <div
+                            className="row flex-column justify-content-center"
+                            style={{ height: "100%", width: "100%" }}
+                          >
+                            <div className="row d-flex justify-content-between">
+                              <div className="col-6">
+                                <h5 style={{ fontWeight: 700 }}>
+                                  {itemSelected.attributes.name}
+                                </h5>
+                              </div>
+                            </div>
+                            {/* {parseInt(e.attributes.price).toLocaleString(
+                              "it-IT",
+                              {
+                                style: "currency",
+                                currency: "VND",
+                              }
+                            )} */}
+                            <div
+                              className="row m-2 flex-column justify-content-between p-0"
+                            >
+                              <div className="col-sm-12 col-md-12 p-0">
+                                {itemSelected.attributes.products.data.map(
+                                  (product, index) => {
+                                    return (
+                                      <p className="description">{`${
+                                        index + 1
+                                      }. ${product.attributes.name}`}</p>
+                                    );
+                                  }
+                                )}
+                              </div>
+                              <div className="col-sm-12 p-0 mt-2">
+                                <div className="row d-flex justify-content-around">
+                                  <div className="col">
+                                    <Button
+                                      variant="contained"
+                                      color="warning"
+                                      fullWidth
+                                    >
+                                      Hỗ trợ
+                                    </Button>
+                                  </div>
+                                  <div className="col">
+                                    <Button
+                                      fullWidth
+                                      color="error"
+                                      variant="contained"
+                                    >
+                                      Đặt tiệc
+                                    </Button>
+                                  </div>
+                                </div>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                ) : null}
+              </div>
             </div>
+            <Button variant="contained" className="MenuClose" onClick={handleClose}>
+              Đóng
+            </Button>
           </div>
-          <Button variant="contained" onClick={handleClose}>
-            Đóng
-          </Button>
         </Box>
       </Modal>
     </div>
@@ -426,7 +423,7 @@ const style = {
   left: "50%",
   transform: "translate(-50%, -50%)",
   width: "100%",
-  height: "100%",
+  height :'650px',
   bgcolor: "background.paper",
   border: "1px solid #000",
   boxShadow: 24,
@@ -435,7 +432,6 @@ const style = {
   overflow: "scroll",
   justifyContent: "center",
   alignItems: "center",
-  pt: 30,
-  // pb: 20,
+  pt : 4,
   px: 4,
 };

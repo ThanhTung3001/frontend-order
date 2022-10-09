@@ -83,7 +83,7 @@ export const Home = () => {
     //let url = URL_BACKEND + `/api/banners?populate=*`;
     axios.get(URL_BACKEND + `/api/big-categories?populate=*`).then((rs) => {
       let { data } = rs;
-      // console.log(data.data);
+      console.log(data.data);
       setListType(data.data);
     });
     axios.get(URL_BACKEND + `/api/blogs?populate=*`).then((rs) => {
@@ -190,6 +190,7 @@ export const Home = () => {
                 <Link
                   style={{ textDecoration: "none" }}
                   to={`cac-loai-tiec/${e.id}`}
+                  key={index}
                   className={
                     index % 2 === 0
                       ? "row d-flex m-2"
@@ -242,9 +243,10 @@ export const Home = () => {
                     <div className="col-sm-12 col-md-12 col-lg-8">
                       <Link
                         to={`/blogs/${e.id}`}
+                        key={index}
                         style={{ textDecoration: "none" }}
                       >
-                        <div className="row">
+                        <div className="row justify-content-center BlogsHome">
                           <div className="row d-flex flex-column">
                             <div className="fit-content">
                               <img
@@ -281,7 +283,7 @@ export const Home = () => {
                   return null;
                 }
               })}
-              <div className="col-sm-12 col-md-12 col-lg-4">
+              <div className="col-sm-12 col-12 col-md-12 col-lg-4">
                 {blog.map((e, index) => {
                   if (index === 0) {
                     return null;
@@ -290,9 +292,10 @@ export const Home = () => {
                       <Link
                         to={`/blogs/${e.id}`}
                         style={{ textDecoration: "none" }}
+                        key={index}
                       >
                         <div className="row">
-                          <div className="row d-flex flex-column">
+                          <div className={`reponsive_blog row d-flex flex-column `}>
                             <div className="fit-cover">
                               <img
                                 src={
@@ -355,7 +358,7 @@ export const Home = () => {
                   onChange={(e) => setFullName(e.target.value)}
                 />
               </div>
-              <div className="col-sm-12 col-md-6 ">
+              <div className={`col-sm-12 col-md-6`}>
                 <TextField
                   fullWidth
                   placeholder="Tiêu đề"

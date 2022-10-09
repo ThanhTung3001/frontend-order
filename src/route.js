@@ -25,10 +25,9 @@ export const RouteApp = () => {
         <Route exact path="/login" element={<Login />} />
         <Route exact path="/dat-tiec" element={<BigCategory />} />
         <Route exact path="/cac-loai-tiec" element={<Category />} />
-        <Route exact path="/cac-loai-tiec/:id" element={<DetailCategory />} />
+        <Route exact path="/cac-loai-tiec/:id" element={<DetailCategory/>} />
         <Route exact path="/blogs" element={<Blogs />} />
         <Route exact path="/register" element={<Register />} />
-        <Route exact path="/login" element={<Login />} />
         <Route exact path="/blogs/:id" element={<BlogDetails />} />
         <Route exact path="/recovery-password" element={<RecoveryPassword />} />
         <Route path="*" element={<NotFound />} />

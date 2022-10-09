@@ -13,6 +13,7 @@ import {
   Select,
 } from "@mui/material";
 import { categoryMock } from "../../mock/CategoryMock";
+import "./style.css";
 export const BigCategory = () => {
   const [bigCategory, setBigCategory] = useState([]);
   const [open, setOpen] = React.useState(false);
@@ -101,13 +102,13 @@ export const BigCategory = () => {
                           className="row flex-column justify-content-center"
                           style={{ height: "100%", width: "100%" }}
                         >
-                          <div className="row d-flex justify-content-between">
-                            <div className="col-6">
+                          <div className="row d-flex WrapperCompareMenu">
+                            <div className="col-12 col-sm-6 col-md-6 col-lg-6">
                               <h5 style={{ fontWeight: 700 }}>
                                 {e.attributes.name}
                               </h5>
                             </div>
-                            <div className="col-6 d-flex justify-content-end">
+                            <div className="col-12 col-sm-6 col-md-6 col-lg-6 d-flex BtnCompareMenu">
                               <Button
                                 variant="contained"
                                 color="warning"
@@ -126,11 +127,8 @@ export const BigCategory = () => {
                               currency: "VND",
                             }
                           )} */}
-                          <div
-                            className="row m-2 flex-column justify-content-between"
-                            style={{ height: 250 }}
-                          >
-                            <div className="col-sm-12 col-md-12">
+                          <div className="row m-2 flex-column justify-content-between p-0">
+                            <div className="col-sm-12 col-md-12 p-0">
                               {e.attributes.products.data.map(
                                 (product, index) => {
                                   return (
@@ -142,8 +140,8 @@ export const BigCategory = () => {
                               )}
                             </div>
                             <div className="col-sm-12">
-                              <div className="row d-flex justify-content-around">
-                                <div className="col">
+                              <div className="row d-flex AroundBtnOrder">
+                                <div className="col-12 col-sm-6 col-md-6 col-lg-6 pl-0">
                                   <Button
                                     variant="contained"
                                     color="warning"
@@ -152,7 +150,7 @@ export const BigCategory = () => {
                                     Cần hỗ trợ thêm
                                   </Button>
                                 </div>
-                                <div className="col">
+                                <div className="col-12 col-sm-6 col-md-6 col-lg-6 pl-0 BtnOrderMenu">
                                   <Button
                                     fullWidth
                                     color="error"
@@ -180,133 +178,33 @@ export const BigCategory = () => {
         aria-labelledby="child-modal-title"
         aria-describedby="child-modal-description"
       >
-        <Box sx={{ ...style, width: "80%", flexDirection: "column" }}>
-          <FormControl style={{ height: 60 }} fullWidth>
-            <InputLabel id="demo-simple-select-label">
-              Chọn loại muốn so sánh
-            </InputLabel>
-            <Select
-              labelId="demo-simple-select-label"
-              id="demo-simple-select"
-              value={itemSelected.id}
-              label="Chọn loại muốn so sánh"
-              onChange={(e) => {
-                //console.log(e);
-                handleSelected(e.target.value);
-              }}
-            >
-              {listMenu.map((e, index) => {
-                return (
-                  <MenuItem key={index} value={e.id}>
-                    {e.attributes.name}
-                  </MenuItem>
-                );
-              })}
-            </Select>
-          </FormControl>
-          <div className="row d-flex justify-content-center mt-2">
-            <div className="col-sm-5 " style={{ marginRight: 20 }}>
-              <div className="col-sm-12">
-                <div>
-                  <div className="row">
-                    <div className="col-sm-12">
-                      <div className="row mt-2 mb-2">
-                        {new Array(4).fill().map((product, index) => {
-                          //  console.log(product);
-                          let urlImg = "";
-                          if (
-                            item.attributes.products.data.length <
-                            index + 1
-                          ) {
-                            urlImg = "/img_emty.png";
-                          } else {
-                            urlImg =
-                              URL_BACKEND +
-                              item.attributes.products.data[index].attributes
-                                .avatar.data.attributes.url;
-                          }
-                          return (
-                            <div
-                              key={index}
-                              className=" col-6 col-sm-6 p-1 ml-0 mr-1 d-flex justify-content-center"
-                            >
-                              {/* itemSelected.attributes.products.data */}
-                              <img
-                                src={urlImg}
-                                className="item-img"
-                                width={"100%"}
-                                alt=""
-                              />
-                            </div>
-                          );
-                        })}
-                      </div>
-                    </div>
-                    <div className="col-sm-12">
-                      <div
-                        className="row flex-column justify-content-center"
-                        style={{ height: "100%", width: "100%" }}
-                      >
-                        <div className="row d-flex justify-content-between">
-                          <div className="col-12">
-                            <h5 style={{ fontWeight: 700 }}>
-                              {item.attributes.name}
-                            </h5>
-                          </div>
-                        </div>
-                        {/* {parseInt(e.attributes.price).toLocaleString(
-                            "it-IT",
-                            {
-                              style: "currency",
-                              currency: "VND",
-                            }
-                          )} */}
-                        <div
-                          className="row m-2 flex-column justify-content-between"
-                          style={{ height: 250 }}
-                        >
-                          <div className="col-sm-12 col-md-12">
-                            {item.attributes.products.data.map(
-                              (product, index) => {
-                                return (
-                                  <p className="description">{`${index + 1}. ${
-                                    product.attributes.name
-                                  }`}</p>
-                                );
-                              }
-                            )}
-                          </div>
-                          <div className="col-sm-12">
-                            <div className="row d-flex justify-content-around">
-                              <div className="col">
-                                <Button
-                                  variant="contained"
-                                  color="warning"
-                                  fullWidth
-                                >
-                                  Cần hỗ trợ thêm
-                                </Button>
-                              </div>
-                              <div className="col">
-                                <Button
-                                  fullWidth
-                                  color="error"
-                                  variant="contained"
-                                >
-                                  Đặt tiệc
-                                </Button>
-                              </div>
-                            </div>
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-            <div className="col-sm-5">
-              {selected == true ? (
+        <Box className="BoxModal" sx={{ ...style, width: "80%", flexDirection : 'column'}}>
+          <div style={{ position: 'relative', width:'100%', height:'100%'}}>
+            <FormControl style={{ height : 60 }} fullWidth>
+              <InputLabel id="demo-simple-select-label">
+                Chọn loại muốn so sánh
+              </InputLabel>
+              <Select
+                labelId="demo-simple-select-label"
+                id="demo-simple-select"
+                value={itemSelected.id}
+                label="Chọn loại muốn so sánh"
+                onChange={(e) => {
+                  //console.log(e);
+                  handleSelected(e.target.value);
+                }}
+              >
+                {listMenu.map((e, index) => {
+                  return (
+                    <MenuItem key={index} value={e.id}>
+                      {e.attributes.name}
+                    </MenuItem>
+                  );
+                })}
+              </Select>
+            </FormControl>
+            <div className="row d-flex mt-2 AroundMenuFood">
+              <div className="col-sm-5 col-md-5 col-lg-5" style={{ marginRight: 20 }}>
                 <div className="col-sm-12">
                   <div>
                     <div className="row">
@@ -316,15 +214,15 @@ export const BigCategory = () => {
                             //  console.log(product);
                             let urlImg = "";
                             if (
-                              itemSelected.attributes.products.data.length <
+                              item.attributes.products.data.length <
                               index + 1
                             ) {
                               urlImg = "/img_emty.png";
                             } else {
                               urlImg =
                                 URL_BACKEND +
-                                itemSelected.attributes.products.data[index]
-                                  .attributes.avatar.data.attributes.url;
+                                item.attributes.products.data[index].attributes
+                                  .avatar.data.attributes.url;
                             }
                             return (
                               <div
@@ -351,44 +249,43 @@ export const BigCategory = () => {
                           <div className="row d-flex justify-content-between">
                             <div className="col-12">
                               <h5 style={{ fontWeight: 700 }}>
-                                {itemSelected.attributes.name}
+                                {item.attributes.name}
                               </h5>
                             </div>
                           </div>
                           {/* {parseInt(e.attributes.price).toLocaleString(
-                            "it-IT",
-                            {
-                              style: "currency",
-                              currency: "VND",
-                            }
-                          )} */}
+                                  "it-IT",
+                                  {
+                                    style: "currency",
+                                    currency: "VND",
+                                  }
+                                )} */}
                           <div
-                            className="row m-2 flex-column justify-content-between"
-                            style={{ height: 250 }}
+                            className="row m-2 flex-column p-0 justify-start AroundMenuDetail"
                           >
-                            <div className="col-sm-12 col-md-12">
-                              {itemSelected.attributes.products.data.map(
+                            <div className="col-sm-12 col-md-12 p-0">
+                              {item.attributes.products.data.map(
                                 (product, index) => {
                                   return (
-                                    <p className="description">{`${
-                                      index + 1
-                                    }. ${product.attributes.name}`}</p>
+                                    <p className="description">{`${index + 1}. ${
+                                      product.attributes.name
+                                    }`}</p>
                                   );
                                 }
                               )}
                             </div>
-                            <div className="col-sm-12">
-                              <div className="row d-flex justify-content-around">
+                            <div className="col-sm-12 pl-0 mt-4">
+                              <div className="row d-flex justify-content-between WrapperBtnOrderDetail">
                                 <div className="col">
                                   <Button
                                     variant="contained"
                                     color="warning"
                                     fullWidth
                                   >
-                                    Cần hỗ trợ thêm
+                                   Hỗ trợ
                                   </Button>
                                 </div>
-                                <div className="col">
+                                <div className="col BtnOrderDetail">
                                   <Button
                                     fullWidth
                                     color="error"
@@ -405,12 +302,115 @@ export const BigCategory = () => {
                     </div>
                   </div>
                 </div>
-              ) : null}
+              </div>
+              <div className="col-sm-5 col-md-5 col-lg-5">
+                {selected == true ? (
+                  <div className="col-sm-12">
+                    <div>
+                      <div className="row">
+                        <div className="col-sm-12">
+                          <div className="row mt-2 mb-2">
+                            {new Array(4).fill().map((product, index) => {
+                              //  console.log(product);
+                              let urlImg = "";
+                              if (
+                                itemSelected.attributes.products.data.length <
+                                index + 1
+                              ) {
+                                urlImg = "/img_emty.png";
+                              } else {
+                                urlImg =
+                                  URL_BACKEND +
+                                  itemSelected.attributes.products.data[index]
+                                    .attributes.avatar.data.attributes.url;
+                              }
+                              return (
+                                <div
+                                  key={index}
+                                  className=" col-6 col-sm-6 p-1 ml-0 mr-1 d-flex justify-content-center"
+                                >
+                                  {/* itemSelected.attributes.products.data */}
+                                  <img
+                                    src={'https://images.unsplash.com/photo-1662581871625-7dbd3ac1ca18?ixlib=rb-1.2.1&ixid=MnwxMjA3fDF8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=386&q=80'}
+                                    className="item-img"
+                                    width={"100%"}
+                                    alt=""
+                                  />
+                                </div>
+                              );
+                            })}
+                          </div>
+                        </div>
+                        <div className="col-sm-12">
+                          <div
+                            className="row flex-column justify-content-center"
+                            style={{ height: "100%", width: "100%" }}
+                          >
+                            <div className="row d-flex justify-content-between">
+                              <div className="col-12">
+                                <h5 style={{ fontWeight: 700 }}>
+                                  {itemSelected.attributes.name}
+                                </h5>
+                              </div>
+                            </div>
+                            {/* {parseInt(e.attributes.price).toLocaleString(
+                                  "it-IT",
+                                  {
+                                    style: "currency",
+                                    currency: "VND",
+                                  }
+                                )} */}
+                            <div
+                              className="row m-2 flex-column justify-content-between p-0"
+                              style={{ height: 135 }}
+                            >
+                              <div className="col-sm-12 col-md-12 p-0">
+                                {itemSelected.attributes.products.data.map(
+                                  (product, index) => {
+                                    return (
+                                      <p className="description">{`${
+                                        index + 1
+                                      }. ${product.attributes.name}`}</p>
+                                    );
+                                  }
+                                )}
+                              </div>
+                              <div className="col-sm-12 pl-0">
+                                <div className="row d-flex justify-content-between WrapperBtnOrderDetail">
+                                  <div className="col">
+                                    <Button
+                                      variant="contained"
+                                      color="warning"
+                                      fullWidth
+                                    >
+                                       Hỗ trợ
+                                    </Button>
+                                  </div>
+                                  <div className="col BtnOrderDetail">
+                                    <Button
+                                      fullWidth
+                                      color="error"
+                                      variant="contained"
+                                    >
+                                      Đặt tiệc
+                                    </Button>
+                                  </div>
+                                </div>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                ) : null}
+              </div>
+             
             </div>
+            <Button variant="contained" className="MenuClose" onClick={handleClose}>
+              Đóng
+            </Button>
           </div>
-          <Button variant="contained" onClick={handleClose}>
-            Đóng
-          </Button>
         </Box>
       </Modal>
     </div>
@@ -422,7 +422,7 @@ const style = {
   left: "50%",
   transform: "translate(-50%, -50%)",
   width: "100%",
-  height: "100%",
+  height: "600px",
   bgcolor: "background.paper",
   border: "1px solid #000",
   boxShadow: 24,
@@ -431,7 +431,8 @@ const style = {
   overflow: "scroll",
   justifyContent: "center",
   alignItems: "center",
-  pt: 30,
+  pt: 5,
   // pb: 20,
   px: 4,
+  pb : 10
 };

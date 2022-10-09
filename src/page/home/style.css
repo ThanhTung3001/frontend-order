@@ -15,7 +15,6 @@ p.legend {
     font-size: 59px !important;
     background-color: rgba(255, 255, 255, 0) !important;
     bottom: 100px !important;
-
     opacity: 1 !important;
 }
 
@@ -43,4 +42,26 @@ span.MuiSlider-root.MuiSlider-colorSecondary.MuiSlider-sizeMedium.css-1diafny-Mu
     top: 0;
     bottom: 0;
     background: linear-gradient(0deg, rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6));
+}
+
+    
+@media screen and (max-width : 800px){
+    .reponsive{
+        margin-top: 24px;
+    }
+    .reponsive_blog{
+        margin-top: 24px;
+    }
+    .reponsiveInputFooter{
+        width: 250px;
+    }
+}
+@media screen and (max-width : 420px){
+    .reponsive{
+        margin-top: 24px;
+    }
+    .reponsive_blog{
+        margin-top: 24px;
+    }
+
 }
