@@ -32,7 +32,7 @@ export const Footer = () => {
       let { data } = rs;
       if (data.data.length > 0) {
         setCompanyInfo(data.data);
-        // console.log(data.data);
+        // //console.log(data.data);
       }
       //setBlog(data.data);
     });

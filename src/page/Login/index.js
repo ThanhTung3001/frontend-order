@@ -1,10 +1,13 @@
 import {
   Button,
   Checkbox,
+  Divider,
   FormControlLabel,
   FormGroup,
+  InputAdornment,
   TextField,
 } from "@mui/material";
+import './index.css'
 import React, { useEffect, useState } from "react";
 import * as EmailValidator from "email-validator";
 import passwordValidator from "password-validator";
@@ -14,9 +17,14 @@ import { createSelector } from "@reduxjs/toolkit";
 import { useDispatch, useSelector } from "react-redux";
 import { register } from "../../app/reducer/UserSlice";
 import { LoginAction, RegisterAction } from "../../app/action/UserAction";
-import { Navigate, useHistory, useNavigate } from "react-router-dom";
-import GoogleButton from 'react-google-button'
-import './index.css'
+import { Link, Navigate, useHistory, useNavigate } from "react-router-dom";
+import GoogleButton from "react-google-button";
+import GoogleIcon from "@mui/icons-material/Google";
+import RemoveRedEyeIcon from "@mui/icons-material/RemoveRedEye";
+import VisibilityOffIcon from "@mui/icons-material/VisibilityOff";
+import FacebookIcon from "@mui/icons-material/Facebook";
+
+//npm i react-facebook-login-button
 export const Login = () => {
   const { users, authencated, error } = useSelector(
     (state) => state.userReducer
@@ -50,6 +58,7 @@ export const Login = () => {
     value: "",
     message: "",
   });
+  const [type, setType] = useState(false);
 
   const handleChangePassword = (e) => {
     const value = e.target.value;
@@ -209,10 +218,9 @@ export const Login = () => {
     <div className="full-width ">
       <div className="container ">
         <div className="row d-flex justify-content-center ">
-          <div className="col-sm-12 col-md-7">
-            <div className="row block p-5 items-center">
+          <div className="col-sm-12 col-md-12 col-lg-7">
+            <div className="row block p-5">
               <div className="col-sm-12 ">
-
                 <h3 style={{ textAlign: "center", fontWeight: 700 }}>
                   Đăng nhập
                 </h3>
@@ -232,22 +240,33 @@ export const Login = () => {
 
               <div className="col-sm-12 col-md-8 m-2">
                 <TextField
-                  type="password"
+                  fullWidth
+                  type={type == false ? "password" : "text"}
                   label="Mật khẩu"
                   onChange={handleChangePassword}
                   value={password.value}
                   error={password.error}
                   helperText={password.message}
-                  fullWidth
                   placeholder="Mật khẩu"
+                  InputProps={{
+                    endAdornment: (
+                      <InputAdornment
+                        onClick={() => setType(!type)}
+                        position="end"
+                        style={{ cursor: "pointer" }}
+                      >
+                        {!type ? <RemoveRedEyeIcon /> : <VisibilityOffIcon />}
+                      </InputAdornment>
+                    ),
+                  }}
                 />
               </div>
 
-              <div className="AroundLoginBtn col-sm-12 col-md-10 d-flex">
-                <div className="LoginBtn col-12 col-sm-6 m-2">
+              <div className="col-sm-8 mt-2">
+                <div className="col-12">
                   <Button
                     fullWidth
-                    style={{ height: '100%' }}
+                    style={{ height: "100%" }}
                     variant="contained"
                     color="error"
                     onClick={handleSubmit}
@@ -255,13 +274,58 @@ export const Login = () => {
                     Đăng nhập
                   </Button>
                 </div>
-                <div className="col-12 col-sm-6 m-2">
-                  <GoogleButton style={window.innerWidth < '420' ? {width : '220px'} : {width : '240px'}} type="light" onClick={() => {
-                    (window.location = `${URL_BACKEND}/api/connect/google`)
-                  }}>Đăng nhập với Google</GoogleButton>
+              </div>
+              <div className="col-8 mt-3 d-flex justify-content-between">
+                <div className="col-6 d-flex justify-content-start">
+                  <p className="description-time" style={{ height: 12 }}>
+                    Quên mật khẩu?
+                    <Link to="/forgot-password" />
+                  </p>
                 </div>
-
-
+                <div className="col-6 d-flex justify-content-end">
+                  <p className="description-time" style={{ height: 12 }}>
+                    Đăng ký
+                    <Link to="/register" />
+                  </p>
+                </div>
+              </div>
+              <div className="col-8">
+                <Divider textAlign="center"> or</Divider>
+              </div>
+              <div className="col-12 col-sm-8 ml-0 d-flex justify-content-between AroundBtnLogin">
+                <div className="col-sm-12 col-md-6 d-flex justify-content-start BtnFb">
+                  <Button
+                    fullWidth
+                    startIcon={<FacebookIcon />}
+                    variant="contained"
+                    color="primary"
+                    className="containedPrimary"
+                    onClick={() => {
+                      window.location = `${URL_BACKEND}/api/connect/facebook`;
+                    }}
+                    style={{
+                      fontSize: 11,
+                    }}
+                  >
+                    Đăng nhập với Facebook
+                  </Button>
+                </div>
+                <div className="col-sm-12 col-md-6 d-flex justify-content-start BtnGoogle">
+                  <Button
+                    onClick={() => {
+                      window.location = `${URL_BACKEND}/api/connect/google`;
+                    }}
+                    variant="contained"
+                    color="error"
+                    fullWidth
+                    startIcon={<GoogleIcon />}
+                    style={{
+                      fontSize: 11,
+                    }}
+                  >
+                    Đăng nhập với Google
+                  </Button>
+                </div>
               </div>
             </div>
           </div>

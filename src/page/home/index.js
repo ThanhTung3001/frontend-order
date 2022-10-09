@@ -77,13 +77,13 @@ export const Home = () => {
     let url = URL_BACKEND + `/api/banners?populate=*`;
     axios.get(url).then((rs) => {
       let { data } = rs;
-      //  console.log(data.data);
+      //  //console.log(data.data);
       setBackground(data.data);
     });
     //let url = URL_BACKEND + `/api/banners?populate=*`;
     axios.get(URL_BACKEND + `/api/big-categories?populate=*`).then((rs) => {
       let { data } = rs;
-      console.log(data.data);
+      // //console.log(data.data);
       setListType(data.data);
     });
     axios.get(URL_BACKEND + `/api/blogs?populate=*`).then((rs) => {
@@ -188,9 +188,9 @@ export const Home = () => {
             {listType.map((e, index) => {
               return (
                 <Link
+                  key={index}
                   style={{ textDecoration: "none" }}
                   to={`cac-loai-tiec/${e.id}`}
-                  key={index}
                   className={
                     index % 2 === 0
                       ? "row d-flex m-2"
@@ -294,7 +294,7 @@ export const Home = () => {
                         style={{ textDecoration: "none" }}
                         key={index}
                       >
-                        <div className="row">
+                        <div className="row justify-content-center">
                           <div className={`reponsive_blog row d-flex flex-column `}>
                             <div className="fit-cover">
                               <img
@@ -358,7 +358,7 @@ export const Home = () => {
                   onChange={(e) => setFullName(e.target.value)}
                 />
               </div>
-              <div className={`col-sm-12 col-md-6`}>
+              <div className={`col-sm-12 col-md-6 reponsive`}>
                 <TextField
                   fullWidth
                   placeholder="Tiêu đề"

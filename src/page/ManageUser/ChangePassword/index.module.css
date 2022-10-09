@@ -1,30 +1,37 @@
-.BtnChangePassword{
+.BtnChangePassword {
     background: #F5C342;
 }
-.FormInfoAccount{
+
+.FormInfoAccount {
     margin-top: 30px;
     width: 380px;
 }
-.ContainerInputPassword{
+
+.ContainerInputPassword {
     display: flex;
     width: 800px;
     justify-content: space-between;
 }
-.InputPassword{
+
+.InputPassword {
     width: 380px;
 }
-.Button{
+
+.Button {
     background: #F5C342;
 }
-@media screen and (max-width:420px){
-    .FormInfoAccount{
+
+@media screen and (max-width:420px) {
+    .FormInfoAccount {
         width: 100%;
     }
-    .ContainerInputPassword{
+
+    .ContainerInputPassword {
         flex-direction: column;
         width: 100%;
     }
-    .InputPassword{
+
+    .InputPassword {
         width: 100%;
     }
 }

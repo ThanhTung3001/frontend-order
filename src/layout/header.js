@@ -43,11 +43,11 @@ const pages = [
 const settings = [
   {
     name: "Giỏ hàng",
-    path: "card",
+    path: "cart",
   },
   {
     name: "Quản lý tài khoản",
-    path: "quan-ly-tai-khoan",
+    path: "user/info",
   },
   {
     name: "Đổi mật khẩu",
@@ -70,6 +70,7 @@ const Header = () => {
     setAnchorElNav(event.currentTarget);
   };
   const handleOpenUserMenu = (event) => {
+    document.body.style.overflowY = 'scroll'
     setAnchorElUser(event.currentTarget);
   };
 
@@ -77,6 +78,7 @@ const Header = () => {
     setAnchorElNav(null);
   };
   const handleClickNav = (path) => {
+    // //console.log("click");
     if (path === "logout") {
       localStorage.setItem("UserInfo", "");
       dispatch(logout());
@@ -93,40 +95,11 @@ const Header = () => {
   const [user, setUser] = React.useState({});
   const location = useLocation();
   const { authencated } = useSelector((state) => state.userReducer);
-  React.useEffect(() => {
-    //console.log(authencated);
-    const userInfor = JSON.stringify(localStorage.getItem("UserInfo"));
-    const userJson = localStorage.getItem("UserInfo");
-    if (userJson) {
-      const userInfor = JSON.parse(localStorage.getItem("UserInfo"));
-      // console.log(isJwtExpired("Bearer " + userInfor.jwt)); //Bearer
-      const decodeToken = decode(userInfor.jwt);
-
-      if (decodeToken.payload.exp >= decodeToken.payload.iat) {
-
-        setUser(userInfor);
-        setAppAuthencated(true);
-      } else {
-        setAppAuthencated(false);
-        setUser({});
-        localStorage.setItem("UserInfo", "");
-
-      }
-      console.log(authencated)
-    }
-    // setAppAuthencated(authencated);
-  }, [authencated]);
-
-  // React.useEffect(() => {
-  //   setAppAuthencated(authencated);
-
-  //   return () => { };
-  // }, [authencated]);
-
   return (
     <AppBar
       style={{
         backgroundColor: "#B32B21",
+        overflowX : 'hidden'
       }}
       className="navbar"
       position="static"
@@ -183,7 +156,14 @@ const Header = () => {
             >
               {pages.map((e, index) => (
                 <MenuItem key={index} onClick={handleCloseNavMenu}>
-                  <Typography textAlign="center">{e.name}</Typography>
+                  <Typography
+                    textAlign="center"
+                    onClick={() => {
+                      handleClickNav(e.path);
+                    }}
+                  >
+                    {e.name}
+                  </Typography>
                 </MenuItem>
               ))}
             </Menu>
@@ -228,7 +208,7 @@ const Header = () => {
             ))}
           </Box>
 
-          {appAuthencated == true ? (
+          {authencated == true ? (
             <Box sx={{ flexGrow: 0 }}>
               <Tooltip title="Người dùng">
                 <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>

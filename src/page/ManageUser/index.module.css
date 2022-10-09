@@ -1,4 +1,4 @@
-ul{
+ul {
     list-style: none;
     margin: 0;
     padding: 0;
@@ -10,24 +10,31 @@ input{
     outline: none;
     border: none;
 }
-span{
+
+
+
+
+span {
     font-size: 16px;
     font-weight: 700;
     text-align: left;
 }
-.CardImage{
+
+.CardImage {
     width: 122px;
     height: 122px;
     object-fit: cover;
     border-radius: 100%;
 }
-.TitleCard{
+
+.TitleCard {
     font-weight: 700;
     font-size: 16px;
     line-height: 18.75px;
     margin-top: 20px;
 }
-.ContainerCardInfo{
+
+.ContainerCardInfo {
     padding-top: 30px;
     padding-bottom: 10px;
     background: white;
@@ -35,78 +42,93 @@ span{
     border-radius: 20px;
     overflow: hidden;
 }
-.ContainerBlockInfo{
+
+.ContainerBlockInfo {
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
 }
-.ListMenu{
-  margin-top: 20px;
-  box-shadow: none;
-  width: 100%;
-  border: none;
+
+.ListMenu {
+    margin-top: 20px;
+    box-shadow: none;
+    width: 100%;
+    border: none;
 }
-.ItemMenu{
+
+.ItemMenu {
     margin-top: 30px;
     box-shadow: none;
     width: 100%;
     border: none;
 }
-.ItemCard{
+
+.ItemCard {
     padding: 5px 0 5px 30px;
     text-align: left;
     position: relative;
     cursor: pointer;
 }
-.active{
+
+.active {
     background-color: #f8e6b7;
 }
-.active::before{
+
+.active::before {
     top: 0;
     position: absolute;
     content: "";
     width: 2px;
     height: 100%;
     left: 0;
-    background: #F5C342;  
+    background: #F5C342;
 }
-.ContainerInfoAccount{
+
+.ContainerInfoAccount {
     padding: 50px 20px;
     background: white;
     width: 100%;
-    border-radius: 20px;
+    border-radius: 10px;
 
 }
-.WrapperInfoAccount{
+
+.WrapperInfoAccount {
     display: flex;
     padding: 12px 0;
     border-bottom: 1px solid #ccc;
     justify-content: space-between;
 }
-.TitleAccount{
+
+.TitleAccount {
     font-size: 20px;
 }
-@media screen and (max-width:420px){
-    .ContainerCardInfo{
-        padding:20px 0;
+
+@media screen and (max-width:420px) {
+    .ContainerCardInfo {
+        padding: 20px 0;
     }
-    .ContainerInfoAccount{
+
+    .ContainerInfoAccount {
         margin-top: 30px;
         padding: 20px;
     }
-    .WrraperInfoAccount{
+
+    .WrraperInfoAccount {
         padding: 0;
     }
-    .TitleAccount{
+
+    .TitleAccount {
         font-size: 16px;
         text-align: left;
         width: 60%;
     }
-    .ContainerBtn{
+
+    .ContainerBtn {
         text-align: right;
     }
-    .ContainerBtn Button:last-child{
+
+    .ContainerBtn Button:last-child {
         margin-top: 5px;
     }
 }

@@ -1,112 +1,268 @@
 import style from "./index.module.css";
-import Button from '@mui/material/Button'
-import { useEffect, useState } from "react";
+import Button from "@mui/material/Button";
+import { useEffect, useRef, useState } from "react";
 import InfoDetail from "./InfoDetail";
 import HistoryTransaction from "./HistoryTransaction";
 import ChangePassword from "./ChangePassword";
-import { URL_BACKEND } from '../../constants/index';
-import axios from 'axios';
-import { useNavigate } from 'react-router-dom';
-import { useDispatch } from 'react-redux';
-import { logout } from "../../app/reducer/UserSlice";
+import { useDispatch, useSelector } from "react-redux";
+import { getMeAction } from "../../app/action/UserAction";
+import { URL_BACKEND } from "../../constants";
+import { Audio } from "react-loader-spinner";
+import { CircularProgress, TextField } from "@mui/material";
+import LoadingOverlay from "react-loading-overlay";
+import BounceLoader from "react-spinners/BounceLoader";
+import axios from "axios";
+
 function ManageUser() {
-  const [ChangeBtn,SetChangeBtn] = useState(true);
+  const [ChangeBtn, SetChangeBtn] = useState(true);
   const [ItemToogle, SetItemToogle] = useState(1);
-  const navigate = useNavigate();
+  const HandleChangeBtn = () => {
+    if (ChangeBtn) {
+      SetChangeBtn(false);
+    } else {
+      SetChangeBtn(true);
+    }
+  };
+  const HandleToogle = (index) => {
+    SetItemToogle(index);
+  };
+  const { users, user, loadedUser } = useSelector((state) => state.userReducer);
+
   const dispatch = useDispatch();
-  const HandleChangeBtn = ()=>{
-    if(ChangeBtn){
-      SetChangeBtn(false)
+  const refInput = useRef({});
+  const [userInfo, setUserInfo] = useState({});
+  const [img, setImg] = useState(
+    `${URL_BACKEND}${
+      user.Avatar != undefined
+        ? user.Avatar.url
+        : "/uploads/2289_Sk_VNQSBGQU_1_PID_Ew_Mjgt_MT_Iy_127a9d0f7c.jpg"
+    }`
+  );
+  const handleFileUpload = async (event) => {
+    const file = event.target.files[0];
+    let form = new FormData();
+    form.append("files", file);
+    var reader = new FileReader();
+
+    reader.readAsDataURL(file);
+    reader.onloadend = function () {
+      setImg(reader.result);
+    };
+
+    const { data, status } = await axios.post(
+      `${URL_BACKEND}/api/upload`,
+      form
+    );
+    const dataResponse = data[0];
+
+    if (status === 200) {
+      //console.log({ Avatar: dataResponse.id });
+      fetch(`${URL_BACKEND}/api/users/${user.id}`, {
+        method: "PUT",
+        body: JSON.stringify({ Avatar: dataResponse.id }),
+        headers: {
+          Authorization: `Bearer ${users.jwt}`,
+          "Content-Type": "application/json",
+        },
+      }).then((rs) => {
+        if (rs.status === 200) {
+          //s  alert("Cập nhật hình ảnh thành công");
+          //return rs.json();
+        } else {
+          alert("Cập nhật thất bại");
+        }
+      });
+
+      //    //console.log(data);
     }
-    else{
-      SetChangeBtn(true)
+  };
+  const uploadFile = () => {
+    ////console.log(refInput.current.target.files[0].name);
+    refInput.current.click();
+  };
+  useEffect(() => {
+    if (!loadedUser) {
+      dispatch(getMeAction(users.jwt));
     }
-  }
-  const HandleToogle = (index)=>{
-     SetItemToogle(index)
-  }
-  if(ItemToogle == 1){
-    return (
-     
-        <div className="full-width1">
-          <div className="container">
-            <div
-              className="row justify-content-center"
-            >
-              <div className="col-xl-3 col-11 justify-content-center text-center">
-                <div className={style.ContainerCardInfo}>
-                  <div className={style.ContainerBlockInfo}>
-                    <img
-                      className={style.CardImage}
-                      src="https://images.unsplash.com/photo-1535713875002-d1d0cf377fde?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxzZWFyY2h8Mnx8YXZhdGFyfGVufDB8fDB8fA%3D%3D&auto=format&fit=crop&w=500&q=60"
-                      alt=""
+    if (user) {
+      ////console.log(user);
+      setUserInfo(user);
+      // //console.log(user);
+    }
+  }, [loadedUser]);
+  if (ItemToogle == 1) {
+    if (loadedUser) {
+      return (
+        <div
+          style={{ padding: "40px 0 40px 0", background: "#D9D9D9" }}
+          className="row justify-content-center"
+        >
+          <div className="col-xl-3 col-11 justify-content-center text-center mt-3">
+            <div className={style.ContainerCardInfo}>
+              <div className={style.ContainerBlockInfo}>
+                <img className={style.CardImage} src={img} alt="" />
+                <div className="row mt-2">
+                  <div className="col">
+                    <input
+                      ref={refInput}
+                      onChange={handleFileUpload}
+                      type="file"
+                      style={{ display: "none" }}
+                      // multiple={false}
                     />
-                    <span className={style.TitleCard}>{JSON.parse(localStorage.getItem('UserInfo')).user.username}</span>
-                  </div>
-                  <div>
-                    <ul className={style.ListMenu}>
-                      <li onClick={()=>{HandleToogle(1)}} className={`${style.ItemCard} ${(ItemToogle === 1) ? `${style.active}` : ``}`}>Thông tin cá nhân</li>
-                      <li onClick={()=>{HandleToogle(2)}} className={`${style.ItemCard} ${(ItemToogle === 2) ? `${style.active}` : ``}`}>Lịch sử giao dịch</li>
-                      <li onClick={()=>{HandleToogle(3)}} className={`${style.ItemCard} ${(ItemToogle === 3) ? `${style.active}` : ``}`}>Đăng Xuất</li>
-                    </ul>
+                    <Button variant="containeds" onClick={uploadFile}>
+                      Cập nhật ảnh đại diện
+                    </Button>
                   </div>
                 </div>
+                <span className={style.TitleCard}>{user.FullName}</span>
               </div>
-              <div className="col-xl-8 col-11 justify-content-center text-center">
-                <div className={style.ContainerInfoAccount}>
-                  <div className={style.WrapperInfoAccount}>
-                    <h1 className={style.TitleAccount}>Thông tin tài khoản</h1>
-                    <div className={style.ContainerBtn}>
-                     <Button onClick={()=>{HandleChangeBtn()}} variant="contained" color={ChangeBtn ? "error" : "warning"}>CHI TIẾT</Button>
-                     <Button onClick={()=>{HandleChangeBtn()}} variant="contained" color={ChangeBtn ? "warning" : "error"}>ĐỔI MẬT KHẨU</Button>
-                    </div>
-                  </div>
-                  {
-                    ChangeBtn ? <InfoDetail/> : <ChangePassword/>
-                  }
-                </div>
+              <div>
+                <ul className={style.ListMenu}>
+                  <li
+                    onClick={() => {
+                      HandleToogle(1);
+                    }}
+                    className={`${style.ItemCard} ${
+                      ItemToogle === 1 ? `${style.active}` : ``
+                    }`}
+                  >
+                    Thông tin cá nhân
+                  </li>
+                  <li
+                    onClick={() => {
+                      HandleToogle(2);
+                    }}
+                    className={`${style.ItemCard} ${
+                      ItemToogle === 2 ? `${style.active}` : ``
+                    }`}
+                  >
+                    Lịch sử giao dịch
+                  </li>
+                  <li
+                    onClick={() => {
+                      HandleToogle(3);
+                    }}
+                    className={`${style.ItemCard} ${
+                      ItemToogle === 3 ? `${style.active}` : ``
+                    }`}
+                  >
+                    Đăng Xuất
+                  </li>
+                </ul>
               </div>
             </div>
           </div>
+          <div className="col-xl-8 col-11 justify-content-center text-center mt-3">
+            <div className={style.ContainerInfoAccount}>
+              <div className={style.WrapperInfoAccount}>
+                <h1 className={style.TitleAccount}>Thông tin tài khoản</h1>
+                <div className={style.ContainerBtn}>
+                  <Button
+                    className="m-2"
+                    onClick={() => {
+                      HandleChangeBtn();
+                    }}
+                    variant="contained"
+                    color={ChangeBtn ? "error" : "warning"}
+                  >
+                    CHI TIẾT
+                  </Button>
+                  <Button
+                    onClick={() => {
+                      HandleChangeBtn();
+                    }}
+                    variant="contained"
+                    color={ChangeBtn ? "warning" : "error"}
+                  >
+                    ĐỔI MẬT KHẨU
+                  </Button>
+                </div>
+              </div>
+              {ChangeBtn ? <InfoDetail /> : <ChangePassword />}
+            </div>
+          </div>
         </div>
-      
-  );
-  }
-  else if(ItemToogle === 2){
-    return(
+      );
+    } else {
+      return (
+        <LoadingOverlay
+          className="full-width"
+          active={true}
+          spinner
+          text="Loading your content..."
+        >
+          <div className="full-width" style={{ height: 1000 }}></div>
+        </LoadingOverlay>
+      );
+    }
+  } else if (ItemToogle === 2) {
+    return (
       <div
         style={{ padding: "40px 0 40px 0", background: "#D9D9D9" }}
-        className="row justify-content-center"
+        className="row justify-content-center "
       >
-        <div className="col-xl-3 col-11 justify-content-center text-center">
+        <div className="col-xl-3 col-11 justify-content-center text-center mt-3">
           <div className={style.ContainerCardInfo}>
             <div className={style.ContainerBlockInfo}>
-              <img
-                className={style.CardImage}
-                src="https://images.unsplash.com/photo-1535713875002-d1d0cf377fde?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxzZWFyY2h8Mnx8YXZhdGFyfGVufDB8fDB8fA%3D%3D&auto=format&fit=crop&w=500&q=60"
-                alt=""
-              />
-              <span className={style.TitleCard}>Tên người dùng</span>
+              <img className={style.CardImage} src={img} alt="" />
+              <div className="row mt-2">
+                <div className="col">
+                  <input
+                    ref={refInput}
+                    onChange={handleFileUpload}
+                    type="file"
+                    style={{ display: "none" }}
+                    // multiple={false}
+                  />
+                  <Button variant="containeds" onClick={uploadFile}>
+                    Cập nhật ảnh đại diện
+                  </Button>
+                </div>
+              </div>
+              <span className={style.TitleCard}>{user.FullName}</span>
             </div>
             <div>
               <ul className={style.ListMenu}>
-                <li onClick={()=>{HandleToogle(1)}} className={`${style.ItemCard} ${(ItemToogle === 1) ? `${style.active}` : ``}`}>Thông tin cá nhân</li>
-                <li onClick={()=>{HandleToogle(2)}} className={`${style.ItemCard} ${(ItemToogle === 2) ? `${style.active}` : ``}`}>Lịch sử giao dịch</li>
-                <li onClick={()=>{HandleToogle(3)}} className={`${style.ItemCard} ${(ItemToogle === 3) ? `${style.active}` : ``}`}>Đăng Xuất</li>
+                <li
+                  onClick={() => {
+                    HandleToogle(1);
+                  }}
+                  className={`${style.ItemCard} ${
+                    ItemToogle === 1 ? `${style.active}` : ``
+                  }`}
+                >
+                  Thông tin cá nhân
+                </li>
+                <li
+                  onClick={() => {
+                    HandleToogle(2);
+                  }}
+                  className={`${style.ItemCard} ${
+                    ItemToogle === 2 ? `${style.active}` : ``
+                  }`}
+                >
+                  Lịch sử giao dịch
+                </li>
+                <li
+                  onClick={() => {
+                    // HandleToogle(3);
+                  }}
+                  className={`${style.ItemCard} ${
+                    ItemToogle === 3 ? `${style.active}` : ``
+                  }`}
+                >
+                  Đăng Xuất
+                </li>
               </ul>
             </div>
           </div>
         </div>
-        <div className="col-xl-8 col-11 justify-content-center text-center">
-           <HistoryTransaction/>
+        <div className="col-xl-8 col-11 justify-content-center text-center mt-3">
+          <HistoryTransaction />
         </div>
       </div>
-    )
-  }
-  else if(ItemToogle === 3){
-     dispatch(logout());
-     navigate('/login')
-     window.location.reload();
+    );
   }
 }
 

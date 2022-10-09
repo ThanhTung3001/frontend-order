@@ -5,7 +5,7 @@ import { URL_BACKEND } from "../../constants";
 import { useDispatch } from "react-redux";
 import { login } from "../../app/reducer/UserSlice";
 
-function GoogleAuthCallback() {
+function FacebookCallBack() {
   const [auth, setAuth] = useState();
   const location = useLocation();
   const dispatch = useDispatch();
@@ -17,7 +17,7 @@ function GoogleAuthCallback() {
     const { search } = location;
     axios({
       method: "GET",
-      url: `${URL_BACKEND}/api/auth/google/callback${search}`,
+      url: `${URL_BACKEND}/api/auth/facebook/callback${search}`,
     })
       .then((res) => {
         // //console.log(res.data)
@@ -32,4 +32,4 @@ function GoogleAuthCallback() {
   }, [location, auth]);
 }
 
-export default GoogleAuthCallback;
+export default FacebookCallBack;

@@ -30,6 +30,9 @@
 .AroundCeleb:not(:nth-child(1)){
     margin-top: 30px;
 }
+.HeightDetail{
+    height: 180px;
+}
 @media screen and (max-width:1000px){
     .AroundBtnOrder{
         margin-top: 20px;

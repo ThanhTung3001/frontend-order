@@ -1,124 +1,139 @@
-.AroundBtnOrder{
+.AroundBtnOrder {
   justify-content: space-between;
   margin-top: 50px;
 }
-.WrapperCompare{
-    justify-content: space-between;
+.WrapperCompare {
+  justify-content: space-between;
 }
-.BtnCompareMenu{
-    justify-content: flex-end;
+.BtnCompareMenu {
+  justify-content: flex-end;
 }
-.FormControlMenu{
-    position: relative;
-    display: block;
+.FormControlMenu {
+  position: relative;
+  display: block;
 }
-.AroundMenuFood{
-    justify-content: space-between;
+.AroundMenuFood {
+  justify-content: space-between;
 }
-.MenuClose{
-    left: 50%;
-    bottom: 0;
-    transform: translateX(-50%);
-}
-.AroundMenuDetail{
-    height: 150px;
-}
-.BtnOrderDetail{
-    margin-top: 0;
-}
-.WrapperBtnOrderDetail{
-    justify-content: space-between;
-}
-@media screen and (max-width: 1000px){
-    .BtnOrderMenu{
-        margin-top: 0px;
-    }
-    .BtnCompareMenu{
-        justify-content: flex-end;
-    }
-    
-}
-@media screen and (max-width : 910px){
-    .BtnCompareMenu{
-        justify-content: flex-start;
-    }
-    .BtnOrderMenu{
-        margin-top: 0;
-    }
-}
-@media screen and (max-width:820px){
-    .BtnCompareMenu{
-        justify-content: flex-end;
-    }
-    .BtnOrderMenu{
-        margin-top: 10px;
-    }
-    .WrapperBtnOrderDetail{
-        flex-direction: column;
-    }
-    .BtnOrderDetail{
-        margin-top: 10px;
-    }
-}
-@media screen and (max-width:640px){
-    .BtnCompareMenu{
-        margin-top: 15px;
-        
-    }
-    .WrapperCompareMenu{
-        flex-direction: column;
-        align-items: flex-start;
-    }
-    .BtnOrderMenu{
-        margin-top: 10px;
-    }
-    .BtnOrderDetail{
-        margin-top: 10px;
-    }
-    .WrapperBtnOrderDetail{
-        flex-direction: row;
-    }
-}
-@media screen and (max-width: 580px){
-    .AroundBtnOrder{
-        flex-direction: column;
-        align-items: flex-start;
-    }
-    .BtnCompareMenu{
-        justify-content: flex-start;
-    }
-    .BtnOrderDetail{
-        margin-top: 0px;
-    }
-}
-@media screen and (max-width : 420px){
-    .WrapperCompareMenu{
-        flex-direction: column;
-        align-items: flex-start;
-    }
-    .AroundBtnOrder{
-        margin-top: 30px;
-    }
-    .BtnOrderMenu{
-        margin-top: 15px;
-    }
-    .BtnCompareMenu{
-        justify-content: flex-start;
-    }
-    .BtnOrderDetail{
-        margin-top: 0;
-    }
-   
-}
-@media screen and (max-width : 321px){
-    .BtnCompareMenu{
-        justify-content: flex-start;
-    }
-    .WrapperBtnOrderDetail{
-        flex-direction: column;
-    }
-    .BtnOrderDetail{
-        margin-top: 10px;
-    }
+.MenuClose {
+  left: 50%;
+  bottom: 0;
+  transform: translateX(-50%);
+  margin-top: 10px;
 }
 
+.BtnOrderDetail {
+  margin-top: 0;
+}
+.HeightDetail{
+    height: 180px;
+}
+.WrapperBtnOrderDetails{
+  justify-content: space-between;
+  flex-direction: column;
+  margin-top: 10px;
+}
+.WrapperBtnOrderDetail{
+    margin-top: 10px;
+}
+@media screen and (max-width: 1000px) {
+  .BtnOrderMenu {
+    margin-top: 0px;
+  }
+  .BtnCompareMenu {
+    justify-content: flex-end;
+  }
+}
+@media screen and (max-width: 910px) {
+  .BtnCompareMenu {
+    justify-content: flex-start;
+  }
+  .BtnOrderMenu {
+    margin-top: 0;
+  }
+}
+@media screen and (max-width: 820px) {
+  .BtnCompareMenu {
+    justify-content: flex-end;
+  }
+  .BtnOrderMenu {
+    margin-top: 0;
+  }
+  .WrapperBtnOrderDetail{
+    flex-direction: row;
+  }
+  .BtnOrderDetail {
+    margin-top: 0;
+  }
+  .AroundMenuFood {
+    flex-direction: column;
+  }
+}
+@media screen and (max-width: 640px) {
+  .BtnCompareMenu {
+    margin-top: 15px;
+  }
+  .WrapperCompareMenu{
+    flex-direction: column;
+    align-items: flex-start;
+  }
+  .BtnOrderMenu {
+    margin-top: 10px;
+  }
+  .BtnOrderDetail {
+    margin-top: 10px;
+  }
+  .WrapperBtnOrderDetail {
+    flex-direction: row;
+  }
+}
+@media screen and (max-width: 580px) {
+  .AroundBtnOrder {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+  .BtnCompareMenu {
+    justify-content: flex-start;
+  }
+  .BtnOrderDetail {
+    margin-top: 0px;
+  }
+}
+@media screen and (max-width: 420px) {
+  .WrapperCompareMenu {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+  .AroundBtnOrder {
+    margin-top: 30px;
+  }
+  .BtnOrderMenu {
+    margin-top: 15px;
+  }
+  .BtnCompareMenu {
+    justify-content: flex-start;
+  }
+  .BtnOrderDetail {
+    margin-top: 0;
+  }
+}
+@media screen and (max-width: 360px) {
+  .WrapperBtnOrderDetails{
+    flex-direction: column;
+    margin-top: 20px;
+  }
+  .BtnOrderDetail {
+    margin-top: 10px;
+  }
+}
+@media screen and (max-width: 321px) {
+  .BtnCompareMenu {
+    justify-content: flex-start;
+  }
+  .WrapperBtnOrderDetails{
+    flex-direction: column;
+  }
+  .BtnOrderDetail {
+    margin-top: 10px;
+  }
+}

@@ -22,3 +22,32 @@ export const LoginAction = createAsyncThunk("login/User", async (user) => {
   localStorage.setItem("UserInfo", JSON.stringify(data));
   return data;
 });
+export const getMeAction = createAsyncThunk("getMe/User", async (token) => {
+  const { data } = await axios.get(
+    URL_BACKEND + "/api/users/me?populate=deep,3",
+    {
+      headers: {
+        Authorization: "Bearer " + token,
+      },
+    }
+  );
+  return data;
+});
+
+const initUserCurrent = () => {
+  const json = localStorage.getItem("UserInfo");
+  if (json) {
+    return JSON.parse(json);
+  } else {
+    return {};
+  }
+};
+const initUserAuthenticated = () => {
+  const json = localStorage.getItem("UserInfo");
+  if (json) {
+    return true;
+  } else {
+    return false;
+  }
+};
+export { initUserCurrent, initUserAuthenticated };

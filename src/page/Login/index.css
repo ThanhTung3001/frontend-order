@@ -1,8 +1,30 @@
-@media screen and (max-width:420px){
-    .AroundLoginBtn{
+.BtnGoogle{
+    margin-left: 5px;
+}
+.BtnFb{
+    margin-right: 5px;
+}
+@media screen and (max-width:750px){
+    .AroundBtnLogin{
         flex-direction: column;
     }
-    .LoginBtn{
-        width: 220px;
+    .BtnGoogle{
+        margin-top: 10px;
+        margin-left: 0;
+    }
+    .BtnFb{
+        margin-right: 0;
+    }
+}
+@media screen and (max-width:420px){
+    .AroundBtnLogin{
+        flex-direction: column;
+    }
+    .BtnGoogle{
+        margin-top: 10px;
+        margin-left: 0;
+    }
+    .BtnFb{
+        margin-right: 0;
     }
 }

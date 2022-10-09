@@ -21,7 +21,7 @@ export const Blogs = () => {
       <div className="container">
         <div className="row block-top">
           <div className="row d-flex justify-content-center">
-            <div className="col-sm-4 d-flex justify-content-center">
+            <div className="col-sm-12 d-flex justify-content-center">
               <h3 className="hignl-title second">Blogs</h3>
             </div>
           </div>

@@ -5,6 +5,7 @@ import { useParams } from "react-router";
 import {
   Box,
   Button,
+  Divider,
   FormControl,
   InputLabel,
   MenuItem,
@@ -12,10 +13,17 @@ import {
   Select,
   Typography,
 } from "@mui/material";
+import AddShoppingCartIcon from "@mui/icons-material/AddShoppingCart";
 import { categoryMock } from "../../mock/CategoryMock";
 import { height } from "@mui/system";
+import { useDispatch, useSelector } from "react-redux";
+import { addToCart } from "../../app/reducer/CartSlice";
 import './style.css'
+
 export const DetailCategory = () => {
+  const dispatch = useDispatch();
+  const { items, isLoaded } = useSelector((state) => state.cartReducer);
+
   const [bigCategory, setBigCategory] = useState([]);
   const { id } = useParams();
   const [open, setOpen] = React.useState(false);
@@ -23,6 +31,17 @@ export const DetailCategory = () => {
   const [selected, setSelected] = useState(false);
   const [itemSelected, setItemSelected] = useState(categoryMock);
   const [listMenu, setListMenu] = useState([]);
+  const handleAddToCart = (data) => {
+    dispatch(
+      addToCart({
+        ID: data.id,
+        name: data.attributes.name,
+        amount: 1,
+        price: data.attributes.price,
+      })
+    );
+    alert("Thêm vào giỏ hàng thành công");
+  };
   const handleOpen = (idItem) => {
     setItem(bigCategory.find((e) => e.id == idItem));
     setListMenu(bigCategory.filter((e) => e.id != idItem));
@@ -41,43 +60,45 @@ export const DetailCategory = () => {
 
   useEffect(() => {
     axios
-      .get(URL_BACKEND + `/api/big-categories/${id}?populate=deep,4`)
+      .get(URL_BACKEND + `/api/big-categories/${id}?populate=deep,5`)
       .then((rs) => {
         let { data } = rs;
-        console.log(data.data);
+        // //console.log(data.data.attributes.categories.data);
         setBigCategory(data.data.attributes.categories.data);
       });
+
     return () => {};
   }, []);
   return (
     <div className="full-width1">
       <div className="container">
-        <div style={{position :'relative'}} className="row block pb-9">
+        <div className="row block">
           <div className="row d-flex justify-content-center">
             <div className="col-sm-12 d-flex justify-content-center">
-              <h3 className="hignl-title second">Các loại hình tiệc</h3>
+              <h3 className="hignl-title second">Danh sách Menu</h3>
             </div>
           </div>
           <div className="row">
             {bigCategory.map((e, index) => {
+              if (e.attributes.FromTime == null) {
+                e.attributes.FromTime = "";
+              }
+              if (e.attributes.EndTime == null) {
+                e.attributes.EndTime = "";
+              }
               return (
-                <div key={index} className="col-sm-12 AroundCeleb">
+                <div key={index} className="col-sm-12">
                   <div>
                     <div className="row">
                       <div className="col-sm-12 col-md-6 col-lg-6">
                         <div className="row mt-2 mb-2">
                           {new Array(4).fill().map((product, index) => {
-                            //  console.log(product);
+                            //  //console.log(product);
                             let urlImg = "";
-                            //    console.log(e.attributes.products.data.length);
+                            //   //console.log(e.attributes.products.data.length);
                             if (e.attributes.products.data.length < index + 1) {
                               urlImg = "/img_emty.png";
                             } else {
-                              // console.log(e.attributes);
-                              // console.log(
-                              //   e.attributes.products.data[index].attributes
-                              //     .avatar.data.attributes.url
-                              // );
                               urlImg =
                                 URL_BACKEND +
                                 e.attributes.products.data[index].attributes
@@ -101,16 +122,16 @@ export const DetailCategory = () => {
                       </div>
                       <div className="col-sm-12 col-md-6 col-lg-6 ">
                         <div
-                          className="row flex-column justify-content-center ReponsiveMenuCategory"
+                          className="row flex-column justify-content-center"
                           style={{ height: "100%", width: "100%" }}
                         >
-                          <div className="row ContainerCategoryDetail">
-                            <div className="col-12 col-sm-6">
+                          <div className="row d-flex WrapperCompareMenu">
+                            <div className="col-12 col-sm-6 col-md-6 col-lg-6">
                               <h5 style={{ fontWeight: 700 }}>
                                 {e.attributes.name}
                               </h5>
                             </div>
-                            <div className="col-12 col-sm-6 d-flex BtnCompare">
+                            <div className="col-12 col-sm-6 col-md-6 col-lg-6 d-flex BtnCompareMenu">
                               <Button
                                 variant="contained"
                                 color="warning"
@@ -129,9 +150,8 @@ export const DetailCategory = () => {
                               currency: "VND",
                             }
                           )} */}
-                          <div
-                            className="m-2 flex-column justify-content-between MenuCategoryDetail">
-                            <div className="col-sm-12 col-md-12">
+                          <div className="row m-2 flex-column justify-content-between p-0">
+                            <div className="col-sm-12 col-md-12 p-0">
                               {e.attributes.products.data.map(
                                 (product, index) => {
                                   return (
@@ -144,16 +164,20 @@ export const DetailCategory = () => {
                             </div>
                             <div className="col-sm-12">
                               <div className="row d-flex AroundBtnOrder">
-                                <div className="col col-md-10 col-xl-6 col-lg-6">
+                                <div className="col-12 col-sm-6 col-md-6 col-lg-6 pl-0">
                                   <Button
                                     variant="contained"
                                     color="warning"
                                     fullWidth
+                                    startIcon={<AddShoppingCartIcon />}
+                                    onClick={() => {
+                                      handleAddToCart(e);
+                                    }}
                                   >
-                                    Cần hỗ trợ thêm
+                                    Giỏ hàng
                                   </Button>
                                 </div>
-                                <div className="col col-md-10 col-xl-6 col-lg-6 BtnOrder">
+                                <div className="col-12 col-sm-6 col-md-6 col-lg-6 pl-0 BtnOrderMenu">
                                   <Button
                                     fullWidth
                                     color="error"
@@ -163,12 +187,44 @@ export const DetailCategory = () => {
                                   </Button>
                                 </div>
                               </div>
+                              <div className="row flex-column mt-4">
+                                <h1 className="description p-0">
+                                  Đơn giá{": "}
+                                  <strong>
+                                    {parseInt(
+                                      e.attributes.price
+                                    ).toLocaleString("it-IT", {
+                                      style: "currency",
+                                      currency: "VND",
+                                    })}
+                                  </strong>
+                                </h1>
+                                <h1 className="description p-0">
+                                  Số lượng tối thiểu{": "}
+                                  <strong>{e.attributes.amout}</strong>
+                                </h1>
+                                <h1 className="description p-0">
+                                  Thời gian phù hợp{": "}
+                                  <strong>{`${e.attributes.FromTime.substring(
+                                    0,
+                                    5
+                                  )} - ${e.attributes.EndTime.substring(
+                                    0,
+                                    5
+                                  )}`}</strong>
+                                </h1>
+                                <h1 className="description p-0">
+                                  Supplier{": "}
+                                  <strong>{`${e.attributes.TypeMenu}`}</strong>
+                                </h1>
+                              </div>
                             </div>
                           </div>
                         </div>
                       </div>
                     </div>
                   </div>
+                  <Divider className="mb-2" style={{ color: "gray" }} />
                 </div>
               );
             })}
@@ -181,10 +237,10 @@ export const DetailCategory = () => {
         aria-labelledby="child-modal-title"
         aria-describedby="child-modal-description"
       >
-        <Box className="BoxModal" sx={{ ...style, width: "80%", flexDirection: "column" }}>
+        <Box className="BoxModal" sx={{ ...style, width: "80%", flexDirection : 'column'}}>
           <div style={{ position: 'relative', width:'100%', height:'100%'}}>
-            <FormControl className="AroundFormControl" style={{ height: 60 }} fullWidth>
-              <InputLabel className="InputFormControl" id="demo-simple-select-label">
+            <FormControl style={{ height : 60 }} fullWidth>
+              <InputLabel id="demo-simple-select-label">
                 Chọn loại muốn so sánh
               </InputLabel>
               <Select
@@ -206,15 +262,15 @@ export const DetailCategory = () => {
                 })}
               </Select>
             </FormControl>
-            <div className="row d-flex justify-content-between mt-2 AroundMenuFood">
-              <div className="col-sm-5 WrapperMenuFoodLeft">
+            <div className="row d-flex mt-2 AroundMenuFood">
+              <div className="col-sm-5 col-md-12 col-lg-5" style={{ marginRight: 20 }}>
                 <div className="col-sm-12">
                   <div>
                     <div className="row">
                       <div className="col-sm-12">
                         <div className="row mt-2 mb-2">
                           {new Array(4).fill().map((product, index) => {
-                            //  console.log(product);
+                            //  //console.log(product);
                             let urlImg = "";
                             if (
                               item.attributes.products.data.length <
@@ -244,27 +300,27 @@ export const DetailCategory = () => {
                           })}
                         </div>
                       </div>
-                      <div className="col-sm-12">
+                      <div className="col-sm-12 HeightDetail">
                         <div
-                          className="row flex-column justify-content-center"
+                          className="row flex-column justify-content-between"
                           style={{ height: "100%", width: "100%" }}
                         >
                           <div className="row d-flex justify-content-between">
-                            <div className="col-6">
+                            <div className="col-12">
                               <h5 style={{ fontWeight: 700 }}>
                                 {item.attributes.name}
                               </h5>
                             </div>
                           </div>
                           {/* {parseInt(e.attributes.price).toLocaleString(
-                              "it-IT",
-                              {
-                                style: "currency",
-                                currency: "VND",
-                              }
-                            )} */}
+                                  "it-IT",
+                                  {
+                                    style: "currency",
+                                    currency: "VND",
+                                  }
+                                )} */}
                           <div
-                            className="row m-2 flex-column justify-content-between p-0"
+                            className="row m-2 flex-column p-0 justify-start AroundMenuDetail"
                           >
                             <div className="col-sm-12 col-md-12 p-0">
                               {item.attributes.products.data.map(
@@ -277,9 +333,9 @@ export const DetailCategory = () => {
                                 }
                               )}
                             </div>
-                            <div className="col-sm-12 p-0 mt-4">
-                              <div className="row d-flex justify-content-around">
-                                <div className="col">
+                            <div className="col-sm-12 pl-0">
+                              <div className="row d-flex justify-content-between WrapperBtnOrderDetail">
+                                <div className="col col-md-6">
                                   <Button
                                     variant="contained"
                                     color="warning"
@@ -288,7 +344,7 @@ export const DetailCategory = () => {
                                    Hỗ trợ
                                   </Button>
                                 </div>
-                                <div className="col">
+                                <div className="col col-md-6 BtnOrderDetail">
                                   <Button
                                     fullWidth
                                     color="error"
@@ -306,9 +362,9 @@ export const DetailCategory = () => {
                   </div>
                 </div>
               </div>
-              <div className="col-sm-5 WrapperFoodRight">
+              <div className="col-sm-5 col-md-12 col-lg-5">
                 {selected == true ? (
-                  <div className="col-sm-12 ">
+                  <div className="col-sm-12">
                     <div>
                       <div className="row">
                         <div className="col-sm-12">
@@ -334,7 +390,7 @@ export const DetailCategory = () => {
                                 >
                                   {/* itemSelected.attributes.products.data */}
                                   <img
-                                    src={urlImg}
+                                    src=""
                                     className="item-img"
                                     width={"100%"}
                                     alt=""
@@ -344,27 +400,28 @@ export const DetailCategory = () => {
                             })}
                           </div>
                         </div>
-                        <div className="col-sm-12 p-0">
+                        <div className="col-sm-12 HeightDetail">
                           <div
-                            className="row flex-column justify-content-center"
+                            className="row flex-column justify-content-between"
                             style={{ height: "100%", width: "100%" }}
                           >
                             <div className="row d-flex justify-content-between">
-                              <div className="col-6">
+                              <div className="col-12">
                                 <h5 style={{ fontWeight: 700 }}>
                                   {itemSelected.attributes.name}
                                 </h5>
                               </div>
                             </div>
                             {/* {parseInt(e.attributes.price).toLocaleString(
-                              "it-IT",
-                              {
-                                style: "currency",
-                                currency: "VND",
-                              }
-                            )} */}
+                                  "it-IT",
+                                  {
+                                    style: "currency",
+                                    currency: "VND",
+                                  }
+                                )} */}
                             <div
                               className="row m-2 flex-column justify-content-between p-0"
+  
                             >
                               <div className="col-sm-12 col-md-12 p-0">
                                 {itemSelected.attributes.products.data.map(
@@ -377,18 +434,18 @@ export const DetailCategory = () => {
                                   }
                                 )}
                               </div>
-                              <div className="col-sm-12 p-0 mt-2">
-                                <div className="row d-flex justify-content-around">
+                              <div className="col-sm-12 pl-0">
+                                <div className="row d-flex justify-content-between WrapperBtnOrderDetail">
                                   <div className="col">
                                     <Button
                                       variant="contained"
                                       color="warning"
                                       fullWidth
                                     >
-                                      Hỗ trợ
+                                       Hỗ trợ
                                     </Button>
                                   </div>
-                                  <div className="col">
+                                  <div className="col BtnOrderDetail">
                                     <Button
                                       fullWidth
                                       color="error"
@@ -407,6 +464,7 @@ export const DetailCategory = () => {
                   </div>
                 ) : null}
               </div>
+              
             </div>
             <Button variant="contained" className="MenuClose" onClick={handleClose}>
               Đóng
@@ -423,7 +481,7 @@ const style = {
   left: "50%",
   transform: "translate(-50%, -50%)",
   width: "100%",
-  height :'650px',
+  height: "750px",
   bgcolor: "background.paper",
   border: "1px solid #000",
   boxShadow: 24,
@@ -432,6 +490,8 @@ const style = {
   overflow: "scroll",
   justifyContent: "center",
   alignItems: "center",
-  pt : 4,
+  pt: 5,
+  // pb: 20,
   px: 4,
+  pb : 10
 };

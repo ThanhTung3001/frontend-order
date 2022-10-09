@@ -1,27 +1,30 @@
-.ContainerHistoryTransaction{
+.ContainerHistoryTransaction {
     background: white;
     width: 100%;
     padding: 40px 20px 20px 40px;
     border-radius: 10px;
 }
-.TextHistory{
-    font-size: 18px;
+
+.TextHistory {
+    font-size: 20px;
     font-weight: 400;
     text-align: left;
     padding-bottom: 20px;
     border-bottom: 1px solid #ccc;
 }
-.MenuHistory{
+
+.MenuHistory {
     display: grid;
     grid-template-columns: 1fr 0.5fr 1.5fr 1fr 1fr;
     column-gap: 20px;
-     text-align: left;
-     margin-top: 20px;
-     font-size: 14px;
-     font-weight: 700;
-     color:rgba(0, 0, 0, 0.87);
+    text-align: left;
+    margin-top: 20px;
+    font-size: 14px;
+    font-weight: 700;
+    color: rgba(0, 0, 0, 0.87);
 }
-.ItemHistory{
+
+.ItemHistory {
     display: grid;
     padding-top: 20px;
     grid-template-columns: 1fr 0.5fr 1.5fr 1fr 1fr;
@@ -31,16 +34,19 @@
     margin-top: 20px;
     border-top: 1px solid #ccc;
 }
-@media screen and (max-width: 420px){
-    .ContainerHistoryTransaction{
+
+@media screen and (max-width: 420px) {
+    .ContainerHistoryTransaction {
         margin-top: 20px;
         padding: 20px 10px 20px 10px;
     }
-    .ItemHistory{
+
+    .ItemHistory {
         grid-template-columns: 50px 30px 80px 50px 50px;
     }
-    .MenuHistory{
+
+    .MenuHistory {
         grid-template-columns: 50px 30px 80px 50px 50px;
-        
+
     }
 }
