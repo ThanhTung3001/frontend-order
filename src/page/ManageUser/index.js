@@ -12,6 +12,7 @@ import { CircularProgress, TextField } from "@mui/material";
 import LoadingOverlay from "react-loading-overlay";
 import BounceLoader from "react-spinners/BounceLoader";
 import axios from "axios";
+import { logout } from "../../app/reducer/UserSlice";
 
 function ManageUser() {
   const [ChangeBtn, SetChangeBtn] = useState(true);
@@ -147,13 +148,14 @@ function ManageUser() {
                   </li>
                   <li
                     onClick={() => {
+                      dispatch(logout());
                       HandleToogle(3);
                     }}
                     className={`${style.ItemCard} ${
                       ItemToogle === 3 ? `${style.active}` : ``
                     }`}
                   >
-                    Đăng Xuất
+                    Đăng xuất
                   </li>
                 </ul>
               </div>

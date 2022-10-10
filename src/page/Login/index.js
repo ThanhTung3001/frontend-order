@@ -306,7 +306,7 @@ export const Login = () => {
                       fontSize: 11,
                     }}
                   >
-                    Đăng nhập với Facebook
+                    Facebook
                   </Button>
                 </div>
 
@@ -323,7 +323,7 @@ export const Login = () => {
                       fontSize: 11,
                     }}
                   >
-                    Đăng nhập với Google
+                    Google
                   </Button>
                 </div>
               </div>

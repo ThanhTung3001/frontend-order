@@ -18,6 +18,7 @@ import { categoryMock } from "../../mock/CategoryMock";
 import { height } from "@mui/system";
 import { useDispatch, useSelector } from "react-redux";
 import { addToCart } from "../../app/reducer/CartSlice";
+import { toast } from "react-toastify";
 
 export const DetailCategory = () => {
   const dispatch = useDispatch();
@@ -39,7 +40,7 @@ export const DetailCategory = () => {
         price: data.attributes.price,
       })
     );
-    alert("Thêm vào giỏ hàng thành công");
+    toast("Thêm vào giỏ hàng thành công");
   };
   const handleOpen = (idItem) => {
     setItem(bigCategory.find((e) => e.id == idItem));
@@ -232,31 +233,36 @@ export const DetailCategory = () => {
         aria-describedby="child-modal-description"
       >
         <Box sx={{ ...style, width: "80%", flexDirection: "column" }}>
-          <FormControl style={{ height: 60 }} fullWidth>
-            <InputLabel id="demo-simple-select-label">
-              Chọn loại muốn so sánh
-            </InputLabel>
-            <Select
-              labelId="demo-simple-select-label"
-              id="demo-simple-select"
-              value={itemSelected.id}
-              label="Chọn loại muốn so sánh"
-              onChange={(e) => {
-                ////console.log(e);
-                handleSelected(e.target.value);
-              }}
-            >
-              {listMenu.map((e, index) => {
-                return (
-                  <MenuItem key={index} value={e.id}>
-                    {e.attributes.name}
-                  </MenuItem>
-                );
-              })}
-            </Select>
-          </FormControl>
-          <div className="row d-flex justify-content-center mt-2">
-            <div className="col-sm-5 " style={{ marginRight: 20 }}>
+          <div
+            className="row d-flex justify-content-center mt-5"
+            style={{ overflow: "scroll" }}
+          >
+            <div className="col-12 mt-2">
+              <FormControl fullWidth>
+                <InputLabel id="demo-simple-select-label">
+                  Chọn loại muốn so sánh
+                </InputLabel>
+                <Select
+                  labelId="demo-simple-select-label"
+                  id="demo-simple-select"
+                  value={itemSelected.id}
+                  label="Chọn loại muốn so sánh"
+                  onChange={(e) => {
+                    ////console.log(e);
+                    handleSelected(e.target.value);
+                  }}
+                >
+                  {listMenu.map((e, index) => {
+                    return (
+                      <MenuItem key={index} value={e.id}>
+                        {e.attributes.name}
+                      </MenuItem>
+                    );
+                  })}
+                </Select>
+              </FormControl>
+            </div>
+            <div className="col-12 col-md-5 " style={{ marginRight: 20 }}>
               <div className="col-sm-12">
                 <div>
                   <div className="row">
@@ -356,7 +362,7 @@ export const DetailCategory = () => {
                 </div>
               </div>
             </div>
-            <div className="col-sm-5">
+            <div className="col-12 col-md-5 ">
               {selected == true ? (
                 <div className="col-sm-12">
                   <div>
@@ -453,9 +459,6 @@ export const DetailCategory = () => {
               ) : null}
             </div>
           </div>
-          <Button variant="contained" onClick={handleClose}>
-            Đóng
-          </Button>
         </Box>
       </Modal>
     </div>

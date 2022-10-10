@@ -246,6 +246,7 @@ const Header = () => {
           ) : (
             <Box>
               <Button
+                className="btn-warning"
                 variant="contained"
                 color="warning"
                 onClick={() => {
@@ -255,6 +256,7 @@ const Header = () => {
                 Đăng ký
               </Button>
               <Button
+                className="btn-warning"
                 onClick={() => {
                   navigate("login");
                 }}

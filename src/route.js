@@ -28,6 +28,7 @@ import { UserInfo } from "./page/User";
 import ManageUser from "./page/ManageUser";
 import { Cart } from "./page/Cart";
 import { Contact } from "./page/Contact";
+import { ToastContainer } from "react-toastify";
 
 export const RouteApp = () => {
   let dispatch = useDispatch();
@@ -82,6 +83,7 @@ export const RouteApp = () => {
         />
       </Routes>
       <Footer />
+      <ToastContainer />
     </Router>
   );
 };

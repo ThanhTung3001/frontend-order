@@ -18,6 +18,7 @@ import {
 import axios from "axios";
 import { URL_BACKEND } from "../../constants";
 import { Navigate, useNavigate } from "react-router-dom";
+import { toast } from "react-toastify";
 
 export const Cart = () => {
   let navigate = useNavigate();
@@ -102,10 +103,10 @@ export const Cart = () => {
           }),
         });
         if (status === 200) {
-          alert("Thao tác đặt hàng thành công, chúng tôi sẽ liên hệ bạn sớm");
+          toast("Thao tác đặt hàng thành công, chúng tôi sẽ liên hệ bạn sớm");
           dispatch(removeAll());
         } else {
-          alert("Đặt hàng thất bại, vui lòng liên hệ Admin để được hỗ trợ");
+          toast("Đặt hàng thất bại, vui lòng liên hệ Admin để được hỗ trợ");
         }
       }
     }

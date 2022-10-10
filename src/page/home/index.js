@@ -4,6 +4,7 @@ import Header from "../../layout/header";
 import "react-responsive-carousel/lib/styles/carousel.min.css"; // requires a loader
 import { Carousel } from "react-responsive-carousel";
 import { TextField, Slider, Button } from "@mui/material";
+import parse from "html-react-parser";
 import "./style.css";
 import dayjs from "dayjs";
 import { LocalizationProvider } from "@mui/x-date-pickers/LocalizationProvider";
@@ -172,7 +173,15 @@ export const Home = () => {
               </div>
               <div className="row d-flex justify-content-center">
                 <div className=".col-sm-12 d-flex justify-content-center">
-                  <Button variant="contained">Xác nhận</Button>
+                  <Button
+                    color="error"
+                    variant="contained"
+                    onClick={() => {
+                      navigate("/cac-loai-tiec/1");
+                    }}
+                  >
+                    Xác nhận
+                  </Button>
                 </div>
               </div>
             </div>
@@ -186,38 +195,43 @@ export const Home = () => {
               </div>
             </div>
             {listType.map((e, index) => {
-              return (
-                <Link
-                  key={index}
-                  style={{ textDecoration: "none" }}
-                  to={`cac-loai-tiec/${e.id}`}
-                  className={
-                    index % 2 === 0
-                      ? "row d-flex m-2"
-                      : "row d-flex  flex-row-reverse m-2"
-                  }
-                >
-                  <div className="col-sm-12 col-md-6 col-lg-3 fit-content">
-                    <img
-                      src={
-                        URL_BACKEND + e.attributes.Avatar.data.attributes.url
-                      }
-                      alt=""
-                    />
-                  </div>
-                  <div className="col-sm-12 col-md-6">
-                    <h3 className="title-article">{e.attributes.name}</h3>
-                    <p className="description">
-                      {e.attributes.Description.substring(0, 600)}
-                      ...
-                    </p>
-                  </div>
-                </Link>
-              );
+              if (index < 3) {
+                return (
+                  <Link
+                    key={index}
+                    style={{ textDecoration: "none" }}
+                    to={`cac-loai-tiec/${e.id}`}
+                    className={
+                      index % 2 === 0
+                        ? "row d-flex m-2"
+                        : "row d-flex flex-row-reverse m-2"
+                    }
+                  >
+                    <div className="col-sm-12 col-md-6 col-lg-3 fit-content">
+                      <img
+                        src={
+                          URL_BACKEND + e.attributes.Avatar.data.attributes.url
+                        }
+                        alt=""
+                      />
+                    </div>
+                    <div className="col-sm-12 col-md-6">
+                      <h3 className="title-article">{e.attributes.name}</h3>
+                      <p className="description">
+                        {parse(e.attributes.Description.substring(0, 600))}
+                        ...
+                      </p>
+                    </div>
+                  </Link>
+                );
+              } else {
+                return null;
+              }
             })}
             <div className="row d-flex justify-content-center mt-4">
               <div className=".col-sm-12 d-flex justify-content-center">
                 <Button
+                  color="error"
                   variant="contained"
                   onClick={() => {
                     navigate("/cac-loai-tiec");
@@ -333,6 +347,7 @@ export const Home = () => {
             <div className="row d-flex justify-content-center mt-4">
               <div className=".col-sm-12 d-flex justify-content-center">
                 <Button
+                  color="error"
                   variant="contained"
                   onClick={() => {
                     navigate("/blogs");
@@ -415,7 +430,11 @@ export const Home = () => {
             </div>
             <div className="row d-flex justify-content-center mt-4">
               <div className=".col-sm-12 d-flex justify-content-center">
-                <Button variant="contained" onClick={handleSubmit}>
+                <Button
+                  variant="contained"
+                  color="error"
+                  onClick={handleSubmit}
+                >
                   Gửi thông tin
                 </Button>
               </div>

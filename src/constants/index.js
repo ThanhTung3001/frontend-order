@@ -1,1 +1,1 @@
-export const URL_BACKEND = "http://localhost:1337";
+export const URL_BACKEND = "https://eztiec.vn";

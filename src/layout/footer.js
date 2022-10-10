@@ -76,9 +76,13 @@ export const Footer = () => {
                 <Divider light />
                 <div className="row mt-2">
                   <h4>{companyInfo[0].attributes.name}</h4>
-                  <p>Địa chỉ: {companyInfo[0].attributes.address}</p>
-                  <p>Email: {companyInfo[0].attributes.email} </p>
-                  <p>Sđt: {companyInfo[0].attributes.phone}</p>
+                  <p className="m-0">
+                    Địa chỉ: {companyInfo[0].attributes.address}
+                  </p>
+                  <p className="m-0">
+                    Email: {companyInfo[0].attributes.email}{" "}
+                  </p>
+                  <p className="m-0">Sđt: {companyInfo[0].attributes.phone}</p>
                 </div>
               </div>
               <div className="col-sm-3">

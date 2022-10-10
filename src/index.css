@@ -248,5 +248,12 @@ button.MuiButton-contained.MuiButton-containedWarning.MuiButton-sizeMedium.MuiBu
   letter-spacing: 2px;
   font-size: 40px !important;
 }
-
-
+.btn-warning{
+  background-color: #F5C342 !important;
+}
+.MuiSlider-colorSecondary{
+  color: #F5C342 !important;
+}
+.hignl-title{
+  text-transform: uppercase;
+}
