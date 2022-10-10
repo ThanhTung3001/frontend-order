@@ -35,7 +35,7 @@ function ManageUser() {
     `${URL_BACKEND}${
       user.Avatar != undefined
         ? user.Avatar.url
-        : "/uploads/2289_Sk_VNQSBGQU_1_PID_Ew_Mjgt_MT_Iy_127a9d0f7c.jpg"
+        : "/uploads/Avatar_Facebook_trang_bb0ad55f0d.jpeg"
     }`
   );
   const handleFileUpload = async (event) => {
@@ -66,8 +66,6 @@ function ManageUser() {
         },
       }).then((rs) => {
         if (rs.status === 200) {
-          //s  alert("Cập nhật hình ảnh thành công");
-          //return rs.json();
         } else {
           alert("Cập nhật thất bại");
         }
@@ -87,6 +85,14 @@ function ManageUser() {
     if (user) {
       ////console.log(user);
       setUserInfo(user);
+      // console.log(user);
+      setImg(
+        `${URL_BACKEND}${
+          user.Avatar != undefined
+            ? user.Avatar.url
+            : "/uploads/Avatar_Facebook_trang_bb0ad55f0d.jpeg"
+        }`
+      );
       // //console.log(user);
     }
   }, [loadedUser]);

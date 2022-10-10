@@ -1,0 +1,67 @@
+.WrapperInfoContact{
+    padding: 20px;
+    background: white;
+    box-shadow: 0px 7px 8px -4px rgb(0 0 0 / 20%);
+}
+.ContainerInfoAccount{
+    display: flex;
+    flex-direction: column;
+    justify-content: start;
+}
+.TextContactTitle{
+    font-size: 24px;
+    font-weight: 700;
+}
+.ContainerImage{
+    width: 160px;
+    height: 160px;
+}
+.TextNameCompany{
+    font-weight: 700;
+    font-size: 18px;
+    margin-bottom: 10px;
+}
+.ImageCompany{
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+.ContainerInfoCompany{
+    margin-left: 20px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+.MenuContactItem{
+    font-size: 15px;
+    font-weight: 700;
+    color: rgba(0, 0, 0, 0.6);
+}
+.MenuContactDetail{
+    font-size: 13px;
+    font-weight: 600;
+    color: rgba(0, 0, 0, 0.6);
+}
+@media screen and (max-width: 420px){
+    .TextContactTitle{
+        text-align: center;
+    }
+   
+    .WrapperInfoCompany{
+        flex-direction: column;
+        padding: 0;
+        justify-content: center;
+        align-items: center;
+        
+    }
+    .ContainerInfoCompany{
+        margin-left: 0;
+        margin-top: 20px;
+    }
+    .TextNameCompany{
+        text-align: center;
+    }
+    .reponsive{
+        margin-top: 24px;
+    }
+}

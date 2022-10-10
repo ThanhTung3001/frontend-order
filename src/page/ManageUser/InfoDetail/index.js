@@ -33,7 +33,11 @@ function InfoDetail() {
         data: JSON.stringify(userInfo),
       }
     );
-    alert(status);
+    if (status === 200) {
+      alert("Cập nhật thông tin người dùng thành công");
+    } else {
+      alert(" Cập nhật thất bại vui lòng thử lại sau");
+    }
   };
   return (
     <div>

@@ -49,10 +49,7 @@ const settings = [
     name: "Quản lý tài khoản",
     path: "user/info",
   },
-  {
-    name: "Đổi mật khẩu",
-    path: "change-password",
-  },
+
   {
     name: "Đăng xuất",
     path: "logout",

@@ -27,6 +27,7 @@ import { login, logout } from "./app/reducer/UserSlice";
 import { UserInfo } from "./page/User";
 import ManageUser from "./page/ManageUser";
 import { Cart } from "./page/Cart";
+import { Contact } from "./page/Contact";
 
 export const RouteApp = () => {
   let dispatch = useDispatch();
@@ -69,6 +70,7 @@ export const RouteApp = () => {
         <Route exact path="/login" element={<Login />} />
         <Route exact path="/blogs/:id" element={<BlogDetails />} />
         <Route exact path="/cart" element={<Cart />} />
+        <Route path="/contact-us" element={<Contact />} />
         <Route exact path="/recovery-password" element={<RecoveryPassword />} />
         <Route path="*" element={<NotFound />} />
         <Route path="/auth/callback/google" element={<GoogleAuthCallback />} />

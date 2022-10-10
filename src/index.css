@@ -244,3 +244,9 @@ button.MuiButton-contained.MuiButton-containedWarning.MuiButton-sizeMedium.MuiBu
   background-color: #F2F2F2;
   min-height: 800px;
 }
+.legend{
+  letter-spacing: 2px;
+  font-size: 40px !important;
+}
+
+
