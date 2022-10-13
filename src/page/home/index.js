@@ -139,11 +139,7 @@ export const Home = () => {
                   <TextField
                     fullWidth
                     onChange={(e) => {
-                      if (parseInt(e.target.value) <= 1000) {
-                        setAmountCus(e.target.value);
-                      } else {
-                        setAmountCus(1000);
-                      }
+                      setAmountCus(e.target.value);
                     }}
                     value={amountCus}
                     type="number"
@@ -210,7 +206,11 @@ export const Home = () => {
                     color="error"
                     variant="contained"
                     onClick={() => {
-                      navigate("/cac-loai-tiec/1");
+                      navigate(
+                        `/filter-tiec?from=${100000}&to=${
+                          range * 20000
+                        }&amount=${amountCus}`
+                      );
                     }}
                   >
                     Xác nhận

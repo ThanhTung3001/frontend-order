@@ -30,6 +30,7 @@ import { Cart } from "./page/Cart";
 import { Contact } from "./page/Contact";
 import { ToastContainer } from "react-toastify";
 import { DetailContent } from "./page/category/DetailContent";
+import { FilterCategory } from "./page/category/FilterCategory";
 
 export const RouteApp = () => {
   let dispatch = useDispatch();
@@ -78,6 +79,8 @@ export const RouteApp = () => {
         <Route path="/auth/callback/google" element={<GoogleAuthCallback />} />
         <Route path="/auth/callback/facebook" element={<FacebookCallBack />} />
         <Route path="/mota-tiec/:id" element={<DetailContent />} />
+        <Route path="/filter-tiec" element={<FilterCategory />} />
+        <Route path="/forgot-password" element={<RecoveryPassword />} />
         <Route
           exact
           path="/user/info"

@@ -22,6 +22,7 @@ import GoogleIcon from "@mui/icons-material/Google";
 import RemoveRedEyeIcon from "@mui/icons-material/RemoveRedEye";
 import VisibilityOffIcon from "@mui/icons-material/VisibilityOff";
 import FacebookIcon from "@mui/icons-material/Facebook";
+import { toast } from "react-toastify";
 
 //npm i react-facebook-login-button
 export const Login = () => {
@@ -208,7 +209,7 @@ export const Login = () => {
   };
   useEffect(() => {
     if (error) {
-      alert("Tài khoản hoặc mật khẩu không đúng");
+      toast("Tài khoản hoặc mật khẩu không đúng");
     } else if (authencated) {
       navigator("/");
     }
@@ -276,10 +277,11 @@ export const Login = () => {
               </div>
               <div className="col-8 mt-3 d-flex justify-content-between">
                 <div className="col-6 d-flex justify-content-start">
-                  <p className="description-time" style={{ height: 12 }}>
-                    Quên mật khẩu?
-                    <Link to="/forgot-password" />
-                  </p>
+                  <Link to="/forgot-password">
+                    <p className="description-time" style={{ height: 12 }}>
+                      Quên mật khẩu?
+                    </p>
+                  </Link>
                 </div>
                 <div className="col-6 d-flex justify-content-end">
                   <Link to="/register">

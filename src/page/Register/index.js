@@ -15,6 +15,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { register } from "../../app/reducer/UserSlice";
 import { RegisterAction } from "../../app/action/UserAction";
 import { Navigate, useHistory, useNavigate } from "react-router-dom";
+import { toast } from "react-toastify";
 
 export const Register = () => {
   const { users, authencated, error } = useSelector(
@@ -203,9 +204,9 @@ export const Register = () => {
   };
   useEffect(() => {
     if (error) {
-      alert("Email hoặc username đã tồn tại");
+      toast("Email hoặc username đã tồn tại");
     } else if (authencated) {
-      alert("Đăng ký thành công, tự động chuyển hướng đến trang chủ");
+      toast("Đăng ký thành công, tự động chuyển hướng đến trang chủ");
       navigator("/");
     }
   }, [authencated, error, users]);
