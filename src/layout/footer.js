@@ -58,6 +58,7 @@ export const Footer = () => {
                 <div className="col-sm-2 d-flex jusitfy-content-end">
                   <Button
                     className="ml-5"
+                    color="error"
                     variant="contained"
                     onClick={onSubmitEmailSend}
                   >

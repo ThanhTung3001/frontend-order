@@ -260,7 +260,7 @@ export const BigCategory = () => {
                 </Select>
               </FormControl>
             </div>
-            <div className="col-12 col-md-5 " style={{ marginRight: 20 }}>
+            <div className="col-12 col-md-5 ">
               <div className="col-sm-12">
                 <div>
                   <div className="row">
@@ -303,19 +303,13 @@ export const BigCategory = () => {
                         style={{ height: "100%", width: "100%" }}
                       >
                         <div className="row d-flex justify-content-between">
-                          <div className="col-6">
+                          <div className="col-12">
                             <h5 style={{ fontWeight: 700 }}>
                               {item.attributes.name}
                             </h5>
                           </div>
                         </div>
-                        {/* {parseInt(e.attributes.price).toLocaleString(
-                            "it-IT",
-                            {
-                              style: "currency",
-                              currency: "VND",
-                            }
-                          )} */}
+
                         <div
                           className="row m-2 flex-column justify-content-between"
                           style={{ height: 250 }}
@@ -333,7 +327,7 @@ export const BigCategory = () => {
                           </div>
                           <div className="col-sm-12">
                             <div className="row d-flex justify-content-around">
-                              <div className="col">
+                              <div className="col-12 col-md-6 mt-2">
                                 <Button
                                   variant="contained"
                                   color="warning"
@@ -342,7 +336,7 @@ export const BigCategory = () => {
                                   Cần hỗ trợ thêm
                                 </Button>
                               </div>
-                              <div className="col">
+                              <div className="col-12 col-md-6 mt-2">
                                 <Button
                                   fullWidth
                                   color="error"
@@ -404,17 +398,14 @@ export const BigCategory = () => {
                           style={{ height: "100%", width: "100%" }}
                         >
                           <div className="row d-flex justify-content-between">
-                            <div className="col-6">
+                            <div className="col-12">
                               <h5 style={{ fontWeight: 700 }}>
                                 {itemSelected.attributes.name}
                               </h5>
                             </div>
                           </div>
 
-                          <div
-                            className="row m-2 flex-column justify-content-between"
-                            style={{ height: 250 }}
-                          >
+                          <div className="row m-2 flex-column justify-content-between">
                             <div className="col-sm-12 col-md-12">
                               {itemSelected.attributes.products.data.map(
                                 (product, index) => {
@@ -428,7 +419,7 @@ export const BigCategory = () => {
                             </div>
                             <div className="col-sm-12">
                               <div className="row d-flex justify-content-around">
-                                <div className="col">
+                                <div className="col-12 col-md-6 mt-2">
                                   <Button
                                     variant="contained"
                                     color="warning"
@@ -437,7 +428,7 @@ export const BigCategory = () => {
                                     Cần hỗ trợ thêm
                                   </Button>
                                 </div>
-                                <div className="col">
+                                <div className="col-12 col-md-6 mt-2">
                                   <Button
                                     fullWidth
                                     color="error"

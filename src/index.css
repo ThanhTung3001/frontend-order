@@ -39,8 +39,8 @@ code {
 }
 
 .hignl-title.second {
-  font-size: 30px !important;
-  height: 32px !important;
+  font-size: 30px ;
+  height: 32px ;
   margin-bottom: 20px;
 }
 
@@ -64,6 +64,7 @@ button.MuiButtonBase-root.MuiButton-root.MuiButton-contained.MuiButton-contained
   color: #000000;
   opacity: 0.6;
   white-space: pre-line;
+  letter-spacing: 1.3;
 }
 
 .title-article {
@@ -256,4 +257,30 @@ button.MuiButton-contained.MuiButton-containedWarning.MuiButton-sizeMedium.MuiBu
 }
 .hignl-title{
   text-transform: uppercase;
+}
+.description-primary{
+        font-size: 16px;
+        font-weight: 400;
+        line-height: 19px;
+        letter-spacing: 0.005em;
+        text-align: left;
+        color: #000000;
+        opacity: 0.6;
+      overflow: hidden;
+        text-overflow: ellipsis;
+        display: -webkit-box;
+        line-height: 18px;
+        /* fallback */
+        max-height: 72px;
+        /* fallback */
+        -webkit-line-clamp: 4;
+        /* number of lines to show */
+        -webkit-box-orient: vertical;
+      
+}
+@media only screen and (max-width: 600px) {
+  .hignl-title {
+    font-size: 24px !important;
+    font-weight: 800;
+  }
 }

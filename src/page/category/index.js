@@ -31,7 +31,7 @@ export const Category = () => {
                 <div className="col-lg-3 col-md-6 col-sm-12">
                   <Link
                     style={{ textDecoration: "none" }}
-                    to={`/cac-loai-tiec/${e.id}`}
+                    to={`/mota-tiec/${e.id}`}
                   >
                     <div className="row">
                       <div className="col">
@@ -50,7 +50,7 @@ export const Category = () => {
                         {e.attributes.name}
                       </h3>
 
-                      <p className="description center mb-1">
+                      <p className="description-primary center mb-1">
                         {parse(e.attributes.Description)}
                       </p>
                       <p className="description-time center">

@@ -24,7 +24,7 @@ export const LoginAction = createAsyncThunk("login/User", async (user) => {
 });
 export const getMeAction = createAsyncThunk("getMe/User", async (token) => {
   const { data } = await axios.get(
-    URL_BACKEND + "/api/users/me?populate=deep,3",
+    URL_BACKEND + "/api/users/me?populate=deep,2",
     {
       headers: {
         Authorization: "Bearer " + token,

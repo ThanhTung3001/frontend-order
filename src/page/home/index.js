@@ -3,7 +3,15 @@ import Container from "react-bootstrap/esm/Container";
 import Header from "../../layout/header";
 import "react-responsive-carousel/lib/styles/carousel.min.css"; // requires a loader
 import { Carousel } from "react-responsive-carousel";
-import { TextField, Slider, Button } from "@mui/material";
+import {
+  TextField,
+  Slider,
+  Button,
+  FormControl,
+  InputLabel,
+  Select,
+  MenuItem,
+} from "@mui/material";
 import parse from "html-react-parser";
 import "./style.css";
 import dayjs from "dayjs";
@@ -31,6 +39,7 @@ export const Home = () => {
   const [range, setRange] = React.useState(0);
   const [companyInfo, setCompanyInfo] = useState([]);
   const [info, setInfo] = useState({});
+  const [time, setTime] = useState("6:00");
   //state for form submit
   const [email, setEmail] = useState("");
   const [fullName, setFullName] = useState("");
@@ -38,6 +47,7 @@ export const Home = () => {
   const [content, setContent] = useState("");
   const [address, setAddress] = useState("");
   const [title, setTitle] = useState("");
+  const [amountCus, setAmountCus] = useState("");
 
   //const notify = () => toast("Wow so easy!");
   const handleChangeRange = (event, newValue) => {
@@ -106,7 +116,6 @@ export const Home = () => {
                 className="slide_bg"
                 key={index}
                 style={{
-                  height: 600,
                   backgroundImage: `URL(
                     "${URL_BACKEND + e.attributes.Media.data.attributes.url}"
                   )`,
@@ -129,23 +138,46 @@ export const Home = () => {
                 <div className="col-sm-12 col-md-6 col-lg-3">
                   <TextField
                     fullWidth
+                    onChange={(e) => {
+                      if (parseInt(e.target.value) <= 1000) {
+                        setAmountCus(e.target.value);
+                      } else {
+                        setAmountCus(1000);
+                      }
+                    }}
+                    value={amountCus}
+                    type="number"
                     label="Số lượng khách *"
                     placeholder="Số lượng khách"
                     variant="outlined"
                   />
                 </div>
                 <div className="col-sm-12 col-md-6 col-lg-3">
-                  <TimePicker
-                    label="Giờ bắt đầu tiệc: *"
-                    value={value}
-                    onChange={handleChange}
-                    renderInput={(params) => (
-                      <TextField fullWidth {...params} />
-                    )}
-                  />
+                  <FormControl fullWidth>
+                    <InputLabel id="demo-simple-select-label">
+                      Giờ bắt đầu tiệc*
+                    </InputLabel>
+                    <Select
+                      labelId="demo-simple-select-label"
+                      id="demo-simple-select"
+                      value={time}
+                      label="Giờ bắt đầu tiệc"
+                      onChange={(e) => {
+                        setTime(e.target.value);
+                      }}
+                    >
+                      {new Array(18).fill().map((e, index) => {
+                        return (
+                          <MenuItem value={`${index + 6}:00`}>{`${
+                            index + 6
+                          }:00`}</MenuItem>
+                        );
+                      })}
+                    </Select>
+                  </FormControl>
                 </div>
                 <div className="col-sm-12 col-md-6 col-lg-3">
-                  <DateTimePicker
+                  <DesktopDatePicker
                     label="Ngày diễn ra tiệc: *"
                     value={value}
                     onChange={handleChange}
@@ -155,16 +187,17 @@ export const Home = () => {
                   />
                 </div>
                 <div className="col-sm-12 col-md-6 col-lg-3 ">
-                  <span>Số ngân sách: *</span>
+                  <span>Đơn giá /khách: *</span>
                   <Slider
                     fullWidth
                     aria-label="Volume"
                     value={range}
                     color="secondary"
+                    min={5}
                     onChange={handleChangeRange}
                   />
                   <span>
-                    {(range * 500000).toLocaleString("it-IT", {
+                    {(range * 20000).toLocaleString("it-IT", {
                       style: "currency",
                       currency: "VND",
                     })}
@@ -200,7 +233,7 @@ export const Home = () => {
                   <Link
                     key={index}
                     style={{ textDecoration: "none" }}
-                    to={`cac-loai-tiec/${e.id}`}
+                    to={`mota-tiec/${e.id}`}
                     className={
                       index % 2 === 0
                         ? "row d-flex m-2"
@@ -217,9 +250,11 @@ export const Home = () => {
                     </div>
                     <div className="col-sm-12 col-md-6">
                       <h3 className="title-article">{e.attributes.name}</h3>
-                      <p className="description">
-                        {parse(e.attributes.Description.substring(0, 600))}
-                        ...
+                      <p
+                        className="
+                      description-primary"
+                      >
+                        {parse(e.attributes.Description)}
                       </p>
                     </div>
                   </Link>
@@ -259,7 +294,7 @@ export const Home = () => {
                         to={`/blogs/${e.id}`}
                         style={{ textDecoration: "none" }}
                       >
-                        <div className="row">
+                        <div className="row d-flex justify-content-center">
                           <div className="row d-flex flex-column">
                             <div className="fit-content">
                               <img
@@ -306,7 +341,7 @@ export const Home = () => {
                         to={`/blogs/${e.id}`}
                         style={{ textDecoration: "none" }}
                       >
-                        <div className="row">
+                        <div className="row d-flex justify-content-center">
                           <div className="row d-flex flex-column">
                             <div className="fit-cover">
                               <img
@@ -362,7 +397,7 @@ export const Home = () => {
         <div className="container">
           <div className="row block">
             <div className="row">
-              <div className="col-sm-12 col-md-6">
+              <div className="col-sm-12 col-md-6 name_text">
                 <TextField
                   fullWidth
                   placeholder="Họ tên"

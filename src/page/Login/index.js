@@ -282,10 +282,11 @@ export const Login = () => {
                   </p>
                 </div>
                 <div className="col-6 d-flex justify-content-end">
-                  <p className="description-time" style={{ height: 12 }}>
-                    Đăng ký
-                    <Link to="/register" />
-                  </p>
+                  <Link to="/register">
+                    <p className="description-time" style={{ height: 12 }}>
+                      Đăng ký
+                    </p>
+                  </Link>
                 </div>
               </div>
               <div className="col-8">

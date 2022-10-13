@@ -33,6 +33,32 @@ span.MuiSlider-root.MuiSlider-colorSecondary.MuiSlider-sizeMedium.css-1diafny-Mu
    
     background-size: cover;
     position: relative;
+    height: 600px;
+  
+}
+@media only screen and (max-width: 600px) {
+    .hignl-title{
+        font-size: 18px;
+    }
+.slide_bg {
+  height: 400px;
+}
+.name_text{
+    margin-bottom: 25px;
+}
+.title-article{
+    font-size: 16px !important;
+}
+.carousel.carousel-slider {
+    height: 400px !important;
+}
+
+.carousel.carousel-slider img {
+    height: 400px !important;
+    object-fit: cover;
+    opacity: 0.34;
+
+}
 }
 .slide_bg:before {
     content: "";

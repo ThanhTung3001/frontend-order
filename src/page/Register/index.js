@@ -101,6 +101,7 @@ export const Register = () => {
       }));
     }
   };
+  const [phoneNumber, setPhoneNumber] = useState("0907109331");
 
   const [username, setUsername] = useState({
     error: false,
@@ -195,6 +196,7 @@ export const Register = () => {
         username: username.value,
         email: email.value,
         password: password.value,
+        PhoneNumber: phoneNumber,
       };
       dispatch(RegisterAction(dataSend));
     }
@@ -236,6 +238,16 @@ export const Register = () => {
                   helperText={username.message}
                   value={username.value}
                   onChange={handleChangeUsername}
+                />
+              </div>
+              <div className="col-sm-12 col-md-8 m-2">
+                <TextField
+                  fullWidth
+                  placeholder="Số điện thoại"
+                  value={phoneNumber}
+                  onChange={(e) => {
+                    setPhoneNumber(e.value);
+                  }}
                 />
               </div>
               <div className="col-sm-12 col-md-8 m-2">

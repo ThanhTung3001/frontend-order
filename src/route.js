@@ -29,6 +29,7 @@ import ManageUser from "./page/ManageUser";
 import { Cart } from "./page/Cart";
 import { Contact } from "./page/Contact";
 import { ToastContainer } from "react-toastify";
+import { DetailContent } from "./page/category/DetailContent";
 
 export const RouteApp = () => {
   let dispatch = useDispatch();
@@ -76,6 +77,7 @@ export const RouteApp = () => {
         <Route path="*" element={<NotFound />} />
         <Route path="/auth/callback/google" element={<GoogleAuthCallback />} />
         <Route path="/auth/callback/facebook" element={<FacebookCallBack />} />
+        <Route path="/mota-tiec/:id" element={<DetailContent />} />
         <Route
           exact
           path="/user/info"

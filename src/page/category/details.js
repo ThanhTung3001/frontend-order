@@ -60,7 +60,7 @@ export const DetailCategory = () => {
 
   useEffect(() => {
     axios
-      .get(URL_BACKEND + `/api/big-categories/${id}?populate=deep,5`)
+      .get(URL_BACKEND + `/api/big-categories/${id}?populate=deep,4`)
       .then((rs) => {
         let { data } = rs;
         // //console.log(data.data.attributes.categories.data);
