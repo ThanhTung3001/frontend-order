@@ -24,7 +24,7 @@ const pages = [
     path: "/",
   },
   {
-    name: "ĐẶC TIỆC",
+    name: "ĐẶT TIỆC",
     path: "/dat-tiec",
   },
   {

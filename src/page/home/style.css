@@ -1,11 +1,18 @@
 .carousel.carousel-slider {
-    height: 600px !important;
+    height: 600px;
+    transition: all 0.3s ease-in-out;
+}
+
+@media screen and (max-width: 991px) {
+    .carousel.carousel-slider {
+        max-height: 300px;
+    }
 }
 
 .carousel.carousel-slider img {
     height: 600px !important;
     object-fit: cover;
-opacity: 0.34;
+    opacity: 0.34;
 
 }
 
@@ -29,11 +36,14 @@ p.legend {
 span.MuiSlider-root.MuiSlider-colorSecondary.MuiSlider-sizeMedium.css-1diafny-MuiSlider-root {
     color: #F5C342;
 }
-.slide_bg{
-   
-    background-size: cover;
+
+.slide_bg {
     position: relative;
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center center;
 }
+
 .slide_bg:before {
     content: "";
     position: absolute;
