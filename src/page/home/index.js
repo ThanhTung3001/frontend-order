@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import Container from "react-bootstrap/esm/Container";
 import Header from "../../layout/header";
 import "react-responsive-carousel/lib/styles/carousel.min.css"; // requires a loader
@@ -30,16 +30,16 @@ import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { Link, useNavigate, useNavigation } from "react-router-dom";
 
-export const Home = () => {
+export const Home = ({ divRef }) => {
   const navigate = useNavigate();
   //state render Web app
   const [value, setValue] = React.useState(dayjs(new Date()));
   const [listType, setListType] = useState([]);
   const [blog, setBlog] = useState([]);
-  const [range, setRange] = React.useState(0);
+  const [range, setRange] = React.useState(5);
   const [companyInfo, setCompanyInfo] = useState([]);
   const [info, setInfo] = useState({});
-  const [time, setTime] = useState("6:00");
+  const [time, setTime] = useState("06:00");
   //state for form submit
   const [email, setEmail] = useState("");
   const [fullName, setFullName] = useState("");
@@ -92,16 +92,26 @@ export const Home = () => {
       setBackground(data.data);
     });
     //let url = URL_BACKEND + `/api/banners?populate=*`;
-    axios.get(URL_BACKEND + `/api/big-categories?populate=*`).then((rs) => {
-      let { data } = rs;
-      // //console.log(data.data);
-      setListType(data.data);
-    });
-    axios.get(URL_BACKEND + `/api/blogs?populate=*`).then((rs) => {
-      let { data } = rs;
-      data.data = data.data.filter((e, index) => index <= 2);
-      setBlog(data.data);
-    });
+    axios
+      .get(
+        URL_BACKEND +
+          `/api/big-categories?populate=*&sort[0]=Index:desc&sort[1]=publishedAt:desc`
+      )
+      .then((rs) => {
+        let { data } = rs;
+        // //console.log(data.data);
+        setListType(data.data);
+      });
+    axios
+      .get(
+        URL_BACKEND +
+          `/api/blogs?populate=*&sort=index:desc&sort[1]=publishedAt:desc`
+      )
+      .then((rs) => {
+        let { data } = rs;
+        data.data = data.data.filter((e, index) => index <= 2);
+        setBlog(data.data);
+      });
 
     return () => {};
   }, []);
@@ -131,7 +141,9 @@ export const Home = () => {
             <div className="row block">
               <div className="row d-flex justify-content-center">
                 <div className="col-sm-12 d-flex justify-content-center">
-                  <h3 className="hignl-title">Đặt tiệc</h3>
+                  <h3 className="hignl-title" ref={divRef}>
+                    Đặt tiệc
+                  </h3>
                 </div>
               </div>
               <div className="row">
@@ -163,11 +175,19 @@ export const Home = () => {
                       }}
                     >
                       {new Array(18).fill().map((e, index) => {
-                        return (
-                          <MenuItem value={`${index + 6}:00`}>{`${
-                            index + 6
-                          }:00`}</MenuItem>
-                        );
+                        if (index + 6 < 10) {
+                          return (
+                            <MenuItem value={`0${index + 6}:00`}>{`${
+                              index + 6
+                            }:00`}</MenuItem>
+                          );
+                        } else {
+                          return (
+                            <MenuItem value={`${index + 6}:00`}>{`${
+                              index + 6
+                            }:00`}</MenuItem>
+                          );
+                        }
                       })}
                     </Select>
                   </FormControl>
@@ -209,7 +229,7 @@ export const Home = () => {
                       navigate(
                         `/filter-tiec?from=${100000}&to=${
                           range * 20000
-                        }&amount=${amountCus}`
+                        }&amount=${amountCus}&time=${time}`
                       );
                     }}
                   >
@@ -288,6 +308,10 @@ export const Home = () => {
             <div className="row">
               {blog.map((e, index) => {
                 if (index === 0) {
+                  var img =
+                    e.attributes.Media.data != null
+                      ? URL_BACKEND + e.attributes.Media.data.attributes.url
+                      : "img_emty.png";
                   return (
                     <div className="col-sm-12 col-md-12 col-lg-8">
                       <Link
@@ -297,16 +321,7 @@ export const Home = () => {
                         <div className="row d-flex justify-content-center">
                           <div className="row d-flex flex-column">
                             <div className="fit-content">
-                              <img
-                                src={
-                                  URL_BACKEND +
-                                  e.attributes.Media.data.attributes.url
-                                }
-                                alt={
-                                  e.attributes.Media.data.attributes
-                                    .alternativeText
-                                }
-                              />
+                              <img src={img} />
                             </div>
                             <div className="">
                               <h3 className="title-article">
@@ -336,6 +351,12 @@ export const Home = () => {
                   if (index === 0) {
                     return null;
                   } else {
+                    //console.log(e.attributes.Media.data);
+
+                    var img =
+                      e.attributes.Media.data != null
+                        ? URL_BACKEND + e.attributes.Media.data.attributes.url
+                        : "img_emty.png";
                     return (
                       <Link
                         to={`/blogs/${e.id}`}
@@ -345,14 +366,8 @@ export const Home = () => {
                           <div className="row d-flex flex-column">
                             <div className="fit-cover">
                               <img
-                                src={
-                                  URL_BACKEND +
-                                  e.attributes.Media.data.attributes.url
-                                }
-                                alt={
-                                  e.attributes.Media.data.attributes
-                                    .alternativeText
-                                }
+                                style={{ maxHeight: 200, objectFit: "cover" }}
+                                src={img}
                               />
                             </div>
                             <div className="">

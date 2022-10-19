@@ -102,9 +102,33 @@ export const Register = () => {
       }));
     }
   };
+  const handleChangeCompanyName = (e) => {
+    const value = e.target.value;
+    let a = "";
+    if (value.trim() == "") {
+      setCompanyName((prev) => ({
+        ...fullName,
+        error: true,
+        value: value,
+        message: "Tên công ty không được để trống!",
+      }));
+    } else {
+      setCompanyName((prev) => ({
+        ...prev,
+        error: false,
+        message: "",
+        value: value,
+      }));
+    }
+  };
   const [phoneNumber, setPhoneNumber] = useState("0907109331");
 
   const [username, setUsername] = useState({
+    error: false,
+    value: "",
+    message: "",
+  });
+  const [companyName, setCompanyName] = useState({
     error: false,
     value: "",
     message: "",
@@ -190,7 +214,8 @@ export const Register = () => {
       !email.error &&
       !password.error &&
       !repeatPassword.error &&
-      !username.error
+      !username.error &&
+      !companyName.error
     ) {
       const dataSend = {
         FullName: fullName.value,
@@ -198,6 +223,7 @@ export const Register = () => {
         email: email.value,
         password: password.value,
         PhoneNumber: phoneNumber,
+        Company: companyName.value,
       };
       dispatch(RegisterAction(dataSend));
     }
@@ -221,7 +247,7 @@ export const Register = () => {
                   Đăng ký
                 </h3>
               </div>
-              <div className="col-sm-12 col-md-8 m-2">
+              <div className="col-sm-12 col-md-6 mt-2">
                 <TextField
                   fullWidth
                   placeholder="Họ và tên"
@@ -231,7 +257,7 @@ export const Register = () => {
                   onChange={handleChangeFullName}
                 />
               </div>
-              <div className="col-sm-12 col-md-8 m-2">
+              <div className="col-sm-12 col-md-6 mt-2">
                 <TextField
                   fullWidth
                   placeholder="Tên tài khoản"
@@ -241,7 +267,7 @@ export const Register = () => {
                   onChange={handleChangeUsername}
                 />
               </div>
-              <div className="col-sm-12 col-md-8 m-2">
+              <div className="col-sm-12 col-md-6 mt-2">
                 <TextField
                   fullWidth
                   placeholder="Số điện thoại"
@@ -251,7 +277,7 @@ export const Register = () => {
                   }}
                 />
               </div>
-              <div className="col-sm-12 col-md-8 m-2">
+              <div className="col-sm-12 col-md-6 mt-2">
                 <TextField
                   type="email"
                   fullWidth
@@ -262,8 +288,19 @@ export const Register = () => {
                   onChange={handleChangeEmail}
                 />
               </div>
+              <div className="col-sm-12 col-md-6 mt-2">
+                <TextField
+                  type="text"
+                  fullWidth
+                  placeholder="Tên công ty"
+                  error={companyName.error}
+                  helperText={companyName.message}
+                  value={companyName.value}
+                  onChange={handleChangeCompanyName}
+                />
+              </div>
 
-              <div className="col-sm-12 col-md-8 m-2">
+              <div className="col-sm-12 col-md-6 mt-2">
                 <TextField
                   type="password"
                   onChange={handleChangePassword}
@@ -274,7 +311,7 @@ export const Register = () => {
                   placeholder="Mật khẩu"
                 />
               </div>
-              <div className="col-sm-12 col-md-8 m-2">
+              <div className="col-sm-12 col-md-6 mt-2">
                 <TextField
                   type="password"
                   fullWidth

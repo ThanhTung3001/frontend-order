@@ -277,21 +277,24 @@ export const Login = () => {
               </div>
               <div className="col-8 mt-3 d-flex justify-content-between">
                 <div className="col-6 d-flex justify-content-start">
-                  <Link to="/forgot-password">
+                  <Link
+                    to="/forgot-password"
+                    style={{ textDecoration: "none" }}
+                  >
                     <p className="description-time" style={{ height: 12 }}>
                       Quên mật khẩu?
                     </p>
                   </Link>
                 </div>
                 <div className="col-6 d-flex justify-content-end">
-                  <Link to="/register">
+                  <Link to="/register" style={{ textDecoration: "none" }}>
                     <p className="description-time" style={{ height: 12 }}>
                       Đăng ký
                     </p>
                   </Link>
                 </div>
               </div>
-              <div className="col-8">
+              {/* <div className="col-8">
                 <Divider textAlign="center"> or</Divider>
               </div>
               <div className="col-12 col-sm-8 ml-0 d-flex justify-content-between">
@@ -329,7 +332,7 @@ export const Login = () => {
                     Google
                   </Button>
                 </div>
-              </div>
+              </div> */}
             </div>
           </div>
         </div>

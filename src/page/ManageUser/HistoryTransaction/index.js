@@ -7,7 +7,8 @@ import { useSelector } from "react-redux";
 import moment from "moment";
 
 const columns = [
-  { field: "id", headerName: "STT", width: 50 },
+  { field: "index", headerName: "STT", width: 50 },
+  { field: "id", headerName: "Mã đơn hàng", width: 150 },
   { field: "createdAt", headerName: "Ngày tạo", width: 200 },
   { field: "Total", headerName: "Tổng cộng", width: 200 },
   { field: "Details", headerName: "Chi tiết", width: 600 },
@@ -41,6 +42,7 @@ function HistoryTransaction() {
       },
     }).then(({ data }) => {
       setData(data.data);
+      console.log(data.data);
       const result = data.data.map((e, index) => {
         let Details = ``;
         if (e.attributes.category_order_cards != null) {
@@ -58,7 +60,8 @@ function HistoryTransaction() {
         }
         // console.log(e.attributes.Total);
         return {
-          id: index + 1,
+          index: index + 1,
+          id: e.id,
           createdAt: moment(e.attributes.createdAt).format("DD/MM/YYYY HH:mm"),
           Total: parseInt(e.attributes.Total).toLocaleString("it-IT", {
             style: "currency",

@@ -31,9 +31,12 @@ span.MuiSlider-root.MuiSlider-colorSecondary.MuiSlider-sizeMedium.css-1diafny-Mu
 }
 .slide_bg{
    
-    background-size: cover;
+    background-size: contain;
     position: relative;
-    height: 600px;
+
+        width: 100%;
+        padding-top: 56.25%;
+    background-repeat: no-repeat;
   
 }
 @media only screen and (max-width: 600px) {
@@ -41,7 +44,7 @@ span.MuiSlider-root.MuiSlider-colorSecondary.MuiSlider-sizeMedium.css-1diafny-Mu
         font-size: 18px;
     }
 .slide_bg {
-  height: 400px;
+height: 200px !important;
 }
 .name_text{
     margin-bottom: 25px;
@@ -50,22 +53,13 @@ span.MuiSlider-root.MuiSlider-colorSecondary.MuiSlider-sizeMedium.css-1diafny-Mu
     font-size: 16px !important;
 }
 .carousel.carousel-slider {
-    height: 400px !important;
+    height: 200px !important;
 }
 
 .carousel.carousel-slider img {
-    height: 400px !important;
+  height: 200px !important;
     object-fit: cover;
     opacity: 0.34;
 
 }
-}
-.slide_bg:before {
-    content: "";
-    position: absolute;
-    left: 0;
-    right: 0;
-    top: 0;
-    bottom: 0;
-    background: linear-gradient(0deg, rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6));
 }
