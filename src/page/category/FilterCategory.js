@@ -15,7 +15,7 @@ export const FilterCategory = () => {
     axios
       .get(
         URL_BACKEND +
-          `/api/big-categories?populate=*&filters[FromTime][$lte]=${time}&filters[amount][$lte]=${amount}$filters[price][$lte]=${to}`
+        `/api/big-categories?populate=*&filters[FromTime][$lte]=${time}&filters[amount][$lte]=${amount}$filters[price][$lte]=${to}`
       )
       .then((rs) => {
         let { data } = rs;
@@ -23,7 +23,7 @@ export const FilterCategory = () => {
         setBigCategory(data.data);
       });
 
-    return () => {};
+    return () => { };
   }, []);
   return (
     <div className="full-width">
@@ -40,7 +40,7 @@ export const FilterCategory = () => {
                 <div className="col-lg-3 col-md-6 col-sm-12">
                   <Link
                     style={{ textDecoration: "none" }}
-                    to={`/mota-tiec/${e.id}`}
+                    to={`/cac-loai-tiec/${e.id}`}
                   >
                     <div className="row">
                       <div className="col">

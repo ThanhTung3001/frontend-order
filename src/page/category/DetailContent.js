@@ -42,7 +42,7 @@ export const DetailContent = () => {
         setCategory(res);
         setLoaded(true);
       });
-    return () => {};
+    return () => { };
   }, []);
 
   return loaded == false ? (
@@ -55,9 +55,9 @@ export const DetailContent = () => {
       <div className="full-width" style={{ height: 1000 }}></div>
     </LoadingOverlay>
   ) : (
-    <div className="full-width" style={{ minHeight: 2000 }}>
+    <div className="full-width" >
       <div className="container">
-        <div className="row block">
+        <div className="row block" style={{ minHeight: 2000 }}>
           <div className="row d-flex justify-content-center">
             <div className="col-sm-12 d-flex justify-content-center">
               <h3 className="hignl-title second">Chi tiết loại tiệc</h3>
