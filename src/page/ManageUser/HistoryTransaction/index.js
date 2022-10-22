@@ -5,28 +5,25 @@ import axios from "axios";
 import { URL_BACKEND } from "../../../constants";
 import { useSelector } from "react-redux";
 import moment from "moment";
+import { Modal, Typography } from "@mui/material";
+import { Box } from "@mui/system";
+import parse from "html-react-parser";
 
 const columns = [
-  { field: "id", headerName: "STT", width: 50 },
+  { field: "index", headerName: "STT", width: 50 },
+  { field: "id", headerName: "Mã đơn hàng", width: 150 },
   { field: "createdAt", headerName: "Ngày tạo", width: 200 },
   { field: "Total", headerName: "Tổng cộng", width: 200 },
   { field: "Details", headerName: "Chi tiết", width: 600 },
   { field: "Status", headerName: "Trạng thái", width: 130 },
 ];
 
-// const rows = [
-//   { id: 1, lastName: "Snow", firstName: "Jon", age: 35 },
-//   { id: 2, lastName: "Lannister", firstName: "Cersei", age: 42 },
-//   { id: 3, lastName: "Lannister", firstName: "Jaime", age: 45 },
-//   { id: 4, lastName: "Stark", firstName: "Arya", age: 16 },
-//   { id: 5, lastName: "Targaryen", firstName: "Daenerys", age: null },
-//   { id: 6, lastName: "Melisandre", firstName: null, age: 150 },
-//   { id: 7, lastName: "Clifford", firstName: "Ferrara", age: 44 },
-//   { id: 8, lastName: "Frances", firstName: "Rossini", age: 36 },
-//   { id: 9, lastName: "Roxie", firstName: "Harvey", age: 65 },
-// ];
 
 function HistoryTransaction() {
+  const [open, setOpen] = React.useState(false);
+  const handleOpen = () => setOpen(true);
+  const handleClose = () => setOpen(false);
+  const [dataRow, setDataRow] = React.useState({ "index": 1, "id": 25, "createdAt": "08/10/2022 17:08", "Total": "25.369.998 VND", "Details": "CÁC MÓN SOUP X 2 - 16.100.000 VND \nCÁC MÓN GỎI X 1 - 6.520.000 VND \nMÓN CƠM – MÌ X 1 - 2.749.998 VND \n", "Status": "Đã tiếp nhận" })
   const [data, setData] = React.useState([]);
   const [rows, setRows] = React.useState([]);
   const { users } = useSelector((state) => state.userReducer);
@@ -41,6 +38,7 @@ function HistoryTransaction() {
       },
     }).then(({ data }) => {
       setData(data.data);
+      console.log(data.data);
       const result = data.data.map((e, index) => {
         let Details = ``;
         if (e.attributes.category_order_cards != null) {
@@ -53,12 +51,13 @@ function HistoryTransaction() {
               ).toLocaleString("it-IT", {
                 style: "currency",
                 currency: "VND",
-              })} \n`;
+              })} || `;
           });
         }
         // console.log(e.attributes.Total);
         return {
-          id: index + 1,
+          index: index + 1,
+          id: e.id,
           createdAt: moment(e.attributes.createdAt).format("DD/MM/YYYY HH:mm"),
           Total: parseInt(e.attributes.Total).toLocaleString("it-IT", {
             style: "currency",
@@ -76,6 +75,26 @@ function HistoryTransaction() {
       className={`${style.ContainerHistoryTransaction}`}
       style={{ minHeight: 414 }}
     >
+      <Modal
+        open={open}
+        onClose={handleClose}
+        aria-labelledby="modal-modal-title"
+        aria-describedby="modal-modal-description"
+      >
+        <Box sx={styleModal} className="d-flex flex-column justify-content-center align-items-center">
+          <Typography id="modal-modal-title" variant="h6" component="h2">
+            <h3 style={{ fontSize: 24, fontWeight: 700 }}> Đơn hàng {dataRow.id}</h3>
+          </Typography>
+          <Typography id="modal-modal-description" sx={{ mt: 2 }}>
+            <h4 style={{ fontSize: 18, fontWeight: 600 }}>  Chi tiết:</h4> <p>{parse(dataRow.Details)}</p>
+            <span style={{ fontSize: 18, fontWeight: 600 }}>  Tổng cộng: <span> {(dataRow.Total)}</span></span>
+            <br />
+            <span style={{ fontSize: 18, fontWeight: 600 }}>  Ngày tạo: <span> {(dataRow.createdAt)}</span></span>
+            <br />
+            <span style={{ fontSize: 18, fontWeight: 600 }}>  Trạng thái: <span> {(dataRow.Status)}</span></span>
+          </Typography>
+        </Box>
+      </Modal>
       <div>
         <h1 className={style.TextHistory}>Lịch sử giao dịch</h1>
         <div style={{ height: 400, width: "100%" }}>
@@ -84,11 +103,34 @@ function HistoryTransaction() {
             columns={columns}
             pageSize={5}
             rowsPerPageOptions={[5]}
+            onRowClick={(e) => {
+              console.log(JSON.stringify(e.row));
+
+
+              var data = e.row;
+              data.Details = data.Details.replaceAll('||', '<br/>');
+              setDataRow(data);
+              handleOpen();
+            }}
           />
         </div>
       </div>
     </div>
+
   );
 }
 
 export default HistoryTransaction;
+const styleModal = {
+  position: 'absolute',
+  top: '50%',
+  left: '50%',
+  transform: 'translate(-50%, -50%)',
+  width: 400,
+  backgroundColor: 'white',
+  minHeight: 400,
+  minWidth: 400,
+  border: '2px solid #000',
+  boxShadow: 24,
+  p: 4,
+};

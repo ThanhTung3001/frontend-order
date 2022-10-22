@@ -56,7 +56,7 @@ const settings = [
   },
 ];
 
-const Header = () => {
+const Header = ({ handleScroll }) => {
   let navigate = useNavigate();
   let dispatch = useDispatch();
 
@@ -154,7 +154,11 @@ const Header = () => {
                   <Typography
                     textAlign="center"
                     onClick={() => {
-                      handleClickNav(e.path);
+                      if (e.path === "/dat-tiec") {
+                        handleScroll();
+                      } else {
+                        handleClickNav(e.path);
+                      }
                     }}
                   >
                     {e.name}
@@ -187,7 +191,11 @@ const Header = () => {
               <Button
                 key={index}
                 onClick={() => {
-                  navigate(e.path);
+                  if (e.path === "/dat-tiec") {
+                    handleScroll();
+                  } else {
+                    handleClickNav(e.path);
+                  }
                 }}
                 sx={{
                   my: 2,

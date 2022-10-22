@@ -67,12 +67,12 @@ export const DetailCategory = () => {
         setBigCategory(data.data.attributes.categories.data);
       });
 
-    return () => {};
+    return () => { };
   }, []);
   return (
     <div className="full-width">
       <div className="container">
-        <div className="row block">
+        <div className="row block" >
           <div className="row d-flex justify-content-center">
             <div className="col-sm-12 d-flex justify-content-center">
               <h3 className="hignl-title second">Danh sách Menu</h3>
@@ -96,9 +96,11 @@ export const DetailCategory = () => {
                             //  //console.log(product);
                             let urlImg = "";
                             //   //console.log(e.attributes.products.data.length);
-                            if (e.attributes.products.data.length < index + 1) {
+                            if (e.attributes.products.data.length < index + 1 || e.attributes.products.data[index].attributes.avatar.data == null) {
                               urlImg = "/img_emty.png";
                             } else {
+                              // console.log(e.attributes.products.data[index].attributes.avatar.data);
+
                               urlImg =
                                 URL_BACKEND +
                                 e.attributes.products.data[index].attributes
@@ -141,19 +143,23 @@ export const DetailCategory = () => {
 
                           <div
                             className="row m-2 flex-column justify-content-center"
-                            style={{ height: 450 }}
+
                           >
                             <div
-                              className="col-sm-12 col-md-12 flex-column flex-wrap"
-                              style={{ height: 250 }}
+                              className="col-sm-12 col-md-12 d-flex flex-wrap "
+
                             >
                               {e.attributes.products.data.map(
                                 (product, index) => {
-                                  return (
-                                    <p className="description">{`${
-                                      index + 1
-                                    }. ${product.attributes.name}`}</p>
-                                  );
+                                  if (index > 15) {
+                                    return;
+
+                                  } else {
+                                    return (
+                                      <p className="description col-6">{`${index + 1
+                                        }. ${product.attributes.name}`}</p>
+                                    );
+                                  }
                                 }
                               )}
                             </div>
@@ -273,7 +279,7 @@ export const DetailCategory = () => {
                           let urlImg = "";
                           if (
                             item.attributes.products.data.length <
-                            index + 1
+                            index + 1 || item.attributes.products.data[index].attributes.avatar.data == null
                           ) {
                             urlImg = "/img_emty.png";
                           } else {
@@ -326,9 +332,8 @@ export const DetailCategory = () => {
                             {item.attributes.products.data.map(
                               (product, index) => {
                                 return (
-                                  <p className="description">{`${index + 1}. ${
-                                    product.attributes.name
-                                  }`}</p>
+                                  <p className="description">{`${index + 1}. ${product.attributes.name
+                                    }`}</p>
                                 );
                               }
                             )}
@@ -374,7 +379,7 @@ export const DetailCategory = () => {
                             let urlImg = "";
                             if (
                               itemSelected.attributes.products.data.length <
-                              index + 1
+                              index + 1 || item.attributes.products.data[index].attributes.avatar.data == null
                             ) {
                               urlImg = "/img_emty.png";
                             } else {
@@ -421,9 +426,8 @@ export const DetailCategory = () => {
                               {itemSelected.attributes.products.data.map(
                                 (product, index) => {
                                   return (
-                                    <p className="description">{`${
-                                      index + 1
-                                    }. ${product.attributes.name}`}</p>
+                                    <p className="description">{`${index + 1
+                                      }. ${product.attributes.name}`}</p>
                                   );
                                 }
                               )}

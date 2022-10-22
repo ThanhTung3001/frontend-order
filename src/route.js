@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useRef } from "react";
 import {
   BrowserRouter as Router,
   Routes,
@@ -58,12 +58,19 @@ export const RouteApp = () => {
   //     }
   //   }
   // }, [authencated]);
-
+  const divRef = useRef();
+  const handleScroll = () => {
+    divRef.current.scrollIntoView({
+      behavior: "smooth",
+      block: "center",
+      inline: "center",
+    });
+  };
   return (
     <Router>
-      <Header />
+      <Header handleScroll={handleScroll} />
       <Routes>
-        <Route exact path="/" element={<Home />} />
+        <Route exact path="/" element={<Home divRef={divRef} />} />
         <Route exact path="/login" element={<Login />} />
         <Route exact path="/dat-tiec" element={<BigCategory />} />
         <Route exact path="/cac-loai-tiec" element={<Category />} />

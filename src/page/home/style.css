@@ -31,10 +31,13 @@ span.MuiSlider-root.MuiSlider-colorSecondary.MuiSlider-sizeMedium.css-1diafny-Mu
 }
 
 .slide_bg {
-
-    background-size: cover;
+    /* display: none; */
+    background-size: contain;
     position: relative;
-    height: 600px;
+
+    width: 100%;
+    padding-top: 56.25%;
+    background-repeat: no-repeat;
 
 }
 
@@ -44,7 +47,7 @@ span.MuiSlider-root.MuiSlider-colorSecondary.MuiSlider-sizeMedium.css-1diafny-Mu
     }
 
     .slide_bg {
-        height: 400px;
+        height: 200px !important;
     }
 
     .name_text {
@@ -56,23 +59,39 @@ span.MuiSlider-root.MuiSlider-colorSecondary.MuiSlider-sizeMedium.css-1diafny-Mu
     }
 
     .carousel.carousel-slider {
-        height: 400px !important;
+        height: 200px !important;
     }
 
     .carousel.carousel-slider img {
-        height: 400px !important;
+        height: 200px !important;
         object-fit: cover;
         opacity: 0.34;
 
     }
 }
 
-.slide_bg:before {
-    content: "";
-    position: absolute;
-    left: 0;
-    right: 0;
-    top: 0;
-    bottom: 0;
-    background: linear-gradient(0deg, rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6));
+.MuiBox-root {
+    overflow: unset !important;
+}
+
+.modal-popup-wrapper {}
+
+.modal-popup-wrapper::-webkit-scrollbar {
+    /* height: 20px; */
+    width: 15px;
+}
+
+.modal-popup-wrapper::-webkit-scrollbar-thumb {
+    background-color: #d6dee1;
+    border-radius: 20px;
+    border: 5px solid transparent;
+    background-clip: content-box;
+}
+
+.modal-popup-wrapper::-webkit-scrollbar-track {
+    background-color: transparent;
+}
+
+.modal-popup-wrapper::-webkit-scrollbar-thumb:hover {
+    background-color: #a8bbbf;
 }

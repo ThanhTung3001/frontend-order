@@ -6,6 +6,7 @@ import { URL_BACKEND } from "../../constants";
 import parse from "html-react-parser";
 import { Carousel } from "react-responsive-carousel";
 import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
+import "./style.css";
 import {
   Accordion,
   AccordionDetails,
@@ -41,7 +42,7 @@ export const DetailContent = () => {
         setCategory(res);
         setLoaded(true);
       });
-    return () => {};
+    return () => { };
   }, []);
 
   return loaded == false ? (
@@ -54,9 +55,9 @@ export const DetailContent = () => {
       <div className="full-width" style={{ height: 1000 }}></div>
     </LoadingOverlay>
   ) : (
-    <div className="full-width">
+    <div className="full-width" >
       <div className="container">
-        <div className="row block">
+        <div className="row block" style={{ minHeight: 2000 }}>
           <div className="row d-flex justify-content-center">
             <div className="col-sm-12 d-flex justify-content-center">
               <h3 className="hignl-title second">Chi tiết loại tiệc</h3>
@@ -83,7 +84,7 @@ export const DetailContent = () => {
                   <div className="description-content mt-2">
                     {parse(category.data.attributes.Description)}
                   </div>
-                  <div className="title-article center  mb-2">
+                  {/* <div className="title-article center  mb-2">
                     Danh sách menu
                   </div>
                   <div className="row d-flex justify-content-center mt-3">
@@ -133,7 +134,7 @@ export const DetailContent = () => {
                         }
                       )}
                     </div>
-                  </div>
+                  </div> */}
                   <div className="row d-flex justify-content-end">
                     <div className="description d-flex justify-content-end mt-4">
                       Khung thời gian:
@@ -143,25 +144,25 @@ export const DetailContent = () => {
                       )} - ${category.data.attributes.EndTime.substring(0, 5)}`}
                     </div>
                   </div>
-                </div>
-                <div className="title-article center mb-5">Media</div>
-                <div className="row">
-                  <Carousel autoPlay interval={2000}>
-                    {category.data.attributes.Media.data.map((e, index) => (
-                      <div
-                        className="slide_bg"
-                        key={index}
-                        style={{
-                          backgroundImage: `URL(
-                    "${URL_BACKEND + e.attributes.url}"
-                  )`,
-                        }}
-                      ></div>
-                    ))}
-                  </Carousel>
-
                   <div className="description-content mt-2">
                     {parse(category.data.attributes.content)}
+                  </div>
+                  <div className="title-article center mb-5">Media</div>
+                  <div className="row">
+                    <Carousel autoPlay interval={2000}>
+                      {category.data.attributes.Media.data.map((e, index) => (
+                        <div
+                          className="slide_bg"
+                          key={index}
+                          style={{
+                            backgroundSize: "cover",
+                            backgroundImage: `URL(
+                    "${URL_BACKEND + e.attributes.url}"
+                  )`,
+                          }}
+                        ></div>
+                      ))}
+                    </Carousel>
                   </div>
                 </div>
               </div>
