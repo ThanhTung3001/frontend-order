@@ -39,8 +39,8 @@ code {
 }
 
 .hignl-title.second {
-  font-size: 30px ;
-  height: 32px ;
+  font-size: 30px;
+  height: 32px;
   margin-bottom: 20px;
 }
 
@@ -245,39 +245,45 @@ button.MuiButton-contained.MuiButton-containedWarning.MuiButton-sizeMedium.MuiBu
   background-color: #F2F2F2;
   min-height: 800px;
 }
-.legend{
+
+.legend {
   letter-spacing: 2px;
   font-size: 40px !important;
 }
-.btn-warning{
+
+.btn-warning {
   background-color: #F5C342 !important;
 }
-.MuiSlider-colorSecondary{
+
+.MuiSlider-colorSecondary {
   color: #F5C342 !important;
 }
-.hignl-title{
+
+.hignl-title {
   text-transform: uppercase;
 }
-.description-primary{
-        font-size: 16px;
-        font-weight: 400;
-        line-height: 19px;
-        letter-spacing: 0.005em;
-        text-align: left;
-        color: #000000;
-        opacity: 0.6;
-      overflow: hidden;
-        text-overflow: ellipsis;
-        display: -webkit-box;
-        line-height: 18px;
-        /* fallback */
-        max-height: 72px;
-        /* fallback */
-        -webkit-line-clamp: 4;
-        /* number of lines to show */
-        -webkit-box-orient: vertical;
-      
+
+.description-primary {
+  font-size: 16px;
+  font-weight: 400;
+  line-height: 19px;
+  letter-spacing: 0.005em;
+  text-align: left;
+  color: #000000;
+  opacity: 0.6;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  display: -webkit-box;
+  line-height: 18px;
+  /* fallback */
+  max-height: 72px;
+  /* fallback */
+  -webkit-line-clamp: 4;
+  /* number of lines to show */
+  -webkit-box-orient: vertical;
+
 }
+
 @media only screen and (max-width: 600px) {
   .hignl-title {
     font-size: 24px !important;
