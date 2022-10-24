@@ -1,9 +1,9 @@
 .carousel.carousel-slider {
-    height: 600px !important;
+
 }
 
 .carousel.carousel-slider img {
-    height: 600px !important;
+  
     object-fit: cover;
     opacity: 0.34;
 
@@ -47,7 +47,7 @@ span.MuiSlider-root.MuiSlider-colorSecondary.MuiSlider-sizeMedium.css-1diafny-Mu
     }
 
     .slide_bg {
-        height: 200px !important;
+        /* height: 200px !important; */
     }
 
     .name_text {
@@ -59,11 +59,11 @@ span.MuiSlider-root.MuiSlider-colorSecondary.MuiSlider-sizeMedium.css-1diafny-Mu
     }
 
     .carousel.carousel-slider {
-        height: 200px !important;
+        /* height: 200px !important; */
     }
 
     .carousel.carousel-slider img {
-        height: 200px !important;
+        /* height: 200px !important; */
         object-fit: cover;
         opacity: 0.34;
 

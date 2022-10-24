@@ -28,7 +28,8 @@ import moment from "moment";
 import { Footer } from "../../layout/footer";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
-import { Link, useNavigate, useNavigation } from "react-router-dom";
+import { Link, useLocation, useNavigate, useNavigation } from "react-router-dom";
+import { CarouselMock } from "../../mock/CaroulMock";
 
 export const Home = ({ divRef }) => {
   const navigate = useNavigate();
@@ -48,6 +49,19 @@ export const Home = ({ divRef }) => {
   const [address, setAddress] = useState("");
   const [title, setTitle] = useState("");
   const [amountCus, setAmountCus] = useState("");
+
+
+  const location = useLocation();
+  React.useEffect(()=>{
+   // console.log(location.pathname)
+      if(location.pathname=="/dat-tiec"){
+        divRef.current.scrollIntoView({
+          behavior: "smooth",
+          block: "center",
+          inline: "center",
+        });
+      }
+  },[location.pathname]);
 
   //const notify = () => toast("Wow so easy!");
   const handleChangeRange = (event, newValue) => {
@@ -83,7 +97,7 @@ export const Home = ({ divRef }) => {
       );
   };
 
-  const [background, setBackground] = useState([]);
+  const [background, setBackground] = useState(CarouselMock);
   useEffect(() => {
     let url = URL_BACKEND + `/api/banners?populate=*`;
     axios.get(url).then((rs) => {

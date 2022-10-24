@@ -15,7 +15,7 @@ export const FilterCategory = () => {
     axios
       .get(
         URL_BACKEND +
-        `/api/big-categories?populate=*&filters[FromTime][$lte]=${time}&filters[amount][$lte]=${amount}$filters[price][$lte]=${to}`
+        `/api/big-categories?populate=*&filters[FromTime][$lte]=${time}&filters[amount][$lte]=${amount}&filters[price][$lte]=${to}`
       )
       .then((rs) => {
         let { data } = rs;

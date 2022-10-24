@@ -290,3 +290,6 @@ button.MuiButton-contained.MuiButton-containedWarning.MuiButton-sizeMedium.MuiBu
     font-weight: 800;
   }
 }
+.slide{
+  height: 100%
+}

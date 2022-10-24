@@ -23,6 +23,7 @@ import { toast } from "react-toastify";
 export const DetailCategory = () => {
   const dispatch = useDispatch();
   const { items, isLoaded } = useSelector((state) => state.cartReducer);
+  const { data, loaded } = useSelector(state => state.companyStored);
 
   const [bigCategory, setBigCategory] = useState([]);
   const { id } = useParams();
@@ -31,6 +32,10 @@ export const DetailCategory = () => {
   const [selected, setSelected] = useState(false);
   const [itemSelected, setItemSelected] = useState(categoryMock);
   const [listMenu, setListMenu] = useState([]);
+  const handleNeedSupport = () => {
+    console.log(data)
+    window.location.href = `tel:${data[0].attributes.phone}`
+  }
   const handleAddToCart = (data) => {
     dispatch(
       addToCart({
@@ -124,12 +129,12 @@ export const DetailCategory = () => {
                       </div>
                       <div className="col-sm-12 col-md-6 col-lg-6 ">
                         <div className="row d-flex justify-content-between mt-5">
-                          <div className="col-8">
+                          <div className="col-7">
                             <h5 style={{ fontWeight: 700 }}>
                               {e.attributes.name}
                             </h5>
                           </div>
-                          <div className="col-4">
+                          <div className="col-5 d-flex justify-content-end">
                             <Button
                               variant="contained"
                               color="warning"
@@ -269,96 +274,122 @@ export const DetailCategory = () => {
               </FormControl>
             </div>
             <div className="col-12 col-md-5 " style={{ marginRight: 20 }}>
-              <div className="col-sm-12">
-                <div>
-                  <div className="row">
-                    <div className="col-sm-12">
-                      <div className="row mt-2 mb-2">
-                        {new Array(4).fill().map((product, index) => {
-                          //  //console.log(product);
-                          let urlImg = "";
-                          if (
-                            item.attributes.products.data.length <
-                            index + 1 || item.attributes.products.data[index].attributes.avatar.data == null
-                          ) {
-                            urlImg = "/img_emty.png";
-                          } else {
-                            urlImg =
-                              URL_BACKEND +
-                              item.attributes.products.data[index].attributes
-                                .avatar.data.attributes.url;
-                          }
-                          return (
-                            <div
-                              key={index}
-                              className=" col-6 col-sm-6 p-1 ml-0 mr-1 d-flex justify-content-center"
-                            >
-                              {/* itemSelected.attributes.products.data */}
-                              <img
-                                src={urlImg}
-                                className="item-img"
-                                width={"100%"}
-                                alt=""
-                              />
-                            </div>
-                          );
-                        })}
-                      </div>
+
+              <div>
+                <div className="row">
+                  <div className="col-sm-12">
+                    <div className="row mt-2 mb-2">
+                      {new Array(4).fill().map((product, index) => {
+                        //  //console.log(product);
+                        let urlImg = "";
+                        if (
+                          item.attributes.products.data.length <
+                          index + 1 || item.attributes.products.data[index].attributes.avatar.data == null
+                        ) {
+                          urlImg = "/img_emty.png";
+                        } else {
+                          urlImg =
+                            URL_BACKEND +
+                            item.attributes.products.data[index].attributes
+                              .avatar.data.attributes.url;
+                        }
+                        return (
+                          <div
+                            key={index}
+                            className=" col-6 col-sm-6 p-1 ml-0 mr-1 d-flex justify-content-center"
+                          >
+                            {/* itemSelected.attributes.products.data */}
+                            <img
+                              src={urlImg}
+                              className="item-img"
+                              width={"100%"}
+                              alt=""
+                            />
+                          </div>
+                        );
+                      })}
                     </div>
-                    <div className="col-sm-12">
-                      <div
-                        className="row flex-column justify-content-center"
-                        style={{ height: "100%", width: "100%" }}
-                      >
-                        <div className="row d-flex justify-content-between">
-                          <div className="col-6">
-                            <h5 style={{ fontWeight: 700 }}>
-                              {item.attributes.name}
-                            </h5>
-                          </div>
+                  </div>
+                  <div className="">
+                    <div
+                      className="row flex-column justify-content-center"
+                      style={{ height: "100%", width: "100%" }}
+                    >
+                      <div className="row d-flex justify-content-between">
+                        <div className="col-6">
+                          <h5 style={{ fontWeight: 700 }}>
+                            {item.attributes.name}
+                          </h5>
                         </div>
-                        {/* {parseInt(e.attributes.price).toLocaleString(
-                            "it-IT",
-                            {
-                              style: "currency",
-                              currency: "VND",
+                      </div>
+
+                      <div
+                        className="row m-2 flex-column justify-content-between"
+
+                      >
+                        <div className="col-sm-12 col-md-12 d-flex flex-wrap">
+                          {item.attributes.products.data.map(
+                            (product, index) => {
+                              return (
+                                <p className="description col-6">{`${index + 1}. ${product.attributes.name
+                                  }`}</p>
+                              );
                             }
-                          )} */}
-                        <div
-                          className="row m-2 flex-column justify-content-between"
-                          style={{ height: 250 }}
-                        >
-                          <div className="col-sm-12 col-md-12">
-                            {item.attributes.products.data.map(
-                              (product, index) => {
-                                return (
-                                  <p className="description">{`${index + 1}. ${product.attributes.name
-                                    }`}</p>
-                                );
-                              }
-                            )}
-                          </div>
-                          <div className="col-sm-12">
-                            <div className="row d-flex justify-content-around">
-                              <div className="col">
-                                <Button
-                                  variant="contained"
-                                  color="warning"
-                                  fullWidth
-                                >
-                                  Cần hỗ trợ thêm
-                                </Button>
-                              </div>
-                              <div className="col">
-                                <Button
-                                  fullWidth
-                                  color="error"
-                                  variant="contained"
-                                >
-                                  Đặt tiệc
-                                </Button>
-                              </div>
+                          )}
+                        </div>
+
+                        <div className="col-sm-12">
+                          <div className="row d-flex justify-content-around">
+                            <div className="col">
+                              <Button
+                                variant="contained"
+                                color="warning"
+                                fullWidth
+                                onClick={handleNeedSupport}
+                              >
+                                Cần hỗ trợ thêm
+                              </Button>
                             </div>
+                            <div className="col">
+                              <Button
+                                fullWidth
+                                color="error"
+                                variant="contained"
+                              >
+                                Đặt tiệc
+                              </Button>
+                            </div>
+                          </div>
+                          <div className="row flex-column mt-4">
+                            <h1 className="description">
+                              Đơn giá{": "}
+                              <strong>
+                                {parseInt(
+                                  item.attributes.price
+                                ).toLocaleString("it-IT", {
+                                  style: "currency",
+                                  currency: "VND",
+                                })}
+                              </strong>
+                            </h1>
+                            <h1 className="description">
+                              Số lượng tối thiểu{": "}
+                              <strong>{item.attributes.amout}</strong>
+                            </h1>
+                            <h1 className="description">
+                              Thời gian phù hợp{": "}
+                              <strong>{`${item.attributes.FromTime.substring(
+                                0,
+                                5
+                              )} - ${item.attributes.EndTime.substring(
+                                0,
+                                5
+                              )}`}</strong>
+                            </h1>
+                            <h1 className="description">
+                              Supplier{": "}
+                              <strong>{`${item.attributes.TypeMenu}`}</strong>
+                            </h1>
                           </div>
                         </div>
                       </div>
@@ -366,10 +397,12 @@ export const DetailCategory = () => {
                   </div>
                 </div>
               </div>
+
             </div>
             <div className="col-12 col-md-5 ">
               {selected == true ? (
                 <div className="col-sm-12">
+
                   <div>
                     <div className="row">
                       <div className="col-sm-12">
@@ -420,13 +453,13 @@ export const DetailCategory = () => {
 
                           <div
                             className="row m-2 flex-column justify-content-between"
-                            style={{ height: 250 }}
+
                           >
-                            <div className="col-sm-12 col-md-12">
+                            <div className="col-sm-12 col-md-12 d-flex flex-wrap">
                               {itemSelected.attributes.products.data.map(
                                 (product, index) => {
                                   return (
-                                    <p className="description">{`${index + 1
+                                    <p className="description col-6">{`${index + 1
                                       }. ${product.attributes.name}`}</p>
                                   );
                                 }
@@ -439,6 +472,7 @@ export const DetailCategory = () => {
                                     variant="contained"
                                     color="warning"
                                     fullWidth
+                                    onClick={handleNeedSupport}
                                   >
                                     Cần hỗ trợ thêm
                                   </Button>
@@ -452,6 +486,37 @@ export const DetailCategory = () => {
                                     Đặt tiệc
                                   </Button>
                                 </div>
+                              </div>
+                              <div className="row flex-column mt-4">
+                                <h1 className="description">
+                                  Đơn giá{": "}
+                                  <strong>
+                                    {parseInt(
+                                      itemSelected.attributes.price
+                                    ).toLocaleString("it-IT", {
+                                      style: "currency",
+                                      currency: "VND",
+                                    })}
+                                  </strong>
+                                </h1>
+                                <h1 className="description">
+                                  Số lượng tối thiểu{": "}
+                                  <strong>{itemSelected.attributes.amout}</strong>
+                                </h1>
+                                <h1 className="description">
+                                  Thời gian phù hợp{": "}
+                                  <strong>{`${itemSelected.attributes.FromTime.substring(
+                                    0,
+                                    5
+                                  )} - ${itemSelected.attributes.EndTime.substring(
+                                    0,
+                                    5
+                                  )}`}</strong>
+                                </h1>
+                                <h1 className="description">
+                                  Supplier{": "}
+                                  <strong>{`${itemSelected.attributes.TypeMenu}`}</strong>
+                                </h1>
                               </div>
                             </div>
                           </div>

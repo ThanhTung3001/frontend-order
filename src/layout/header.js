@@ -57,6 +57,13 @@ const settings = [
 ];
 
 const Header = ({ handleScroll }) => {
+  const { pathname } = useLocation();
+
+  React.useEffect(() => {
+    window.scrollTo(0, 0);
+  }, [pathname]);
+
+
   let navigate = useNavigate();
   let dispatch = useDispatch();
 
@@ -89,8 +96,14 @@ const Header = ({ handleScroll }) => {
   };
   const [appAuthencated, setAppAuthencated] = React.useState(false);
   const [user, setUser] = React.useState({});
-  const location = useLocation();
   const { authencated } = useSelector((state) => state.userReducer);
+  const location = useLocation();
+  React.useEffect(()=>{
+   // console.log(location.pathname)
+      if(location.pathname=="/dat-tiec"){
+        handleScroll();
+      }
+  },[location.pathname]);
   return (
     <AppBar
       style={{
@@ -154,11 +167,9 @@ const Header = ({ handleScroll }) => {
                   <Typography
                     textAlign="center"
                     onClick={() => {
-                      if (e.path === "/dat-tiec") {
-                        handleScroll();
-                      } else {
+                     
                         handleClickNav(e.path);
-                      }
+                    
                     }}
                   >
                     {e.name}
@@ -191,11 +202,9 @@ const Header = ({ handleScroll }) => {
               <Button
                 key={index}
                 onClick={() => {
-                  if (e.path === "/dat-tiec") {
-                    handleScroll();
-                  } else {
+                  
                     handleClickNav(e.path);
-                  }
+                 
                 }}
                 sx={{
                   my: 2,

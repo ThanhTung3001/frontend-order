@@ -59,7 +59,9 @@ export const RouteApp = () => {
   //   }
   // }, [authencated]);
   const divRef = useRef();
+
   const handleScroll = () => {
+   
     divRef.current.scrollIntoView({
       behavior: "smooth",
       block: "center",
@@ -72,7 +74,7 @@ export const RouteApp = () => {
       <Routes>
         <Route exact path="/" element={<Home divRef={divRef} />} />
         <Route exact path="/login" element={<Login />} />
-        <Route exact path="/dat-tiec" element={<BigCategory />} />
+        <Route exact path="/dat-tiec" element={<Home divRef={divRef} />} />
         <Route exact path="/cac-loai-tiec" element={<Category />} />
         <Route exact path="/cac-loai-tiec/:id" element={<DetailCategory />} />
         <Route exact path="/blogs" element={<Blogs />} />

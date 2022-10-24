@@ -1,13 +1,16 @@
 import { Button, TextField, Divider } from "@mui/material";
 import axios from "axios";
 import React, { useEffect, useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
 import { toast } from "react-toastify";
+import { initInfoCompany } from "../app/action/CompanyAction";
 import { URL_BACKEND } from "../constants";
 import "./style.css";
 
 export const Footer = () => {
   const [emailSubmit, setEmailSubmit] = useState("");
-  const [companyInfo, setCompanyInfo] = useState([]);
+
+  const {data,loaded} = useSelector(state=>state.companyStored);
   const onSubmitEmailSend = () => {
     if (emailSubmit == null) {
       toast("Email không đúng định dạng");
@@ -27,17 +30,12 @@ export const Footer = () => {
       });
     }
   };
+  const dispatch = useDispatch();
   useEffect(() => {
-    axios.get(URL_BACKEND + `/api/info-companies?populate=*`).then((rs) => {
-      let { data } = rs;
-      if (data.data.length > 0) {
-        setCompanyInfo(data.data);
-        // //console.log(data.data);
-      }
-      //setBlog(data.data);
-    });
+    dispatch(initInfoCompany());
+
   }, []);
-  if (companyInfo.length > 0) {
+  if (loaded==true) {
     return (
       <>
         <div className="container-fluid">
@@ -72,32 +70,31 @@ export const Footer = () => {
               <div className="col-sm-3 ">
                 <img src="logo_color.png" />
                 <div className="row mt-2 mb-2">
-                  <div className="col">{companyInfo[0].attributes.Slogan}</div>
+                  <div className="col">{data[0].attributes.Slogan}</div>
                 </div>
                 <Divider light />
                 <div className="row mt-2">
-                  <h4>{companyInfo[0].attributes.name}</h4>
+                  <h4>{data[0].attributes.name}</h4>
                   <p className="m-0">
-                    Địa chỉ: {companyInfo[0].attributes.address}
+                    Địa chỉ: {data[0].attributes.address}
                   </p>
                   <p className="m-0">
-                    Email: {companyInfo[0].attributes.email}{" "}
+                    Email: {data[0].attributes.email}{" "}
                   </p>
-                  <p className="m-0">Sđt: {companyInfo[0].attributes.phone}</p>
+                  <p className="m-0">Sđt: {data[0].attributes.phone}</p>
                 </div>
               </div>
-              <div className="col-sm-3">
+              <div className="col-6 col-sm-3">
                 <h6>Chính sách bảo mật</h6>
                 <h6>Thông tin chuyển khoản</h6>
                 <h6>Hướng dẫn đặt hàng</h6>
               </div>
-              <div className="col-sm-3">
+              <div className="col-6 col-sm-3">
                 <h6>Chính sách đổi trả</h6>
                 <h6>Câu hỏi thường gặp</h6>
                 <h6>Điều khoản sử dụng</h6>
               </div>
-              <div className="col-sm-3">
-                <h6>Phí & khu vực giao hàng</h6>
+              <div className="col-6 col-sm-3">
                 <h6>Bảng tin công ty</h6>
                 <h6>Điều khoản sử dụng</h6>
               </div>
