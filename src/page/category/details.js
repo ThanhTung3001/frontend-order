@@ -1,7 +1,7 @@
 import axios from "axios";
 import React, { useEffect, useState } from "react";
 import { URL_BACKEND } from "../../constants";
-import { useParams } from "react-router";
+import { useParams ,useNavigate} from "react-router";
 import {
   Box,
   Button,
@@ -24,6 +24,7 @@ export const DetailCategory = () => {
   const dispatch = useDispatch();
   const { items, isLoaded } = useSelector((state) => state.cartReducer);
   const { data, loaded } = useSelector(state => state.companyStored);
+  const navigate = useNavigate();
 
   const [bigCategory, setBigCategory] = useState([]);
   const { id } = useParams();
@@ -88,7 +89,7 @@ export const DetailCategory = () => {
               if (e.attributes.FromTime == null) {
                 e.attributes.FromTime = "";
               }
-              if (e.attributes.EndTime == null) {
+              if (e.attributes.EndTime == null) { 
                 e.attributes.EndTime = "";
               }
               return (
@@ -188,6 +189,10 @@ export const DetailCategory = () => {
                                     fullWidth
                                     color="error"
                                     variant="contained"
+                                    onClick={() => {
+                                      handleAddToCart(e);
+                                      navigate('/cart')
+                                    }}
                                   >
                                     Đặt tiệc
                                   </Button>
@@ -273,7 +278,7 @@ export const DetailCategory = () => {
                 </Select>
               </FormControl>
             </div>
-            <div className="col-12 col-md-5 " style={{ marginRight: 20 }}>
+            <div className="col-12 col-md-6" >
 
               <div>
                 <div className="row">
@@ -316,7 +321,7 @@ export const DetailCategory = () => {
                       style={{ height: "100%", width: "100%" }}
                     >
                       <div className="row d-flex justify-content-between">
-                        <div className="col-6">
+                        <div className="col-10">
                           <h5 style={{ fontWeight: 700 }}>
                             {item.attributes.name}
                           </h5>
@@ -324,7 +329,7 @@ export const DetailCategory = () => {
                       </div>
 
                       <div
-                        className="row m-2 flex-column justify-content-between"
+                        className="row mt-2 flex-column justify-content-between"
 
                       >
                         <div className="col-sm-12 col-md-12 d-flex flex-wrap">
@@ -399,7 +404,7 @@ export const DetailCategory = () => {
               </div>
 
             </div>
-            <div className="col-12 col-md-5 ">
+            <div className="col-12 col-md-6">
               {selected == true ? (
                 <div className="col-sm-12">
 
@@ -444,7 +449,7 @@ export const DetailCategory = () => {
                           style={{ height: "100%", width: "100%" }}
                         >
                           <div className="row d-flex justify-content-between">
-                            <div className="col-6">
+                            <div className="col-12">
                               <h5 style={{ fontWeight: 700 }}>
                                 {itemSelected.attributes.name}
                               </h5>

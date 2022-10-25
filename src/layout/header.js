@@ -55,13 +55,26 @@ const settings = [
     path: "logout",
   },
 ];
+const settingsNotAuth = [
+  {
+    name: "Giỏ hàng",
+    path: "cart",
+  },
+  {
+    name:"Đăng nhập",
+    path:'login'
+  },{
+    name:"Đăng ký",
+    path:"register"
+  }
+]
 
 const Header = ({ handleScroll }) => {
   const { pathname } = useLocation();
 
   React.useEffect(() => {
     window.scrollTo(0, 0);
-  }, [pathname]);
+  }, [pathname]); 
 
 
   let navigate = useNavigate();
@@ -220,7 +233,7 @@ const Header = ({ handleScroll }) => {
             ))}
           </Box>
 
-          {authencated == true ? (
+          {
             <Box sx={{ flexGrow: 0 }}>
               <Tooltip title="Người dùng">
                 <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
@@ -246,7 +259,7 @@ const Header = ({ handleScroll }) => {
                 open={Boolean(anchorElUser)}
                 onClose={handleCloseUserMenu}
               >
-                {settings.map((setting, index) => (
+                {((authencated==true?settings:settingsNotAuth).map((setting, index) => (
                   <MenuItem key={index} onClick={handleCloseUserMenu}>
                     <Typography
                       textAlign="center"
@@ -257,36 +270,10 @@ const Header = ({ handleScroll }) => {
                       {setting.name}
                     </Typography>
                   </MenuItem>
-                ))}
+                )))}
               </Menu>
             </Box>
-          ) : (
-            <Box>
-              <Button
-                className="btn-warning"
-                variant="contained"
-                color="warning"
-                onClick={() => {
-                  navigate("register");
-                }}
-              >
-                Đăng ký
-              </Button>
-              <Button
-                className="btn-warning"
-                onClick={() => {
-                  navigate("login");
-                }}
-                variant="contained"
-                color="warning"
-                style={{
-                  marginLeft: 3,
-                }}
-              >
-                Đăng nhập
-              </Button>
-            </Box>
-          )}
+          }
         </Toolbar>
       </Container>
     </AppBar>
