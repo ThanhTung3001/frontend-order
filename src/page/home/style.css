@@ -1,9 +1,7 @@
-.carousel.carousel-slider {
-
-}
+.carousel.carousel-slider {}
 
 .carousel.carousel-slider img {
-  
+
     object-fit: cover;
     opacity: 0.34;
 
@@ -14,7 +12,6 @@ p.legend {
     font-weight: 700 !important;
     background-color: rgba(255, 255, 255, 0) !important;
     bottom: 100px !important;
-
     opacity: 1 !important;
 }
 
@@ -94,4 +91,51 @@ span.MuiSlider-root.MuiSlider-colorSecondary.MuiSlider-sizeMedium.css-1diafny-Mu
 
 .modal-popup-wrapper::-webkit-scrollbar-thumb:hover {
     background-color: #a8bbbf;
+}
+
+.compare-item-wrapper {
+    --spacing: 30px;
+    --columns: 2;
+    display: flex;
+    flex-wrap: wrap;
+    margin-left: calc(-1 * var(--spacing));
+}
+
+.compare-item-wrapper .compare-item {
+    overflow: hidden;
+    flex: auto;
+    width: calc(calc(100% / var(--columns)) - var(--spacing));
+    margin-left: var(--spacing);
+    margin-bottom: var(--spacing);
+}
+
+
+@media screen and (max-width: 767px) {
+    .compare-header .compare-header-item:first-child {
+        margin-bottom: 16px;
+    }
+
+    .compare-header .compare-header-item:last-child {
+        padding: 0 0 0 12px !important;
+    }
+}
+
+.description-wrapper {
+    flex-direction: column;
+    max-height: 300px;
+}
+
+@media (max-width: 1199px) {
+    .description-wrapper {
+        flex-direction: column;
+        max-height: 350px;
+    }
+}
+
+.description-wrapper .description {
+    margin-right: 15px;
+}
+
+.menulist button {
+    max-height: 36.5px;
 }

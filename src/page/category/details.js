@@ -75,7 +75,7 @@ export const DetailCategory = () => {
     return () => { };
   }, []);
   return (
-    <div className="full-width">
+    <div className="full-width menulist">
       <div className="container">
         <div className="row block" >
           <div className="row d-flex justify-content-center">
@@ -128,7 +128,7 @@ export const DetailCategory = () => {
                         </div>
                       </div>
                       <div className="col-sm-12 col-md-6 col-lg-6 ">
-                        <div className="row d-flex justify-content-between mt-5">
+                        <div className="row d-flex justify-content-between mt-2">
                           <div className="col-7">
                             <h5 style={{ fontWeight: 700 }}>
                               {e.attributes.name}
@@ -151,7 +151,7 @@ export const DetailCategory = () => {
 
                           >
                             <div
-                              className="col-sm-12 col-md-12 d-flex flex-wrap "
+                              className="col-sm-12 col-md-12 d-flex flex-wrap description-wrapper"
 
                             >
                               {e.attributes.products.data.map(
@@ -161,7 +161,7 @@ export const DetailCategory = () => {
 
                                   } else {
                                     return (
-                                      <p className="description col-6">{`${index + 1
+                                      <p className="description">{`${index + 1
                                         }. ${product.attributes.name}`}</p>
                                     );
                                   }
@@ -243,281 +243,166 @@ export const DetailCategory = () => {
         aria-labelledby="child-modal-title"
         aria-describedby="child-modal-description"
       >
-        <Box sx={{ ...style, width: "80%", flexDirection: "column" }}>
+        <Box sx={{ ...style, width: "80%", height: "90%", flexDirection: "column" }}>
           <div
-            className="row d-flex justify-content-center mt-5"
-            style={{ overflow: "scroll" }}
+            className="row d-flex justify-content-center mt-4 modal-popup-wrapper"
+            style={{ overflowY: "scroll" }}
           >
-            <div className="col-12 mt-2">
-              <FormControl fullWidth>
-                <InputLabel id="demo-simple-select-label">
-                  Chọn loại muốn so sánh
-                </InputLabel>
-                <Select
-                  labelId="demo-simple-select-label"
-                  id="demo-simple-select"
-                  value={itemSelected.id}
-                  label="Chọn loại muốn so sánh"
-                  onChange={(e) => {
-                    ////console.log(e);
-                    handleSelected(e.target.value);
-                  }}
-                >
-                  {listMenu.map((e, index) => {
-                    return (
-                      <MenuItem key={index} value={e.id}>
-                        {e.attributes.name}
-                      </MenuItem>
-                    );
-                  })}
-                </Select>
-              </FormControl>
-            </div>
-            <div className="col-12 col-md-5 " style={{ marginRight: 20 }}>
 
-              <div>
-                <div className="row">
-                  <div className="col-sm-12">
-                    <div className="row mt-2 mb-2">
-                      {new Array(4).fill().map((product, index) => {
-                        //  //console.log(product);
-                        let urlImg = "";
-                        if (
-                          item.attributes.products.data.length <
-                          index + 1 || item.attributes.products.data[index].attributes.avatar.data == null
-                        ) {
-                          urlImg = "/img_emty.png";
-                        } else {
-                          urlImg =
-                            URL_BACKEND +
-                            item.attributes.products.data[index].attributes
-                              .avatar.data.attributes.url;
-                        }
-                        return (
-                          <div
-                            key={index}
-                            className=" col-6 col-sm-6 p-1 ml-0 mr-1 d-flex justify-content-center"
-                          >
-                            {/* itemSelected.attributes.products.data */}
-                            <img
-                              src={urlImg}
-                              className="item-img"
-                              width={"100%"}
-                              alt=""
-                            />
-                          </div>
-                        );
-                      })}
-                    </div>
-                  </div>
-                  <div className="">
-                    <div
-                      className="row flex-column justify-content-center"
-                      style={{ height: "100%", width: "100%" }}
-                    >
-                      <div className="row d-flex justify-content-between">
-                        <div className="col-6">
-                          <h5 style={{ fontWeight: 700 }}>
-                            {item.attributes.name}
-                          </h5>
-                        </div>
-                      </div>
-
-                      <div
-                        className="row m-2 flex-column justify-content-between"
-
-                      >
-                        <div className="col-sm-12 col-md-12 d-flex flex-wrap">
-                          {item.attributes.products.data.map(
-                            (product, index) => {
-                              return (
-                                <p className="description col-6">{`${index + 1}. ${product.attributes.name
-                                  }`}</p>
-                              );
-                            }
-                          )}
-                        </div>
-
-                        <div className="col-sm-12">
-                          <div className="row d-flex justify-content-around">
-                            <div className="col">
-                              <Button
-                                variant="contained"
-                                color="warning"
-                                fullWidth
-                                onClick={handleNeedSupport}
-                              >
-                                Cần hỗ trợ thêm
-                              </Button>
-                            </div>
-                            <div className="col">
-                              <Button
-                                fullWidth
-                                color="error"
-                                variant="contained"
-                              >
-                                Đặt tiệc
-                              </Button>
-                            </div>
-                          </div>
-                          <div className="row flex-column mt-4">
-                            <h1 className="description">
-                              Đơn giá{": "}
-                              <strong>
-                                {parseInt(
-                                  item.attributes.price
-                                ).toLocaleString("it-IT", {
-                                  style: "currency",
-                                  currency: "VND",
-                                })}
-                              </strong>
-                            </h1>
-                            <h1 className="description">
-                              Số lượng tối thiểu{": "}
-                              <strong>{item.attributes.amout}</strong>
-                            </h1>
-                            <h1 className="description">
-                              Thời gian phù hợp{": "}
-                              <strong>{`${item.attributes.FromTime.substring(
-                                0,
-                                5
-                              )} - ${item.attributes.EndTime.substring(
-                                0,
-                                5
-                              )}`}</strong>
-                            </h1>
-                            <h1 className="description">
-                              Supplier{": "}
-                              <strong>{`${item.attributes.TypeMenu}`}</strong>
-                            </h1>
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                </div>
+            <div className="row align-items-center pt-2 compare-header" style={{ padding: "0 24px" }}>
+              <div className="col-md-6 compare-header-item">
+                <h3 className="mb-0">So sánh menu đặt tiệc</h3>
               </div>
-
+              <div className="col-md-6 compare-header-item" style={{ padding: "0 0 0 24px" }}>
+                <FormControl fullWidth>
+                  <InputLabel id="demo-simple-select-label">
+                    Chọn loại muốn so sánh
+                  </InputLabel>
+                  <Select
+                    labelId="demo-simple-select-label"
+                    id="demo-simple-select"
+                    value={itemSelected.id}
+                    label="Chọn loại muốn so sánh"
+                    onChange={(e) => {
+                      ////console.log(e);
+                      handleSelected(e.target.value);
+                    }}
+                  >
+                    {listMenu.map((e, index) => {
+                      return (
+                        <MenuItem key={index} value={e.id}>
+                          {e.attributes.name}
+                        </MenuItem>
+                      );
+                    })}
+                  </Select>
+                </FormControl>
+              </div>
             </div>
-            <div className="col-12 col-md-5 ">
-              {selected == true ? (
-                <div className="col-sm-12">
 
-                  <div>
-                    <div className="row">
-                      <div className="col-sm-12">
-                        <div className="row mt-2 mb-2">
-                          {new Array(4).fill().map((product, index) => {
-                            //  //console.log(product);
-                            let urlImg = "";
-                            if (
-                              itemSelected.attributes.products.data.length <
-                              index + 1 || item.attributes.products.data[index].attributes.avatar.data == null
-                            ) {
-                              urlImg = "/img_emty.png";
-                            } else {
-                              urlImg =
-                                URL_BACKEND +
-                                itemSelected.attributes.products.data[index]
-                                  .attributes.avatar.data.attributes.url;
-                            }
-                            return (
-                              <div
-                                key={index}
-                                className=" col-6 col-sm-6 p-1 ml-0 mr-1 d-flex justify-content-center"
-                              >
-                                {/* itemSelected.attributes.products.data */}
-                                <img
-                                  src={urlImg}
-                                  className="item-img"
-                                  width={"100%"}
-                                  alt=""
-                                />
-                              </div>
-                            );
-                          })}
-                        </div>
-                      </div>
-                      <div className="col-sm-12">
-                        <div
-                          className="row flex-column justify-content-center"
-                          style={{ height: "100%", width: "100%" }}
-                        >
-                          <div className="row d-flex justify-content-between">
-                            <div className="col-6">
-                              <h5 style={{ fontWeight: 700 }}>
-                                {itemSelected.attributes.name}
-                              </h5>
+            <div className="col-12 mt-2">
+            </div>
+
+            {/* <div className="container"> */}
+            <div className="row compare-item-wrapper">
+
+              <div className="col-12 col-md-6 compare-item" style={{}}>
+
+                <div>
+                  <div className="row">
+                    <div className="col-sm-12">
+                      <div className="row mt-2 mb-2">
+                        {new Array(4).fill().map((product, index) => {
+                          //  //console.log(product);
+                          let urlImg = "";
+                          if (
+                            item.attributes.products.data.length <
+                            index + 1 || item.attributes.products.data[index].attributes.avatar.data == null
+                          ) {
+                            urlImg = "/img_emty.png";
+                          } else {
+                            urlImg =
+                              URL_BACKEND +
+                              item.attributes.products.data[index].attributes
+                                .avatar.data.attributes.url;
+                          }
+                          return (
+                            <div
+                              key={index}
+                              className=" col-6 col-sm-6 p-1 ml-0 mr-1 d-flex justify-content-center"
+                            >
+                              {/* itemSelected.attributes.products.data */}
+                              <img
+                                src={urlImg}
+                                className="item-img"
+                                width={"100%"}
+                                alt=""
+                              />
                             </div>
+                          );
+                        })}
+                      </div>
+                    </div>
+                    <div className="">
+                      <div
+                        className="row flex-column justify-content-center"
+                        style={{ height: "100%", width: "100%" }}
+                      >
+                        <div className="row d-flex justify-content-between">
+                          <div className="col-12">
+                            <h5 style={{ fontWeight: 700 }}>
+                              {item.attributes.name}
+                            </h5>
+                          </div>
+                        </div>
+
+                        <div
+                          className="row flex-column justify-content-between"
+
+                        >
+                          <div className="col-sm-12 col-md-12 d-flex flex-wrap description-wrapper">
+                            {item.attributes.products.data.map(
+                              (product, index) => {
+                                return (
+                                  <p className="description">{`${index + 1}. ${product.attributes.name
+                                    }`}</p>
+                                );
+                              }
+                            )}
                           </div>
 
-                          <div
-                            className="row m-2 flex-column justify-content-between"
-
-                          >
-                            <div className="col-sm-12 col-md-12 d-flex flex-wrap">
-                              {itemSelected.attributes.products.data.map(
-                                (product, index) => {
-                                  return (
-                                    <p className="description col-6">{`${index + 1
-                                      }. ${product.attributes.name}`}</p>
-                                  );
-                                }
-                              )}
+                          <div className="col-sm-12">
+                            <div className="row d-flex justify-content-around">
+                              <div className="col">
+                                <Button
+                                  variant="contained"
+                                  color="warning"
+                                  fullWidth
+                                  onClick={handleNeedSupport}
+                                >
+                                  Cần hỗ trợ thêm
+                                </Button>
+                              </div>
+                              <div className="col">
+                                <Button
+                                  fullWidth
+                                  color="error"
+                                  variant="contained"
+                                >
+                                  Đặt tiệc
+                                </Button>
+                              </div>
                             </div>
-                            <div className="col-sm-12">
-                              <div className="row d-flex justify-content-around">
-                                <div className="col">
-                                  <Button
-                                    variant="contained"
-                                    color="warning"
-                                    fullWidth
-                                    onClick={handleNeedSupport}
-                                  >
-                                    Cần hỗ trợ thêm
-                                  </Button>
-                                </div>
-                                <div className="col">
-                                  <Button
-                                    fullWidth
-                                    color="error"
-                                    variant="contained"
-                                  >
-                                    Đặt tiệc
-                                  </Button>
-                                </div>
-                              </div>
-                              <div className="row flex-column mt-4">
-                                <h1 className="description">
-                                  Đơn giá{": "}
-                                  <strong>
-                                    {parseInt(
-                                      itemSelected.attributes.price
-                                    ).toLocaleString("it-IT", {
-                                      style: "currency",
-                                      currency: "VND",
-                                    })}
-                                  </strong>
-                                </h1>
-                                <h1 className="description">
-                                  Số lượng tối thiểu{": "}
-                                  <strong>{itemSelected.attributes.amout}</strong>
-                                </h1>
-                                <h1 className="description">
-                                  Thời gian phù hợp{": "}
-                                  <strong>{`${itemSelected.attributes.FromTime.substring(
-                                    0,
-                                    5
-                                  )} - ${itemSelected.attributes.EndTime.substring(
-                                    0,
-                                    5
-                                  )}`}</strong>
-                                </h1>
-                                <h1 className="description">
-                                  Supplier{": "}
-                                  <strong>{`${itemSelected.attributes.TypeMenu}`}</strong>
-                                </h1>
-                              </div>
+                            <div className="row flex-column mt-4">
+                              <h1 className="description">
+                                Đơn giá{": "}
+                                <strong>
+                                  {parseInt(
+                                    item.attributes.price
+                                  ).toLocaleString("it-IT", {
+                                    style: "currency",
+                                    currency: "VND",
+                                  })}
+                                </strong>
+                              </h1>
+                              <h1 className="description">
+                                Số lượng tối thiểu{": "}
+                                <strong>{item.attributes.amout}</strong>
+                              </h1>
+                              <h1 className="description">
+                                Thời gian phù hợp{": "}
+                                <strong>{`${item.attributes.FromTime.substring(
+                                  0,
+                                  5
+                                )} - ${item.attributes.EndTime.substring(
+                                  0,
+                                  5
+                                )}`}</strong>
+                              </h1>
+                              <h1 className="description">
+                                Supplier{": "}
+                                <strong>{`${item.attributes.TypeMenu}`}</strong>
+                              </h1>
                             </div>
                           </div>
                         </div>
@@ -525,9 +410,138 @@ export const DetailCategory = () => {
                     </div>
                   </div>
                 </div>
-              ) : null}
+
+              </div>
+              <div className="col-12 col-md-6 compare-item">
+                {selected == true ? (
+                  <div className="col-sm-12">
+
+                    <div>
+                      <div className="row">
+                        <div className="col-sm-12">
+                          <div className="row mt-2 mb-2">
+                            {new Array(4).fill().map((product, index) => {
+                              //  //console.log(product);
+                              let urlImg = "";
+                              if (
+                                itemSelected.attributes.products.data.length <
+                                index + 1 || item.attributes.products.data[index].attributes.avatar.data == null
+                              ) {
+                                urlImg = "/img_emty.png";
+                              } else {
+                                urlImg =
+                                  URL_BACKEND +
+                                  itemSelected.attributes.products.data[index]
+                                    .attributes.avatar.data.attributes.url;
+                              }
+                              return (
+                                <div
+                                  key={index}
+                                  className=" col-6 col-sm-6 p-1 ml-0 mr-1 d-flex justify-content-center"
+                                >
+                                  {/* itemSelected.attributes.products.data */}
+                                  <img
+                                    src={urlImg}
+                                    className="item-img"
+                                    width={"100%"}
+                                    alt=""
+                                  />
+                                </div>
+                              );
+                            })}
+                          </div>
+                        </div>
+                        <div className="col-sm-12">
+                          <div
+                            className="row flex-column justify-content-center"
+                            style={{ height: "100%", width: "100%" }}
+                          >
+                            <div className="row d-flex justify-content-between">
+                              <div className="col-12">
+                                <h5 style={{ fontWeight: 700 }}>
+                                  {itemSelected.attributes.name}
+                                </h5>
+                              </div>
+                            </div>
+
+                            <div
+                              className="row flex-column justify-content-between"
+                            >
+                              <div className="col-sm-12 col-md-12 d-flex flex-wrap description-wrapper">
+                                {itemSelected.attributes.products.data.map(
+                                  (product, index) => {
+                                    return (
+                                      <p className="description">{`${index + 1
+                                        }. ${product.attributes.name}`}</p>
+                                    );
+                                  }
+                                )}
+                              </div>
+                              <div className="col-sm-12">
+                                <div className="row d-flex justify-content-around">
+                                  <div className="col">
+                                    <Button
+                                      variant="contained"
+                                      color="warning"
+                                      fullWidth
+                                      onClick={handleNeedSupport}
+                                    >
+                                      Cần hỗ trợ thêm
+                                    </Button>
+                                  </div>
+                                  <div className="col">
+                                    <Button
+                                      fullWidth
+                                      color="error"
+                                      variant="contained"
+                                    >
+                                      Đặt tiệc
+                                    </Button>
+                                  </div>
+                                </div>
+                                <div className="row flex-column mt-4">
+                                  <h1 className="description">
+                                    Đơn giá{": "}
+                                    <strong>
+                                      {parseInt(
+                                        itemSelected.attributes.price
+                                      ).toLocaleString("it-IT", {
+                                        style: "currency",
+                                        currency: "VND",
+                                      })}
+                                    </strong>
+                                  </h1>
+                                  <h1 className="description">
+                                    Số lượng tối thiểu{": "}
+                                    <strong>{itemSelected.attributes.amout}</strong>
+                                  </h1>
+                                  <h1 className="description">
+                                    Thời gian phù hợp{": "}
+                                    <strong>{`${itemSelected.attributes.FromTime.substring(
+                                      0,
+                                      5
+                                    )} - ${itemSelected.attributes.EndTime.substring(
+                                      0,
+                                      5
+                                    )}`}</strong>
+                                  </h1>
+                                  <h1 className="description">
+                                    Supplier{": "}
+                                    <strong>{`${itemSelected.attributes.TypeMenu}`}</strong>
+                                  </h1>
+                                </div>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                ) : null}
+              </div>
             </div>
           </div>
+          {/* </div> */}
         </Box>
       </Modal>
     </div>
@@ -548,5 +562,5 @@ const style = {
   overflow: "scroll",
   justifyContent: "center",
   alignItems: "center",
-  px: 4,
+  px: 2,
 };
