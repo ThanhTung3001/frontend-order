@@ -134,6 +134,7 @@ span.MuiSlider-root.MuiSlider-colorSecondary.MuiSlider-sizeMedium.css-1diafny-Mu
 
 .description-wrapper .description {
     margin-right: 15px;
+    position: relative;
 }
 
 .menulist button {
