@@ -1,7 +1,7 @@
 import axios from "axios";
 import React, { useEffect, useState } from "react";
 import { URL_BACKEND } from "../../constants";
-import { useParams } from "react-router";
+import { useParams ,useNavigate} from "react-router";
 import {
   Box,
   Button,
@@ -24,6 +24,7 @@ export const DetailCategory = () => {
   const dispatch = useDispatch();
   const { items, isLoaded } = useSelector((state) => state.cartReducer);
   const { data, loaded } = useSelector(state => state.companyStored);
+  const navigate = useNavigate();
 
   const [bigCategory, setBigCategory] = useState([]);
   const { id } = useParams();
@@ -88,7 +89,7 @@ export const DetailCategory = () => {
               if (e.attributes.FromTime == null) {
                 e.attributes.FromTime = "";
               }
-              if (e.attributes.EndTime == null) {
+              if (e.attributes.EndTime == null) { 
                 e.attributes.EndTime = "";
               }
               return (
@@ -188,6 +189,10 @@ export const DetailCategory = () => {
                                     fullWidth
                                     color="error"
                                     variant="contained"
+                                    onClick={() => {
+                                      handleAddToCart(e);
+                                      navigate('/cart')
+                                    }}
                                   >
                                     Đặt tiệc
                                   </Button>
