@@ -2,6 +2,7 @@ import { Button, TextField, Divider } from "@mui/material";
 import axios from "axios";
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
+import { Link } from "react-router-dom";
 import { toast } from "react-toastify";
 import { initInfoCompany } from "../app/action/CompanyAction";
 import { URL_BACKEND } from "../constants";
@@ -9,8 +10,9 @@ import "./style.css";
 
 export const Footer = () => {
   const [emailSubmit, setEmailSubmit] = useState("");
+  const [blogs, setBlogs] = useState([]);
 
-  const {data,loaded} = useSelector(state=>state.companyStored);
+  const { data, loaded } = useSelector(state => state.companyStored);
   const onSubmitEmailSend = () => {
     if (emailSubmit == null) {
       toast("Email không đúng định dạng");
@@ -33,9 +35,13 @@ export const Footer = () => {
   const dispatch = useDispatch();
   useEffect(() => {
     dispatch(initInfoCompany());
+    axios.get(URL_BACKEND + "/api/blogs?populate=*&filters[display][$eq]=1").then(rs => {
+      const { data } = rs;
+      setBlogs(data.data);
+    })
 
   }, []);
-  if (loaded==true) {
+  if (loaded == true) {
     return (
       <>
         <div className="container-fluid">
@@ -83,21 +89,15 @@ export const Footer = () => {
                   </p>
                   <p className="m-0">Sđt: {data[0].attributes.phone}</p>
                 </div>
-              </div>
-              <div className="col-6 col-sm-3">
-                <h6>Chính sách bảo mật</h6>
-                <h6>Thông tin chuyển khoản</h6>
-                <h6>Hướng dẫn đặt hàng</h6>
-              </div>
-              <div className="col-6 col-sm-3">
-                <h6>Chính sách đổi trả</h6>
-                <h6>Câu hỏi thường gặp</h6>
-                <h6>Điều khoản sử dụng</h6>
-              </div>
-              <div className="col-6 col-sm-3">
-                <h6>Bảng tin công ty</h6>
-                <h6>Điều khoản sử dụng</h6>
-              </div>
+              </div>{
+                blogs.map((e, index) => {
+                  return <div className="col-6 col-sm-3">
+                    <Link style={{ textDecoration: 'none', color: 'black' }} to={`/blogs/${e.id}`} ><h6>{e.attributes.title}</h6></Link>
+
+                  </div>
+                })
+              }
+
             </div>
             <div className="row"></div>
           </div>

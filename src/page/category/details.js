@@ -1,7 +1,7 @@
 import axios from "axios";
 import React, { useEffect, useState } from "react";
 import { URL_BACKEND } from "../../constants";
-import { useParams ,useNavigate} from "react-router";
+import { useParams, useNavigate } from "react-router";
 import {
   Box,
   Button,
@@ -19,6 +19,7 @@ import { height } from "@mui/system";
 import { useDispatch, useSelector } from "react-redux";
 import { addToCart } from "../../app/reducer/CartSlice";
 import { toast } from "react-toastify";
+import { useSearchParams } from "react-router-dom";
 
 export const DetailCategory = () => {
   const dispatch = useDispatch();
@@ -33,10 +34,13 @@ export const DetailCategory = () => {
   const [selected, setSelected] = useState(false);
   const [itemSelected, setItemSelected] = useState(categoryMock);
   const [listMenu, setListMenu] = useState([]);
+  const [upr, setParam] = useSearchParams();
+  const price = upr.get('price');
   const handleNeedSupport = () => {
-    console.log(data)
+    //console.log(data)
     window.location.href = `tel:${data[0].attributes.phone}`
   }
+  //filters[price][$lte]=${parseInt(to) + 100000}
   const handleAddToCart = (data) => {
     dispatch(
       addToCart({
@@ -89,155 +93,160 @@ export const DetailCategory = () => {
               if (e.attributes.FromTime == null) {
                 e.attributes.FromTime = "";
               }
-              if (e.attributes.EndTime == null) { 
+              if (e.attributes.EndTime == null) {
                 e.attributes.EndTime = "";
               }
-              return (
-                <div key={index} className="col-sm-12">
-                  <div>
-                    <div className="row">
-                      <div className="col-sm-12 col-md-6 col-lg-6">
-                        <div className="row mt-2 mb-2">
-                          {new Array(4).fill().map((product, index) => {
-                            //  //console.log(product);
-                            let urlImg = "";
-                            //   //console.log(e.attributes.products.data.length);
-                            if (e.attributes.products.data.length < index + 1 || e.attributes.products.data[index].attributes.avatar.data == null) {
-                              urlImg = "/img_emty.png";
-                            } else {
-                              // console.log(e.attributes.products.data[index].attributes.avatar.data);
 
-                              urlImg =
-                                URL_BACKEND +
-                                e.attributes.products.data[index].attributes
-                                  .avatar.data.attributes.url;
-                            }
-                            return (
-                              <div
-                                key={index}
-                                className=" col-6 col-sm-6 p-1 ml-0 mr-1 d-flex justify-content-center"
-                              >
-                                <img
-                                  src={urlImg}
-                                  className="item-img"
-                                  width={"100%"}
-                                  alt=""
-                                />
-                              </div>
-                            );
-                          })}
+              if (e.attributes.price > parseInt(price) + 100000) {
+                return null;
+              } else {
+                return (
+                  <div key={index} className="col-sm-12">
+                    <div>
+                      <div className="row">
+                        <div className="col-sm-12 col-md-6 col-lg-6">
+                          <div className="row mt-2 mb-2">
+                            {new Array(4).fill().map((product, index) => {
+                              //  //console.log(product);
+                              let urlImg = "";
+                              //   //console.log(e.attributes.products.data.length);
+                              if (e.attributes.products.data.length < index + 1 || e.attributes.products.data[index].attributes.avatar.data == null) {
+                                urlImg = "/img_emty.png";
+                              } else {
+                                // console.log(e.attributes.products.data[index].attributes.avatar.data);
+
+                                urlImg =
+                                  URL_BACKEND +
+                                  e.attributes.products.data[index].attributes
+                                    .avatar.data.attributes.url;
+                              }
+                              return (
+                                <div
+                                  key={index}
+                                  className=" col-6 col-sm-6 p-1 ml-0 mr-1 d-flex justify-content-center"
+                                >
+                                  <img
+                                    src={urlImg}
+                                    className="item-img"
+                                    width={"100%"}
+                                    alt=""
+                                  />
+                                </div>
+                              );
+                            })}
+                          </div>
                         </div>
-                      </div>
-                      <div className="col-sm-12 col-md-6 col-lg-6 ">
-                        <div className="row d-flex justify-content-between mt-2">
-                          <div className="col-7">
-                            <h5 style={{ fontWeight: 700 }}>
-                              {e.attributes.name}
-                            </h5>
-                          </div>
-                          <div className="col-5 d-flex justify-content-end">
-                            <Button
-                              variant="contained"
-                              color="warning"
-                              onClick={() => {
-                                handleOpen(e.id);
-                              }}
-                            >
-                              So sánh
-                            </Button>
-                          </div>
-
-                          <div
-                            className="row m-2 flex-column justify-content-center"
-
-                          >
-                            <div
-                              className="col-sm-12 col-md-12 d-flex flex-wrap description-wrapper"
-
-                            >
-                              {e.attributes.products.data.map(
-                                (product, index) => {
-                                  if (index > 15) {
-                                    return;
-
-                                  } else {
-                                    return (
-                                      <p className="description">{`${index + 1
-                                        }. ${product.attributes.name}`}</p>
-                                    );
-                                  }
-                                }
-                              )}
+                        <div className="col-sm-12 col-md-6 col-lg-6 ">
+                          <div className="row d-flex justify-content-between mt-2">
+                            <div className="col-7">
+                              <h5 style={{ fontWeight: 700 }}>
+                                {e.attributes.name}
+                              </h5>
                             </div>
-                            <div className="col-sm-12">
-                              <div className="row d-flex justify-content-around">
-                                <div className="col">
-                                  <Button
-                                    variant="contained"
-                                    color="warning"
-                                    fullWidth
-                                    startIcon={<AddShoppingCartIcon />}
-                                    onClick={() => {
-                                      handleAddToCart(e);
-                                    }}
-                                  >
-                                    Giỏ hàng
-                                  </Button>
-                                </div>
-                                <div className="col">
-                                  <Button
-                                    fullWidth
-                                    color="error"
-                                    variant="contained"
-                                    onClick={() => {
-                                      handleAddToCart(e);
-                                      navigate('/cart')
-                                    }}
-                                  >
-                                    Đặt tiệc
-                                  </Button>
-                                </div>
+                            <div className="col-5 d-flex justify-content-end">
+                              <Button
+                                variant="contained"
+                                color="warning"
+                                onClick={() => {
+                                  handleOpen(e.id);
+                                }}
+                              >
+                                So sánh
+                              </Button>
+                            </div>
+
+                            <div
+                              className="row m-2 flex-column justify-content-center"
+
+                            >
+                              <div
+                                className="col-sm-12 col-md-12 d-flex flex-wrap description-wrapper"
+
+                              >
+                                {e.attributes.products.data.map(
+                                  (product, index) => {
+                                    if (index > 15) {
+                                      return;
+
+                                    } else {
+                                      return (
+                                        <p className="description">{`${index + 1
+                                          }. ${product.attributes.name}`}</p>
+                                      );
+                                    }
+                                  }
+                                )}
                               </div>
-                              <div className="row flex-column mt-4">
-                                <h1 className="description">
-                                  Đơn giá{": "}
-                                  <strong>
-                                    {parseInt(
-                                      e.attributes.price
-                                    ).toLocaleString("it-IT", {
-                                      style: "currency",
-                                      currency: "VND",
-                                    })}
-                                  </strong>
-                                </h1>
-                                <h1 className="description">
-                                  Số lượng tối thiểu{": "}
-                                  <strong>{e.attributes.amout}</strong>
-                                </h1>
-                                <h1 className="description">
-                                  Thời gian phù hợp{": "}
-                                  <strong>{`${e.attributes.FromTime.substring(
-                                    0,
-                                    5
-                                  )} - ${e.attributes.EndTime.substring(
-                                    0,
-                                    5
-                                  )}`}</strong>
-                                </h1>
-                                <h1 className="description">
-                                  Supplier{": "}
-                                  <strong>{`${e.attributes.TypeMenu}`}</strong>
-                                </h1>
+                              <div className="col-sm-12">
+                                <div className="row d-flex justify-content-around">
+                                  <div className="col">
+                                    <Button
+                                      variant="contained"
+                                      color="warning"
+                                      fullWidth
+                                      startIcon={<AddShoppingCartIcon />}
+                                      onClick={() => {
+                                        handleAddToCart(e);
+                                      }}
+                                    >
+                                      Giỏ hàng
+                                    </Button>
+                                  </div>
+                                  <div className="col">
+                                    <Button
+                                      fullWidth
+                                      color="error"
+                                      variant="contained"
+                                      onClick={() => {
+                                        handleAddToCart(e);
+                                        navigate('/cart')
+                                      }}
+                                    >
+                                      Đặt tiệc
+                                    </Button>
+                                  </div>
+                                </div>
+                                <div className="row flex-column mt-4">
+                                  <h1 className="description">
+                                    Đơn giá{": "}
+                                    <strong>
+                                      {parseInt(
+                                        e.attributes.price
+                                      ).toLocaleString("it-IT", {
+                                        style: "currency",
+                                        currency: "VND",
+                                      })}
+                                    </strong>
+                                  </h1>
+                                  <h1 className="description">
+                                    Số lượng tối thiểu{": "}
+                                    <strong>{e.attributes.amout}</strong>
+                                  </h1>
+                                  <h1 className="description">
+                                    Thời gian phù hợp{": "}
+                                    <strong>{`${e.attributes.FromTime.substring(
+                                      0,
+                                      5
+                                    )} - ${e.attributes.EndTime.substring(
+                                      0,
+                                      5
+                                    )}`}</strong>
+                                  </h1>
+                                  <h1 className="description">
+                                    Supplier{": "}
+                                    <strong>{`${e.attributes.TypeMenu == null ? "" : e.attributes.TypeMenu}`}</strong>
+                                  </h1>
+                                </div>
                               </div>
                             </div>
                           </div>
                         </div>
                       </div>
                     </div>
+                    <Divider className="mb-2" style={{ color: "gray" }} />
                   </div>
-                  <Divider className="mb-2" style={{ color: "gray" }} />
-                </div>
-              );
+                );
+              }
             })}
           </div>
         </div>
@@ -373,6 +382,10 @@ export const DetailCategory = () => {
                                   fullWidth
                                   color="error"
                                   variant="contained"
+                                  onClick={() => {
+                                    handleAddToCart(item);
+                                    navigate('/cart');
+                                  }}
                                 >
                                   Đặt tiệc
                                 </Button>
@@ -406,7 +419,7 @@ export const DetailCategory = () => {
                               </h1>
                               <h1 className="description">
                                 Supplier{": "}
-                                <strong>{`${item.attributes.TypeMenu}`}</strong>
+                                <strong>{`${item.attributes.TypeMenu == null ? "" : item.attributes.TypeMenu}`}</strong>
                               </h1>
                             </div>
                           </div>
@@ -499,6 +512,10 @@ export const DetailCategory = () => {
                                       fullWidth
                                       color="error"
                                       variant="contained"
+                                      onClick={() => {
+                                        handleAddToCart(itemSelected);
+                                        navigate('/cart');
+                                      }}
                                     >
                                       Đặt tiệc
                                     </Button>

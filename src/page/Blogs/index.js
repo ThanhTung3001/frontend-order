@@ -3,17 +3,18 @@ import moment from "moment";
 import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import { URL_BACKEND } from "../../constants";
+import './style.css'
 
 export const Blogs = () => {
   const [blog, setBlog] = useState([]);
   useEffect(() => {
-    axios.get(URL_BACKEND + `/api/blogs?populate=*`).then((rs) => {
+    axios.get(URL_BACKEND + `/api/blogs?populate=*&filters[display][$eq]=0`).then((rs) => {
       let { data } = rs;
       // data.data = data.data.filter((e, index) => index <= 2);
       setBlog(data.data);
     });
 
-    return () => {};
+    return () => { };
   }, []);
 
   return (
@@ -64,8 +65,8 @@ export const Blogs = () => {
                         </h3>
 
                         <p className="description">
-                          {e.attributes.description.substring(0, 230)}
-                          ...
+                          {e.attributes.description}
+
                         </p>
                       </div>
                     </div>

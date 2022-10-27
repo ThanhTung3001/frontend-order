@@ -65,7 +65,7 @@ export const BigCategory = () => {
       setBigCategory(data.data);
     });
 
-    return () => {};
+    return () => { };
   }, []);
   return (
     <div className="full-width">
@@ -148,9 +148,8 @@ export const BigCategory = () => {
                               {e.attributes.products.data.map(
                                 (product, index) => {
                                   return (
-                                    <p className="description">{`${
-                                      index + 1
-                                    }. ${product.attributes.name}`}</p>
+                                    <p className="description">{`${index + 1
+                                      }. ${product.attributes.name}`}</p>
                                   );
                                 }
                               )}
@@ -208,7 +207,7 @@ export const BigCategory = () => {
                                 </h1>
                                 <h1 className="description">
                                   Supplier{": "}
-                                  <strong>{`${e.attributes.TypeMenu}`}</strong>
+                                  <strong>{`${e.attributes.TypeMenu == null ? "" : e.attributes.TypeMenu}`}</strong>
                                 </h1>
                               </div>
                             </div>
@@ -318,9 +317,8 @@ export const BigCategory = () => {
                             {item.attributes.products.data.map(
                               (product, index) => {
                                 return (
-                                  <p className="description">{`${index + 1}. ${
-                                    product.attributes.name
-                                  }`}</p>
+                                  <p className="description">{`${index + 1}. ${product.attributes.name
+                                    }`}</p>
                                 );
                               }
                             )}
@@ -410,9 +408,8 @@ export const BigCategory = () => {
                               {itemSelected.attributes.products.data.map(
                                 (product, index) => {
                                   return (
-                                    <p className="description">{`${
-                                      index + 1
-                                    }. ${product.attributes.name}`}</p>
+                                    <p className="description">{`${index + 1
+                                      }. ${product.attributes.name}`}</p>
                                   );
                                 }
                               )}

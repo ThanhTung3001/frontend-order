@@ -55,6 +55,21 @@ const settings = [
     path: "logout",
   },
 ];
+const settingsNotAuth = [
+  {
+    name: "Giỏ hàng",
+    path: "cart",
+  },
+  {
+    name: "Đăng nhập",
+    path: "login",
+  },
+
+  {
+    name: "Đăng ký",
+    path: "register",
+  },
+];
 
 const Header = ({ handleScroll }) => {
   const { pathname } = useLocation();
@@ -98,12 +113,12 @@ const Header = ({ handleScroll }) => {
   const [user, setUser] = React.useState({});
   const { authencated } = useSelector((state) => state.userReducer);
   const location = useLocation();
-  React.useEffect(()=>{
-   // console.log(location.pathname)
-      if(location.pathname=="/dat-tiec"){
-        handleScroll();
-      }
-  },[location.pathname]);
+  React.useEffect(() => {
+    // console.log(location.pathname)
+    if (location.pathname == "/dat-tiec") {
+      handleScroll();
+    }
+  }, [location.pathname]);
   return (
     <AppBar
       style={{
@@ -167,9 +182,9 @@ const Header = ({ handleScroll }) => {
                   <Typography
                     textAlign="center"
                     onClick={() => {
-                     
-                        handleClickNav(e.path);
-                    
+
+                      handleClickNav(e.path);
+
                     }}
                   >
                     {e.name}
@@ -202,9 +217,9 @@ const Header = ({ handleScroll }) => {
               <Button
                 key={index}
                 onClick={() => {
-                  
-                    handleClickNav(e.path);
-                 
+
+                  handleClickNav(e.path);
+
                 }}
                 sx={{
                   my: 2,
@@ -220,7 +235,7 @@ const Header = ({ handleScroll }) => {
             ))}
           </Box>
 
-          {authencated == true ? (
+          {(
             <Box sx={{ flexGrow: 0 }}>
               <Tooltip title="Người dùng">
                 <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
@@ -246,7 +261,7 @@ const Header = ({ handleScroll }) => {
                 open={Boolean(anchorElUser)}
                 onClose={handleCloseUserMenu}
               >
-                {settings.map((setting, index) => (
+                {(authencated == true ? settings : settingsNotAuth).map((setting, index) => (
                   <MenuItem key={index} onClick={handleCloseUserMenu}>
                     <Typography
                       textAlign="center"
@@ -259,32 +274,6 @@ const Header = ({ handleScroll }) => {
                   </MenuItem>
                 ))}
               </Menu>
-            </Box>
-          ) : (
-            <Box>
-              <Button
-                className="btn-warning"
-                variant="contained"
-                color="warning"
-                onClick={() => {
-                  navigate("register");
-                }}
-              >
-                Đăng ký
-              </Button>
-              <Button
-                className="btn-warning"
-                onClick={() => {
-                  navigate("login");
-                }}
-                variant="contained"
-                color="warning"
-                style={{
-                  marginLeft: 3,
-                }}
-              >
-                Đăng nhập
-              </Button>
             </Box>
           )}
         </Toolbar>
