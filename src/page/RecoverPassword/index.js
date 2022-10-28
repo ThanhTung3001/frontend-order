@@ -167,10 +167,16 @@ export const RecoveryPassword = () => {
     return (
       <div className="full-width">
         <div className="container  d-flex flex-column justify-content-center align-items-center">
+       
           <div
             className="row block d-flex flex-column justify-content-center align-items-center"
             style={{ minHeight: 350, width: "100%" }}
           >
+             <div className="row d-flex justify-content-center">
+            <div className="col-sm-12 d-flex justify-content-center">
+              <h3 className="hignl-title second">Quên mật khẩu</h3>
+            </div>
+          </div>
             <div className="row d-flex justify-content-center">
               <div className="col-12 col-sm-8 col-md-4 d-flex justify-content-center">
                 <TextField
@@ -211,6 +217,11 @@ export const RecoveryPassword = () => {
             className="row block d-flex flex-column justify-content-center align-items-center"
             style={{ minHeight: 350, width: "100%" }}
           >
+            <div className="row d-flex justify-content-center">
+            <div className="col-sm-12 d-flex justify-content-center">
+              <h3 className="hignl-title second">Đổi mật khẩu</h3>
+            </div>
+          </div>
             <div className="row d-flex justify-content-center">
               <div className="row d-flex justify-content-center">
                 <div className="col-12 col-sm-8 col-md-4 d-flex justify-content-center">

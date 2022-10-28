@@ -21,6 +21,7 @@ import { addToCart } from "../../app/reducer/CartSlice";
 import { toast } from "react-toastify";
 import { useSearchParams } from "react-router-dom";
 
+
 export const DetailCategory = () => {
   const dispatch = useDispatch();
   const { items, isLoaded } = useSelector((state) => state.cartReducer);
@@ -298,9 +299,9 @@ export const DetailCategory = () => {
             </div>
 
             {/* <div className="container"> */}
-            <div className="row compare-item-wrapper">
+            <div className="row ">
 
-              <div className="col-12 col-md-6 compare-item" style={{}}>
+              <div className="col-12 col-md-6 compare-item" >
 
                 <div>
                   <div className="row">

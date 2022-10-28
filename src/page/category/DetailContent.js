@@ -4,7 +4,8 @@ import LoadingOverlay from "react-loading-overlay";
 import { useParams } from "react-router-dom";
 import { URL_BACKEND } from "../../constants";
 import parse from "html-react-parser";
-import { Carousel } from "react-responsive-carousel";
+import Carousel from "react-multi-carousel";
+import "react-multi-carousel/lib/styles.css";
 import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
 import "./style.css";
 import {
@@ -13,6 +14,7 @@ import {
   AccordionSummary,
   Typography,
 } from "@mui/material";
+import { responsive } from "../Blogs/blogDetails";
 
 export const DetailContent = () => {
   const [category, setCategory] = useState({});
@@ -55,9 +57,9 @@ export const DetailContent = () => {
       <div className="full-width" style={{ height: 1000 }}></div>
     </LoadingOverlay>
   ) : (
-    <div className="full-width" >
+    <div className="full-width" style={{ minHeight: 2000 }}>
       <div className="container">
-        <div className="row block" style={{ minHeight: 2000 }}>
+        <div className="row block"style={{ minHeight: 2000 ,alignItems:'start'}} >
           <div className="row d-flex justify-content-center">
             <div className="col-sm-12 d-flex justify-content-center">
               <h3 className="hignl-title second">Chi tiết loại tiệc</h3>
@@ -68,7 +70,7 @@ export const DetailContent = () => {
                   style={{
                     objectFit: "cover",
                     width: "100%",
-                    height: "40%",
+                    maxHeight:500,
                     borderRadius: 10,
                   }}
                   src={
@@ -148,19 +150,26 @@ export const DetailContent = () => {
                     {parse(category.data.attributes.content)}
                   </div>
                   <div className="title-article center mb-5">Media</div>
-                  <div className="row">
-                    <Carousel autoPlay interval={2000}>
+                  <div className="row p-3" >
+                    <Carousel responsive={responsive} >
                       {category.data.attributes.Media.data.map((e, index) => (
-                        <div
-                          className="slide_bg"
-                          key={index}
-                          style={{
-                            backgroundSize: "cover",
-                            backgroundImage: `URL(
-                    "${URL_BACKEND + e.attributes.url}"
-                  )`,
-                          }}
-                        ></div>
+                       
+                        <div className="row m-2">
+                        <div className="col fit-content">
+                          <img
+                            style={{
+                              width: "100%",
+                              height: 200,
+                            }}
+                            src={
+                              URL_BACKEND + e.attributes.url
+                            }
+                            alt={
+                              URL_BACKEND + e.attributes.url
+                            }
+                          />
+                        </div>
+                      </div>
                       ))}
                     </Carousel>
                   </div>

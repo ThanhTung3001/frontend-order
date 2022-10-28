@@ -57,12 +57,12 @@ export const BlogDetails = () => {
           </div>
           <div className="row d-flex justify-content-center">
             <div className="col-sm-12 mb-3 mt-3">
-              <h2 className="second" style={{ fontSize: 45, fontWeight: 'bold' }}>{title}</h2>
+              <h2 className="second">{title}</h2>
             </div>
           </div>
           <div className="row d-flex justify-content-center">
             <div className="col-sm-12">
-              <h2 className="second" style={{ fontSize: 20, fontWeight: 'bold' }}>{parse(description)}</h2>
+              <h2 className="second description" style={{ fontSize: 20, fontWeight: 'bold' }}>{parse(description)}</h2>
             </div>
           </div>
           <div className="row">
@@ -136,7 +136,7 @@ export const BlogDetails = () => {
     </div>
   );
 };
-const responsive = {
+export const responsive = {
   superLargeDesktop: {
     // the naming can be any, depends on you.
     breakpoint: { max: 4000, min: 3000 },

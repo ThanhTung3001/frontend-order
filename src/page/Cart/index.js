@@ -58,6 +58,10 @@ export const Cart = () => {
     dispatch(changeAmountItem(dataSend));
   };
   const handleSubmitCart = async () => {
+    if(Object.keys(users).length === 0){
+      alert("Vui lòng đăng nhập để xác nhận");
+      navigate("/login");
+    }
     const arrayIDCart = [];
     if (items.length == 0) {
       alert("Rất tiếc, giỏ hàng của bạn đang rỗng");
@@ -81,6 +85,7 @@ export const Cart = () => {
         });
         arrayIDCart.push(data.data.id);
       }
+    
       if (users.user.PhoneNumber == null || users.user.email == null) {
         alert("Vui lòng kiểm tra thông tin của mình bạn nhé !!!");
         navigate("/user/info");

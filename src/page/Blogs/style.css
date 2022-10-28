@@ -20,3 +20,13 @@
     text-overflow: ellipsis;
     word-break: break-word;
 }
+.second{
+    font-size: 45px;
+    font-weight: bold;
+}
+@media only screen and (max-width: 600px) {
+    .second{
+        font-size: 25px;
+        font-weight: 600;
+    }
+  }
