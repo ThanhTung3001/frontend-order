@@ -37,7 +37,7 @@ export const Home = ({ divRef }) => {
   const [value, setValue] = React.useState(dayjs(new Date()));
   const [listType, setListType] = useState([]);
   const [blog, setBlog] = useState([]);
-  const [range, setRange] = React.useState(5);
+  const [range, setRange] = React.useState(0);
   const [companyInfo, setCompanyInfo] = useState([]);
   const [info, setInfo] = useState({});
   const [time, setTime] = useState("06:00");
@@ -223,7 +223,7 @@ export const Home = ({ divRef }) => {
                     aria-label="Volume"
                     value={range}
                     color="secondary"
-                    min={5}
+                    min={0}
                     onChange={handleChangeRange}
                   />
                   <span>
@@ -327,7 +327,7 @@ export const Home = ({ divRef }) => {
                       ? URL_BACKEND + e.attributes.Media.data.attributes.url
                       : "img_emty.png";
                   return (
-                    <div className="col-sm-12 col-md-12 col-lg-8">
+                    <div key={index} className="col-sm-12 col-md-12 col-lg-8">
                       <Link
                         to={`/blogs/${e.id}`}
                         style={{ textDecoration: "none" }}
@@ -372,7 +372,7 @@ export const Home = ({ divRef }) => {
                         ? URL_BACKEND + e.attributes.Media.data.attributes.url
                         : "img_emty.png";
                     return (
-                      <Link
+                      <Link key={index}
                         to={`/blogs/${e.id}`}
                         style={{ textDecoration: "none" }}
                       >

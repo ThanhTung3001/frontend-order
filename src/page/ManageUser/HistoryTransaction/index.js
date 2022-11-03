@@ -31,14 +31,14 @@ function HistoryTransaction() {
     axios({
       url:
         URL_BACKEND +
-        `/api/orders?populate=%2A&filters%5Busers_permissions_user%5D[id]=${users.user.id}`,
+        `/api/orders?populate=deep,3&filters%5Busers_permissions_user%5D[id]=${users.user.id}`,
       method: "GET",
       headers: {
         authorization: "Bearer " + users.jwt,
       },
     }).then(({ data }) => {
       setData(data.data);
-      console.log(data.data);
+   //   console.log(data.data);
       const result = data.data.map((e, index) => {
         let Details = ``;
         if (e.attributes.category_order_cards != null) {
@@ -55,6 +55,13 @@ function HistoryTransaction() {
           });
         }
         // console.log(e.attributes.Total);
+        var status = e.attributes.status;
+       console.log(status)
+        if(status.data==null){
+          status="Đã tiếp nhận";
+        }else{
+          status = status.data.attributes.name;
+        }
         return {
           index: index + 1,
           id: e.id,
@@ -64,7 +71,8 @@ function HistoryTransaction() {
             currency: "VND",
           }),
           Details: Details,
-          Status: "Đã tiếp nhận",
+
+          Status: status,
         };
       });
       setRows(result);
@@ -73,7 +81,7 @@ function HistoryTransaction() {
   return (
     <div
       className={`${style.ContainerHistoryTransaction}`}
-      style={{ minHeight: 414 }}
+      style={{ minHeight: 700 }}
     >
       <Modal
         open={open}
@@ -97,14 +105,14 @@ function HistoryTransaction() {
       </Modal>
       <div>
         <h1 className={style.TextHistory}>Lịch sử giao dịch</h1>
-        <div style={{ height: 400, width: "100%" }}>
+        <div style={{ height: 700, width: "100%" }}>
           <DataGrid
             rows={rows}
             columns={columns}
-            pageSize={5}
+            pageSize={10}
             rowsPerPageOptions={[5]}
             onRowClick={(e) => {
-              console.log(JSON.stringify(e.row));
+             // console.log(JSON.stringify(e.row));
 
 
               var data = e.row;
