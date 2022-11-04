@@ -30,6 +30,7 @@
     "react-bootstrap": "^2.5.0",
     "react-dom": "^18.2.0",
     "react-google-button": "^0.7.2",
+    "react-lazy-load-image-component": "^1.5.5",
     "react-loader-spinner": "^5.3.4",
     "react-loading-overlay": "^1.0.1",
     "react-markdown": "^8.0.3",

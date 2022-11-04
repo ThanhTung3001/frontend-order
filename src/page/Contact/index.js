@@ -7,6 +7,7 @@ import { URL_BACKEND } from "../../constants/index";
 import * as React from "react";
 import axios from "axios";
 import dayjs from "dayjs";
+import { LazyLoadImage } from "react-lazy-load-image-component";
 function Contact() {
   const [NameCompany, SetNameComPany] = useState("");
   const [AddressCompany, SetAddressCompany] = useState("");
@@ -89,7 +90,7 @@ function Contact() {
           <div className={`${style.WrapperInfoCompany} d-flex`}>
             {" "}
             <div className={`${style.ContainerImage}`}>
-              <img className={`${style.ImageCompany}`} src={img} alt="" />
+              <LazyLoadImage className={`${style.ImageCompany}`} src={img} alt="" />
             </div>{" "}
             <div className={`${style.ContainerInfoCompany}`}>
               {" "}

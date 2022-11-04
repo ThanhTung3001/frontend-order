@@ -1,6 +1,7 @@
 import axios from "axios";
 import moment from "moment";
 import React, { useEffect, useState } from "react";
+import { LazyLoadImage } from "react-lazy-load-image-component";
 import { Link } from "react-router-dom";
 import { URL_BACKEND } from "../../constants";
 import './style.css'
@@ -26,7 +27,7 @@ export const Blogs = () => {
               <h3 className="hignl-title second">Blogs</h3>
             </div>
           </div>
-          <div className="row justify-content-center">
+          <div className="row justify-content-start">
             {blog.map((e, index) => {
               return (
                 <div className="col-sm-12 col-md-4 col-lg-3 justify-content-start">
@@ -36,7 +37,7 @@ export const Blogs = () => {
                   >
                     <div className="row">
                       <div className="col fit-content">
-                        <img
+                        <LazyLoadImage
                           style={{
                             width: "100%",
                             height: 200,

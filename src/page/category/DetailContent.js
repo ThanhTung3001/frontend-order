@@ -57,15 +57,13 @@ export const DetailContent = () => {
       <div className="full-width" style={{ height: 1000 }}></div>
     </LoadingOverlay>
   ) : (
-    <div className="full-width" style={{ minHeight: 2000 }}>
+    <div className="full-width" style={{ }}>
       <div className="container">
-        <div className="row block"style={{ minHeight: 2000 ,alignItems:'start'}} >
-          <div className="row d-flex justify-content-center">
-            <div className="col-sm-12 d-flex justify-content-center">
+        <div className="row block"style={{  alignItems:'start'}} >
+        <div className="col-sm-12 d-flex justify-content-center">
               <h3 className="hignl-title second">Chi tiết loại tiệc</h3>
             </div>
-            <div className="row">
-              <div className="col-12">
+            <div className="col-12">
                 <img
                   style={{
                     objectFit: "cover",
@@ -149,7 +147,7 @@ export const DetailContent = () => {
                   <div className="description-content mt-2">
                     {parse(category.data.attributes.content)}
                   </div>
-                  <div className="title-article center mb-5">Media</div>
+                  <div className="title-article center mb-2">Media</div>
                   <div className="row p-3" >
                     <Carousel responsive={responsive} >
                       {category.data.attributes.Media.data.map((e, index) => (
@@ -175,8 +173,7 @@ export const DetailContent = () => {
                   </div>
                 </div>
               </div>
-            </div>
-          </div>
+        
         </div>
       </div>
     </div>

@@ -30,6 +30,7 @@ import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { Link, useLocation, useNavigate, useNavigation } from "react-router-dom";
 import { CarouselMock } from "../../mock/CaroulMock";
+import { LazyLoadImage } from "react-lazy-load-image-component";
 
 export const Home = ({ divRef }) => {
   const navigate = useNavigate();
@@ -275,10 +276,11 @@ export const Home = ({ divRef }) => {
                     }
                   >
                     <div className="col-sm-12 col-md-6 col-lg-3 fit-content">
-                      <img
+                      <LazyLoadImage
                         src={
                           URL_BACKEND + e.attributes.Avatar.data.attributes.url
                         }
+                        style={{height:250}}
                         alt=""
                       />
                     </div>
@@ -333,9 +335,9 @@ export const Home = ({ divRef }) => {
                         style={{ textDecoration: "none" }}
                       >
                         <div className="row d-flex justify-content-center">
-                          <div className="row d-flex flex-column">
+                          <div className="d-flex flex-column">
                             <div className="fit-content">
-                              <img src={img} />
+                              <LazyLoadImage src={img} />
                             </div>
                             <div className="">
                               <h3 className="title-article">
@@ -377,10 +379,10 @@ export const Home = ({ divRef }) => {
                         style={{ textDecoration: "none" }}
                       >
                         <div className="row d-flex justify-content-center">
-                          <div className="row d-flex flex-column">
+                          <div className="d-flex flex-column">
                             <div className="fit-cover">
-                              <img
-                                style={{ maxHeight: 200, objectFit: "cover" }}
+                              <LazyLoadImage
+                                style={{ minHeight: 200, objectFit: "cover" }}
                                 src={img}
                               />
                             </div>

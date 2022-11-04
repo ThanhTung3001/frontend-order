@@ -62,7 +62,7 @@ export const BlogDetails = () => {
           </div>
           <div className="row d-flex justify-content-center">
             <div className="col-sm-12">
-              <h2 className="second description" style={{ fontSize: 20, fontWeight: 'bold' }}>{parse(description)}</h2>
+              <h2 className="" style={{ fontSize: 18, fontWeight: 'bold',color:'gray' }}>{parse(description)}</h2>
             </div>
           </div>
           <div className="row">

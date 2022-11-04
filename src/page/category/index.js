@@ -4,6 +4,7 @@ import { Link } from "react-router-dom";
 import { URL_BACKEND } from "../../constants";
 import parse from "html-react-parser";
 import moment from "moment";
+import { LazyLoadImage } from "react-lazy-load-image-component";
 
 export const Category = () => {
   const [bigCategory, setBigCategory] = useState([]);
@@ -35,7 +36,7 @@ export const Category = () => {
                   >
                     <div className="row">
                       <div className="col">
-                        <img
+                        <LazyLoadImage
                           className="item-img"
                           src={
                             URL_BACKEND +
